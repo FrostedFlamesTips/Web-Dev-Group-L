@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ACME Manufacturing</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="./static/css/main.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg" href="./static/images/favicon.svg">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Additional styles specific to the login page */
+        body {
+            background-color: #f9fafb;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 80px auto 40px;
+            padding: 0 20px;
+        }
+
+        .login-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header img {
+            height: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .login-header h1 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--text-light);
+        }
+
+        .form-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .remember-me input {
+            margin-right: 0.5rem;
+            width: auto;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .login-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .demo-accounts {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+
+        .demo-accounts h3 {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .demo-account {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .demo-account:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .demo-role {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .demo-credentials {
+            margin-top: 0.5rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="menu-overlay"></div>
+            <div class="side-menu">
+                <div class="side-menu-header">
+                    <img src="./static/images/favicon.svg" alt="Logo" class="menu-logo">
+                    <span>ACME Manufacturing</span>
+                    <button class="close-menu">×</button>
+                </div>
+                <div class="menu-sections">
+                    <div class="menu-section">
+                        <h3>Navigation</h3>
+                        <a href="index.html">
+                            <i class="fa-solid fa-gauge-high menu-icon"></i>
+                            Dashboard
+                        </a>
+                        <a href="machinery.html">
+                            <i class="fa-solid fa-gear menu-icon"></i>
+                            Machinery
+                        </a>
+                        <a href="faults.html">
+                            <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
+                            Fault Cases
+                        </a>
+                        <a href="collections.html">
+                            <i class="fa-solid fa-folder menu-icon"></i>
+                            Collections
+                        </a>
+                        <a href="reports.html">
+                            <i class="fa-solid fa-chart-bar menu-icon"></i>
+                            Reports
+                        </a>
+                    </div>
+
+                    <div class="menu-section">
+                        <h3>Management</h3>
+                        <a href="users.html">
+                            <i class="fa-solid fa-users menu-icon"></i>
+                            Users
+                        </a>
+                        <a href="settings.html">
+                            <i class="fa-solid fa-cog menu-icon"></i>
+                            Settings
+                        </a>
+                        <a href="api-test.html">
+                            <i class="fa-solid fa-code menu-icon"></i>
+                            API Testing
+                        </a>
+                    </div>
+
+                    <div class="menu-section">
+                        <h3>Account</h3>
+                        <a href="profile.html">
+                            <i class="fa-solid fa-user menu-icon"></i>
+                            Your Profile
+                        </a>
+                        <a href="login.html" class="logout-link">
+                            <i class="fa-solid fa-right-from-bracket menu-icon"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Logo and Title -->
+            <div class="logo">
+                <a href="index.html">
+                    <img src="./static/images/favicon.svg" alt="ACME Logo">
+                    <h1>ACME Manufacturing</h1>
+                </a>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="nav-links">
+                <a class="hideable-nav-item" href="machinery.html">Machinery</a>
+                <a class="hideable-nav-item" href="faults.html">Faults</a>
+                <a class="hideable-nav-item" href="collections.html">Collections</a>
+
+                <!-- Profile Dropdown for logged-in users -->
+                <div class="profile-dropdown">
+                    <div class="profile-trigger">
+                        <div class="profile-icon">EA</div>
+                    </div>
+                    <div class="dropdown-content">
+                        <a href="profile.html">My Profile</a>
+                        <a href="settings.html">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="login.html" class="logout-link">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="./static/images/favicon.svg" alt="ACME Logo">
+                <h1>ACME Manufacturing</h1>
+                <p>Machinery Tracking System</p>
+            </div>
+
+            <div class="form-error">
+                Invalid username or password. Please try again.
+            </div>
+
+            <form id="login-form" data-validate="true" data-form-type="login">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Remember me</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Log In</button>
+            </form>
+
+            <div class="login-footer">
+                <p>Forgot your password? <a href="#">Reset Password</a></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Demo accounts info section - only for demonstration purposes -->
+    <div class="demo-accounts">
+        <h3>Demo Accounts for Testing</h3>
+
+        <div class="demo-account">
+            <div class="demo-role">Manager Role</div>
+            <div class="demo-credentials">
+                Username: manager<br>
+                Password: manager123
+            </div>
+        </div>
+
+        <div class="demo-account">
+            <div class="demo-role">Technician Role</div>
+            <div class="demo-credentials">
+                Username: tech<br>
+                Password: tech123
+            </div>
+        </div>
+
+        <div class="demo-account">
+            <div class="demo-role">Repair Role</div>
+            <div class="demo-credentials">
+                Username: repair<br>
+                Password: repair123
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="./static/images/logo.svg" alt="ACME Logo">
+                <span>ACME Manufacturing Corp.</span>
+            </div>
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2025 ACME Manufacturing Corp. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="./static/js/form-validation.js"></script>
+    <script src="./static/js/dynamic-menu.js"></script>
+</body>
+
+</html>
