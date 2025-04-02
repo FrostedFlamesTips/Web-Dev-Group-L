@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from ACME.views import index
 from ACME.views import collection_details
 from ACME.views import collection_edit
@@ -48,6 +48,7 @@ urlpatterns = [
     path('machinery.html', machinery),
     path('report-fault.html', report_fault),
     path('warnings.html', warnings),
+    path('api/', include('ACME.api.urls')),
 ]
 
 if settings.DEBUG:

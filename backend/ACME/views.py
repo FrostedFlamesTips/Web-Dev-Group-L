@@ -1,5 +1,7 @@
 from django.shortcuts import render
-
+import csv
+from django.http import HttpResponse
+from .models import Machine
 def index(request):
     return render(request, 'index.html')
 
@@ -38,3 +40,19 @@ def report_fault(request):
 
 def warnings(request):
     return render(request, 'warnings.html')
+
+def export_machines_csv(request):
+    if request.user.role != 'Manager':
+        return HttpResponse("Unauthorized", status=401)
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="machines_report.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Name', 'Status', 'Priority', 'Created At'])
+
+    machines = Machine.objects.all().order_by('-priority')
+    for machine in machines:
+        writer.writerow([machine.name, machine.status, machine.priority, machine.created_at])
+
+    return response

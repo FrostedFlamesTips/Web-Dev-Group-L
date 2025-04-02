@@ -10,6 +10,13 @@ class User(AbstractUser):
     ]
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
 
+class Collection(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Machine(models.Model):
     STATUS_CHOICES = [
         ('OK', 'OK'),
@@ -20,8 +27,27 @@ class Machine(models.Model):
     description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='OK')
     priority = models.IntegerField(default=0)
+    collections = models.ManyToManyField(Collection, blank=True, related_name='machines')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    technicians = models.ManyToManyField(
+        User, 
+        blank=True, 
+        related_name='assigned_machines_technician',
+        limit_choices_to={'role': 'Technician'}
+    )
+    repair_personnel = models.ManyToManyField(
+        User, 
+        blank=True, 
+        related_name='assigned_machines_repair',
+        limit_choices_to={'role': 'Repair'}
+    )
+    def update_status_based_on_warnings(self):
+        if self.warning_set.filter(resolved=False).exists():
+            self.status = 'Warning'
+        elif self.status != 'Fault':
+            self.status = 'OK'
+        self.save()
 
 
 class Warning(models.Model):
