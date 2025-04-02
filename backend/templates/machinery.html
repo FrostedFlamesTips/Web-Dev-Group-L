@@ -1,0 +1,345 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Machinery Listing - ACME Manufacturing</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg"
+      href="{% static 'images/favicon.svg' %}"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="menu-overlay"></div>
+        <div class="side-menu">
+          <div class="side-menu-header">
+            <img
+              src="./static/images/favicon.svg"
+              alt="Logo"
+              class="menu-logo"
+            />
+            <span>ACME Manufacturing</span>
+            <button class="close-menu">×</button>
+          </div>
+          <div class="menu-sections">
+            <div class="menu-section">
+              <h3>Navigation</h3>
+              <a href="index.html">
+                <i class="fa-solid fa-gauge-high menu-icon"></i>
+                Dashboard
+              </a>
+              <a href="machinery.html">
+                <i class="fa-solid fa-gear menu-icon"></i>
+                Machinery
+              </a>
+              <a href="faults.html">
+                <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
+                Fault Cases
+              </a>
+              <a href="collections.html">
+                <i class="fa-solid fa-folder menu-icon"></i>
+                Collections
+              </a>
+              <a href="reports.html">
+                <i class="fa-solid fa-chart-bar menu-icon"></i>
+                Reports
+              </a>
+            </div>
+
+            <div class="menu-section">
+              <h3>Management</h3>
+              <a href="users.html">
+                <i class="fa-solid fa-users menu-icon"></i>
+                Users
+              </a>
+              <a href="settings.html">
+                <i class="fa-solid fa-cog menu-icon"></i>
+                Settings
+              </a>
+              <a href="api-test.html">
+                <i class="fa-solid fa-code menu-icon"></i>
+                API Testing
+              </a>
+            </div>
+
+            <div class="menu-section">
+              <h3>Account</h3>
+              <a href="profile.html">
+                <i class="fa-solid fa-user menu-icon"></i>
+                Your Profile
+              </a>
+              <a href="login.html" class="logout-link">
+                <i class="fa-solid fa-right-from-bracket menu-icon"></i>
+                Logout
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <button class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Logo and Title -->
+        <div class="logo">
+          <a href="index.html">
+            <img src="./static/images/favicon.svg" alt="ACME Logo" />
+            <h1>ACME Manufacturing</h1>
+          </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+          <a class="hideable-nav-item" href="machinery.html">Machinery</a>
+          <a class="hideable-nav-item" href="faults.html">Faults</a>
+          <a class="hideable-nav-item" href="collections.html">Collections</a>
+
+          <!-- Profile Dropdown for logged-in users -->
+          <div class="profile-dropdown">
+            <div class="profile-trigger">
+              <div class="profile-icon">EA</div>
+            </div>
+            <div class="dropdown-content">
+              <a href="profile.html">My Profile</a>
+              <a href="settings.html">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a href="login.html" class="logout-link">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+      <div class="machinery-list">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h2>Machinery Listing</h2>
+          <!-- Add New Machine Button (Manager Only) -->
+          <a href="add-machine.html" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Add Machine
+          </a>
+        </div>
+
+        <!-- Search and Filter Controls -->
+        <div class="filters-section">
+          <div class="search-container">
+            <i class="fa-solid fa-search search-icon"></i>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search by name, ID, location..."
+            />
+          </div>
+
+          <div class="filters-grid">
+            <div class="filter-group">
+              <label for="status-filter">Status</label>
+              <select id="status-filter">
+                <option value="">All Statuses</option>
+                <option value="ok">OK</option>
+                <option value="warning">Warning</option>
+                <option value="fault">Fault</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="collection-filter">Collection</label>
+              <select id="collection-filter">
+                <option value="">All Collections</option>
+                <option value="main-campus">Main Campus</option>
+                <option value="building-a">Building A</option>
+                <option value="building-b">Building B</option>
+                <option value="production-floor">Production Floor</option>
+                <option value="assembly-line">Assembly Line</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="assigned-filter">Assigned To</label>
+              <select id="assigned-filter">
+                <option value="">All Users</option>
+                <option value="jdoe">Elias Amro (Technician)</option>
+                <option value="asmith">Harry Potter (Repair)</option>
+                <option value="bjones">Hermoine Granger (Technician)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filter-buttons">
+            <button class="btn btn-primary">Apply Filters</button>
+            <button class="btn">Reset</button>
+          </div>
+        </div>
+
+        <!-- Machinery Table -->
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Location</th>
+              <th>Last Maintained</th>
+              <th>Assigned To</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DRL8456</td>
+              <td>
+                <a href="machine-details.html?id=DRL8456">Precision Drill</a>
+              </td>
+              <td><span class="status-badge status-fault">Fault</span></td>
+              <td>Building A, Room 101</td>
+              <td>March 15, 2025</td>
+              <td>Elias Amro</td>
+              <td>
+                <div class="action-buttons">
+                  <a href="machine-details.html?id=DRL8456" class="action-btn">
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                  <a href="edit-machine.html?id=DRL8456" class="action-btn">
+                    <i class="fa-solid fa-pencil"></i>
+                  </a>
+                  <a href="report-fault.html?id=DRL8456" class="action-btn">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>LVL7891</td>
+              <td><a href="machine-details.html?id=LVL7891">Laser Level</a></td>
+              <td><span class="status-badge status-warning">Warning</span></td>
+              <td>Building B, Room 203</td>
+              <td>March 20, 2025</td>
+              <td>Hermoine Granger</td>
+              <td>
+                <div class="action-buttons">
+                  <a href="machine-details.html?id=LVL7891" class="action-btn">
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                  <a href="edit-machine.html?id=LVL7891" class="action-btn">
+                    <i class="fa-solid fa-pencil"></i>
+                  </a>
+                  <a href="report-fault.html?id=LVL7891" class="action-btn">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>WRN2374</td>
+              <td>
+                <a href="machine-details.html?id=WRN2374">Impact Wrench</a>
+              </td>
+              <td><span class="status-badge status-ok">OK</span></td>
+              <td>Production Floor, Section 3</td>
+              <td>March 25, 2025</td>
+              <td>Harry Potter</td>
+              <td>
+                <div class="action-buttons">
+                  <a href="machine-details.html?id=WRN2374" class="action-btn">
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                  <a href="edit-machine.html?id=WRN2374" class="action-btn">
+                    <i class="fa-solid fa-pencil"></i>
+                  </a>
+                  <a href="report-fault.html?id=WRN2374" class="action-btn">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>THM6745</td>
+              <td>
+                <a href="machine-details.html?id=THM6745">Thermal Camera</a>
+              </td>
+              <td><span class="status-badge status-warning">Warning</span></td>
+              <td>Building A, Room 105</td>
+              <td>March 18, 2025</td>
+              <td>Elias Amro</td>
+              <td>
+                <div class="action-buttons">
+                  <a href="machine-details.html?id=THM6745" class="action-btn">
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                  <a href="edit-machine.html?id=THM6745" class="action-btn">
+                    <i class="fa-solid fa-pencil"></i>
+                  </a>
+                  <a href="report-fault.html?id=THM6745" class="action-btn">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <a href="#" class="pagination-item">
+            <i class="fa-solid fa-chevron-left"></i>
+          </a>
+          <a href="#" class="pagination-item active">1</a>
+          <a href="#" class="pagination-item">2</a>
+          <a href="#" class="pagination-item">3</a>
+          <span class="pagination-item">...</span>
+          <a href="#" class="pagination-item">10</a>
+          <a href="#" class="pagination-item">
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="{% static 'js/dynamic-menu.js' %}" alt="ACME Logo" />
+          <span>ACME Manufacturing Corp.</span>
+        </div>
+        <div class="footer-links">
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-copyright">
+          &copy; 2025 ACME Manufacturing Corp. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/dynamic-menu.js' %}"></script>
+  </body>
+</html>

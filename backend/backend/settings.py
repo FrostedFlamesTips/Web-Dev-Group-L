@@ -25,9 +25,9 @@ SECRET_KEY = 'django-insecure-j%1j0gz$m*h!dxfw09b@l%*cx6x4620_+iu7ny_823z96^voy$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-AUTH_USER_MODEL = 'ACME.User' #Added to use custom user model
+AUTH_USER_MODEL = 'ACME.User'  # Added to use custom user model
 
 # Application definition
 
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +68,15 @@ TEMPLATES = [
         },
     },
 ]
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Directory to collect all static files for deployment
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
@@ -113,11 +122,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

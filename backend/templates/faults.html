@@ -1,0 +1,403 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fault Cases - ACME Manufacturing</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg"
+      href="{% static 'images/favicon.svg' %}"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="menu-overlay"></div>
+        <div class="side-menu">
+          <div class="side-menu-header">
+            <img
+              src="./static/images/favicon.svg"
+              alt="Logo"
+              class="menu-logo"
+            />
+            <span>ACME Manufacturing</span>
+            <button class="close-menu">×</button>
+          </div>
+          <div class="menu-sections">
+            <div class="menu-section">
+              <h3>Navigation</h3>
+              <a href="index.html">
+                <i class="fa-solid fa-gauge-high menu-icon"></i>
+                Dashboard
+              </a>
+              <a href="machinery.html">
+                <i class="fa-solid fa-gear menu-icon"></i>
+                Machinery
+              </a>
+              <a href="faults.html">
+                <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
+                Fault Cases
+              </a>
+              <a href="collections.html">
+                <i class="fa-solid fa-folder menu-icon"></i>
+                Collections
+              </a>
+              <a href="reports.html">
+                <i class="fa-solid fa-chart-bar menu-icon"></i>
+                Reports
+              </a>
+            </div>
+
+            <div class="menu-section">
+              <h3>Management</h3>
+              <a href="users.html">
+                <i class="fa-solid fa-users menu-icon"></i>
+                Users
+              </a>
+              <a href="settings.html">
+                <i class="fa-solid fa-cog menu-icon"></i>
+                Settings
+              </a>
+              <a href="api-test.html">
+                <i class="fa-solid fa-code menu-icon"></i>
+                API Testing
+              </a>
+            </div>
+
+            <div class="menu-section">
+              <h3>Account</h3>
+              <a href="profile.html">
+                <i class="fa-solid fa-user menu-icon"></i>
+                Your Profile
+              </a>
+              <a href="login.html" class="logout-link">
+                <i class="fa-solid fa-right-from-bracket menu-icon"></i>
+                Logout
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <button class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Logo and Title -->
+        <div class="logo">
+          <a href="index.html">
+            <img src="./static/images/favicon.svg" alt="ACME Logo" />
+            <h1>ACME Manufacturing</h1>
+          </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+          <a class="hideable-nav-item" href="machinery.html">Machinery</a>
+          <a class="hideable-nav-item" href="faults.html">Faults</a>
+          <a class="hideable-nav-item" href="collections.html">Collections</a>
+
+          <!-- Profile Dropdown for logged-in users -->
+          <div class="profile-dropdown">
+            <div class="profile-trigger">
+              <div class="profile-icon">EA</div>
+            </div>
+            <div class="dropdown-content">
+              <a href="profile.html">My Profile</a>
+              <a href="settings.html">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a href="login.html" class="logout-link">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+      <div class="fault-list">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h2>Fault Cases</h2>
+          <a href="report-fault.html" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Report New Fault
+          </a>
+        </div>
+
+        <!-- Search and Filter Controls -->
+        <div class="filters-section">
+          <form method="get" action="faults.html">
+            <div class="search-container">
+              <i class="fa-solid fa-search search-icon"></i>
+              <input
+                type="text"
+                name="search"
+                class="search-input"
+                placeholder="Search by case ID, title, machine..."
+              />
+            </div>
+
+            <div class="filters-grid">
+              <div class="filter-group">
+                <label for="status-filter">Status</label>
+                <select id="status-filter" name="status">
+                  <option value="">All Statuses</option>
+                  <option value="open">Open</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="resolved">Resolved</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="priority-filter">Priority</label>
+                <select id="priority-filter" name="priority">
+                  <option value="">All Priorities</option>
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                  <option value="critical">Critical</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="assigned-filter">Assigned To</label>
+                <select id="assigned-filter" name="assigned_to">
+                  <option value="">All Users</option>
+                  <option value="elias">Elias Amro</option>
+                  <option value="joe">Joe Mullaly</option>
+                  <option value="unassigned">Unassigned</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="machine-filter">Machine</label>
+                <select id="machine-filter" name="machine">
+                  <option value="">All Machines</option>
+                  <option value="DRL8456">Precision Drill (DRL8456)</option>
+                  <option value="LVL7891">Laser Level (LVL7891)</option>
+                  <option value="WRN2374">Impact Wrench (WRN2374)</option>
+                  <option value="THM6745">Thermal Camera (THM6745)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="filter-buttons">
+              <button type="submit" class="btn btn-primary">
+                Apply Filters
+              </button>
+              <a href="faults.html" class="btn">Reset</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- Fault Cases Table -->
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Machine</th>
+              <th>Title</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>Reported</th>
+              <th>Assigned To</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a href="fault-details.html?id=FLT2025-042">FLT2025-042</a>
+              </td>
+              <td>
+                <a href="machine-details.html?id=DRL8456">Precision Drill</a>
+              </td>
+              <td>Motor Failure</td>
+              <td>
+                <span style="color: var(--danger-color)">High</span>
+              </td>
+              <td><span class="status-badge status-fault">Open</span></td>
+              <td>Mar 28, 2025</td>
+              <td>Joe Mullaly</td>
+              <td>
+                <div class="action-buttons">
+                  <a
+                    href="fault-details.html?id=FLT2025-042"
+                    class="action-btn"
+                  >
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                  <a href="edit-fault.html?id=FLT2025-042" class="action-btn">
+                    <i class="fa-solid fa-pencil"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="fault-details.html?id=FLT2025-041">FLT2025-041</a>
+              </td>
+              <td><a href="machine-details.html?id=LVL7891">Laser Level</a></td>
+              <td>Calibration Issue</td>
+              <td>
+                <span style="color: var(--warning-color)">Medium</span>
+              </td>
+              <td>
+                <span class="status-badge status-warning">In Progress</span>
+              </td>
+              <td>Mar 27, 2025</td>
+              <td>Elias Amro</td>
+              <td>
+                <div class="action-buttons">
+                  <a
+                    href="fault-details.html?id=FLT2025-041"
+                    class="action-btn"
+                  >
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                  <a href="edit-fault.html?id=FLT2025-041" class="action-btn">
+                    <i class="fa-solid fa-pencil"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="fault-details.html?id=FLT2025-040">FLT2025-040</a>
+              </td>
+              <td>
+                <a href="machine-details.html?id=WRN2374">Impact Wrench</a>
+              </td>
+              <td>Battery Not Charging</td>
+              <td>
+                <span style="color: var(--text-light)">Low</span>
+              </td>
+              <td><span class="status-badge status-success">Resolved</span></td>
+              <td>Mar 26, 2025</td>
+              <td>Joe Mullaly</td>
+              <td>
+                <div class="action-buttons">
+                  <a
+                    href="fault-details.html?id=FLT2025-040"
+                    class="action-btn"
+                  >
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="fault-details.html?id=FLT2025-039">FLT2025-039</a>
+              </td>
+              <td>
+                <a href="machine-details.html?id=THM6745">Thermal Camera</a>
+              </td>
+              <td>Display Malfunction</td>
+              <td>
+                <span style="color: var(--warning-color)">Medium</span>
+              </td>
+              <td><span class="status-badge status-success">Resolved</span></td>
+              <td>Mar 25, 2025</td>
+              <td>Elias Amro</td>
+              <td>
+                <div class="action-buttons">
+                  <a
+                    href="fault-details.html?id=FLT2025-039"
+                    class="action-btn"
+                  >
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="fault-details.html?id=FLT2025-038">FLT2025-038</a>
+              </td>
+              <td>
+                <a href="machine-details.html?id=DRL8456">Precision Drill</a>
+              </td>
+              <td>Overheating</td>
+              <td>
+                <span style="color: var(--danger-color); font-weight: bold"
+                  >Critical</span
+                >
+              </td>
+              <td><span class="status-badge status-success">Resolved</span></td>
+              <td>Mar 24, 2025</td>
+              <td>Joe Mullaly</td>
+              <td>
+                <div class="action-buttons">
+                  <a
+                    href="fault-details.html?id=FLT2025-038"
+                    class="action-btn"
+                  >
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <a href="#" class="pagination-item">
+            <i class="fa-solid fa-chevron-left"></i>
+          </a>
+          <a href="#" class="pagination-item active">1</a>
+          <a href="#" class="pagination-item">2</a>
+          <a href="#" class="pagination-item">3</a>
+          <span class="pagination-item">...</span>
+          <a href="#" class="pagination-item">10</a>
+          <a href="#" class="pagination-item">
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="{% static 'js/dynamic-menu.js' %}" alt="ACME Logo" />
+          <span>ACME Manufacturing Corp.</span>
+        </div>
+        <div class="footer-links">
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-copyright">
+          &copy; 2025 ACME Manufacturing Corp. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/dynamic-menu.js' %}"></script>
+  </body>
+</html>

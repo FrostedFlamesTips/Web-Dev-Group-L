@@ -1,0 +1,608 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fault Case #FLT2025-042 - ACME Manufacturing</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg"
+      href="{% static 'images/favicon.svg' %}"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="menu-overlay"></div>
+        <div class="side-menu">
+          <div class="side-menu-header">
+            <img
+              src="./static/images/favicon.svg"
+              alt="Logo"
+              class="menu-logo"
+            />
+            <span>ACME Manufacturing</span>
+            <button class="close-menu">×</button>
+          </div>
+          <div class="menu-sections">
+            <div class="menu-section">
+              <h3>Navigation</h3>
+              <a href="index.html">
+                <i class="fa-solid fa-gauge-high menu-icon"></i>
+                Dashboard
+              </a>
+              <a href="machinery.html">
+                <i class="fa-solid fa-gear menu-icon"></i>
+                Machinery
+              </a>
+              <a href="faults.html">
+                <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
+                Fault Cases
+              </a>
+              <a href="collections.html">
+                <i class="fa-solid fa-folder menu-icon"></i>
+                Collections
+              </a>
+              <a href="reports.html">
+                <i class="fa-solid fa-chart-bar menu-icon"></i>
+                Reports
+              </a>
+            </div>
+
+            <div class="menu-section">
+              <h3>Management</h3>
+              <a href="users.html">
+                <i class="fa-solid fa-users menu-icon"></i>
+                Users
+              </a>
+              <a href="settings.html">
+                <i class="fa-solid fa-cog menu-icon"></i>
+                Settings
+              </a>
+              <a href="api-test.html">
+                <i class="fa-solid fa-code menu-icon"></i>
+                API Testing
+              </a>
+            </div>
+
+            <div class="menu-section">
+              <h3>Account</h3>
+              <a href="profile.html">
+                <i class="fa-solid fa-user menu-icon"></i>
+                Your Profile
+              </a>
+              <a href="login.html" class="logout-link">
+                <i class="fa-solid fa-right-from-bracket menu-icon"></i>
+                Logout
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <button class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Logo and Title -->
+        <div class="logo">
+          <a href="index.html">
+            <img src="./static/images/favicon.svg" alt="ACME Logo" />
+            <h1>ACME Manufacturing</h1>
+          </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+          <a class="hideable-nav-item" href="machinery.html">Machinery</a>
+          <a class="hideable-nav-item" href="faults.html">Faults</a>
+          <a class="hideable-nav-item" href="collections.html">Collections</a>
+
+          <!-- Profile Dropdown for logged-in users -->
+          <div class="profile-dropdown">
+            <div class="profile-trigger">
+              <div class="profile-icon">EA</div>
+            </div>
+            <div class="dropdown-content">
+              <a href="profile.html">My Profile</a>
+              <a href="settings.html">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a href="login.html" class="logout-link">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+      <!-- Breadcrumb Navigation -->
+      <div style="margin-bottom: 1rem">
+        <a
+          href="faults.html"
+          style="color: var(--text-light); text-decoration: none"
+        >
+          <i class="fa-solid fa-chevron-left"></i> Back to Fault Cases
+        </a>
+      </div>
+
+      <div class="fault-details">
+        <!-- Fault Header -->
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+          "
+        >
+          <div>
+            <h2>Fault Case #FLT2025-042</h2>
+            <div style="margin-top: 0.5rem">
+              <div style="display: flex; gap: 2rem; flex-wrap: wrap">
+                <div>
+                  <span style="font-weight: 600; color: var(--text-color)"
+                    >Machine:</span
+                  >
+                  <a
+                    href="machine-details.html?id=DRL8456"
+                    style="color: var(--primary-color); margin-left: 0.5rem"
+                  >
+                    Precision Drill (DRL8456)
+                  </a>
+                </div>
+                <div>
+                  <span style="font-weight: 600; color: var(--text-color)"
+                    >Status:</span
+                  >
+                  <span
+                    class="status-badge status-fault"
+                    style="margin-left: 0.5rem"
+                    >Open</span
+                  >
+                </div>
+                <div>
+                  <span style="font-weight: 600; color: var(--text-color)"
+                    >Priority:</span
+                  >
+                  <span style="margin-left: 0.5rem; color: var(--danger-color)"
+                    >High</span
+                  >
+                </div>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 2rem;
+                  flex-wrap: wrap;
+                  margin-top: 0.5rem;
+                "
+              >
+                <div>
+                  <span style="font-weight: 600; color: var(--text-color)"
+                    >Reported By:</span
+                  >
+                  <span style="margin-left: 0.5rem; color: var(--text-color)"
+                    >Joe Mullaly</span
+                  >
+                </div>
+                <div>
+                  <span style="font-weight: 600; color: var(--text-color)"
+                    >Reported Date:</span
+                  >
+                  <span style="margin-left: 0.5rem; color: var(--text-color)"
+                    >March 28, 2025</span
+                  >
+                </div>
+                <div>
+                  <span style="font-weight: 600; color: var(--text-color)"
+                    >Assigned To:</span
+                  >
+                  <span style="margin-left: 0.5rem; color: var(--text-color)"
+                    >Elias Amro (Technician)</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.5rem">
+            <button class="btn btn-primary repair-only">
+              <i class="fa-solid fa-check"></i> Mark as Resolved
+            </button>
+            <button class="btn manager-only">
+              <i class="fa-solid fa-user"></i> Reassign
+            </button>
+            <button class="btn"><i class="fa-solid fa-print"></i> Print</button>
+          </div>
+        </div>
+
+        <!-- Fault Content Sections -->
+        <div
+          class="machine-details"
+          style="margin-top: 2rem; grid-template-columns: 2fr 1fr"
+        >
+          <!-- Left side: Fault Details and Timeline -->
+          <div>
+            <!-- Fault Description -->
+            <div class="detail-card">
+              <h3>Fault Description</h3>
+              <p style="color: var(--text-color); line-height: 1.6">
+                The motor stops running after approximately 2 minutes of use.
+                There is a burning smell and unusual noise before it cuts out.
+                The issue started after it was used for a particularly tough
+                drilling job yesterday.
+              </p>
+
+              <h3 style="margin-top: 2rem">Attachments</h3>
+              <div style="display: flex; gap: 1rem; margin-top: 0.5rem">
+                <div style="width: 150px; cursor: pointer">
+                  <img
+                    src="static/images/Motor_damage.jpg"
+                    alt="Attachment 1"
+                    style="
+                      width: 100%;
+                      border-radius: 8px;
+                      margin-bottom: 0.5rem;
+                    "
+                  />
+                  <div style="font-size: 0.85rem; color: var(--text-color)">
+                    Motor_damage.jpg
+                  </div>
+                </div>
+                <div style="width: 150px; cursor: pointer">
+                  <img
+                    src="static/images/Wiring_issue.jpg"
+                    alt="Attachment 2"
+                    style="
+                      width: 100%;
+                      border-radius: 8px;
+                      margin-bottom: 0.5rem;
+                    "
+                  />
+                  <div style="font-size: 0.85rem; color: var(--text-color)">
+                    Wiring_issue.jpg
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Case History & Timeline -->
+            <div class="detail-card" style="margin-top: 1.5rem">
+              <h3>Case Timeline</h3>
+
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-date">March 28, 2025 - 10:30 AM</div>
+                    <div class="timeline-title">
+                      Elias Amro assigned to case
+                    </div>
+                    <div class="timeline-body">
+                      I'll look into this issue today. Will check the motor
+                      wiring and components.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-date">March 28, 2025 - 9:15 AM</div>
+                    <div class="timeline-title">
+                      Fault reported by Joe Mullaly
+                    </div>
+                    <div class="timeline-body">
+                      The motor stops running after approximately 2 minutes of
+                      use. There is a burning smell and unusual noise before it
+                      cuts out. The issue started after it was used for a
+                      particularly tough drilling job yesterday.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add Comment Form -->
+            <div class="detail-card" style="margin-top: 1.5rem">
+              <h3>Add Comment</h3>
+
+              <form
+                id="comment-form"
+                data-validate="true"
+                data-form-type="add-comment"
+              >
+                <div class="form-group">
+                  <textarea
+                    id="comment-text"
+                    name="comment-text"
+                    rows="4"
+                    placeholder="Add your observations, updates, or questions about this fault case..."
+                    required
+                  ></textarea>
+                </div>
+
+                <div style="display: flex; gap: 1rem; align-items: center">
+                  <div
+                    class="form-group"
+                    style="margin-bottom: 0; min-width: 200px"
+                  >
+                    <label for="update-status">Update Status (optional)</label>
+                    <select id="update-status" name="update-status">
+                      <option value="">No Change</option>
+                      <option value="in_progress">In Progress</option>
+                      <option value="resolved">Resolved</option>
+                    </select>
+                  </div>
+
+                  <div
+                    style="
+                      flex-grow: 1;
+                      display: flex;
+                      justify-content: flex-end;
+                      align-items: flex-end;
+                    "
+                  >
+                    <div style="margin-right: 1rem">
+                      <input
+                        type="file"
+                        id="comment-attachment"
+                        style="display: none"
+                        multiple
+                      />
+                      <label
+                        for="comment-attachment"
+                        class="btn"
+                        style="cursor: pointer"
+                      >
+                        <i class="fa-solid fa-paperclip"></i> Attach Files
+                      </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fa-solid fa-paper-plane"></i> Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Right side: Supporting Information -->
+          <div>
+            <!-- Machine Info Card -->
+            <div class="detail-card">
+              <h3>Machine Information</h3>
+
+              <div class="detail-item">
+                <div class="detail-label">ID:</div>
+                <div class="detail-value">DRL8456</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Name:</div>
+                <div class="detail-value">Precision Drill</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Model:</div>
+                <div class="detail-value">DL-5000 Pro</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Location:</div>
+                <div class="detail-value">Building A, Room 101</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Last Maintained:</div>
+                <div class="detail-value">March 15, 2025</div>
+              </div>
+
+              <a
+                href="machine-details.html?id=DRL8456"
+                class="btn"
+                style="margin-top: 1rem; width: 100%"
+              >
+                <i class="fa-solid fa-eye"></i> View Machine Details
+              </a>
+            </div>
+
+            <!-- Related Cases -->
+            <div class="detail-card" style="margin-top: 1.5rem">
+              <h3>Related Cases</h3>
+
+              <div
+                style="
+                  padding: 0.75rem;
+                  border-bottom: 1px solid var(--border-color);
+                "
+              >
+                <div style="font-weight: 600; margin-bottom: 0.25rem">
+                  <a href="#" style="color: var(--primary-color)"
+                    >Case #FLT2024-118</a
+                  >
+                </div>
+                <div
+                  style="
+                    font-size: 0.9rem;
+                    color: var(--text-light);
+                    margin-bottom: 0.25rem;
+                  "
+                >
+                  Power Issues - Dec 5, 2024
+                </div>
+                <div style="font-size: 0.9rem; color: var(--text-color)">
+                  Intermittent power loss during operation.
+                </div>
+                <div style="margin-top: 0.5rem">
+                  <span
+                    class="status-badge status-success"
+                    style="font-size: 0.75rem"
+                    >Resolved</span
+                  >
+                </div>
+              </div>
+
+              <div style="padding: 0.75rem">
+                <div style="font-weight: 600; margin-bottom: 0.25rem">
+                  <a href="#" style="color: var(--primary-color)"
+                    >Case #FLT2024-089</a
+                  >
+                </div>
+                <div
+                  style="
+                    font-size: 0.9rem;
+                    color: var(--text-light);
+                    margin-bottom: 0.25rem;
+                  "
+                >
+                  Overheating - Oct 12, 2024
+                </div>
+                <div style="font-size: 0.9rem; color: var(--text-color)">
+                  Motor overheating during extended use.
+                </div>
+                <div style="margin-top: 0.5rem">
+                  <span
+                    class="status-badge status-success"
+                    style="font-size: 0.75rem"
+                    >Resolved</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Fault Statistics -->
+            <div class="detail-card" style="margin-top: 1.5rem">
+              <h3>Fault Statistics</h3>
+
+              <div class="detail-item">
+                <div class="detail-label">Case Age:</div>
+                <div class="detail-value">1 day</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Avg. Resolution:</div>
+                <div class="detail-value">3.2 days</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Similar Faults:</div>
+                <div class="detail-value">3 cases</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="{% static 'js/dynamic-menu.js' %}" alt="ACME Logo" />
+          <span>ACME Manufacturing Corp.</span>
+        </div>
+        <div class="footer-links">
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-copyright">
+          &copy; 2025 ACME Manufacturing Corp. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/dynamic-menu.js' %}"></script>
+    <script src="{% static 'js/form-validation.js' %}"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Comment submission handler
+        const commentForm = document.getElementById("comment-form");
+
+        if (commentForm) {
+          commentForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const commentText = document.getElementById("comment-text").value;
+            const statusUpdate = document.getElementById("update-status").value;
+
+            // Validate input
+            if (!commentText.trim()) {
+              alert("Please enter a comment");
+              return;
+            }
+
+            // Create new timeline item
+            const timeline = document.querySelector(".timeline");
+            const newItem = document.createElement("div");
+            newItem.className = "timeline-item";
+
+            // Format current date
+            const now = new Date();
+            const formattedDate = `${now.toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })} - ${now.toLocaleTimeString("en-US", {
+              hour: "numeric",
+              minute: "2-digit",
+            })}`;
+
+            // Get user name from session storage or use a default
+            const userName =
+              sessionStorage.getItem("userName") || "Current User";
+
+            // Build the timeline item HTML
+            newItem.innerHTML = `
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">${formattedDate}</div>
+                            <div class="timeline-title">${userName} added a comment</div>
+                            <div class="timeline-body">
+                                ${commentText}
+                            </div>
+                        </div>
+                    `;
+
+            // Update status if selected
+            if (statusUpdate) {
+              const statusBadge = document.querySelector(".status-badge");
+              if (statusUpdate === "in_progress") {
+                statusBadge.className = "status-badge status-warning";
+                statusBadge.textContent = "In Progress";
+              } else if (statusUpdate === "resolved") {
+                statusBadge.className = "status-badge status-success";
+                statusBadge.textContent = "Resolved";
+              }
+            }
+
+            // Add the new item to the beginning of the timeline
+            timeline.insertBefore(newItem, timeline.firstChild);
+
+            // Clear the form
+            commentForm.reset();
+
+            // Show success message
+            alert("Comment added successfully!");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

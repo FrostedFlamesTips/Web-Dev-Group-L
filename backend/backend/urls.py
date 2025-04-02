@@ -16,7 +16,39 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from ACME.views import index
+from ACME.views import collection_details
+from ACME.views import collection_edit
+from ACME.views import collections
+from ACME.views import edit_fault
+from ACME.views import edit_machine
+from ACME.views import fault_details
+from ACME.views import faults
+from ACME.views import login
+from ACME.views import machine_details
+from ACME.views import machinery
+from ACME.views import report_fault
+from ACME.views import warnings
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
+    path('', index),
+    path ('index.html', index),
+    path('collection-details.html', collection_details),
+    path('collection-edit.html', collection_edit),
+    path('collections.html', collections),
+    path('edit-fault.html', edit_fault),
+    path('edit-machine.html', edit_machine),
+    path('fault-details.html', fault_details),
+    path('faults.html', faults),
+    path('login.html', login),
+    path('machine-details.html', machine_details),
+    path('machinery.html', machinery),
+    path('report-fault.html', report_fault),
+    path('warnings.html', warnings),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

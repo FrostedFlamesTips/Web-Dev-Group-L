@@ -1,0 +1,528 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Machine - ACME Manufacturing</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg"
+      href="{% static 'images/favicon.svg' %}"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="menu-overlay"></div>
+        <div class="side-menu">
+          <div class="side-menu-header">
+            <img
+              src="./static/images/favicon.svg"
+              alt="Logo"
+              class="menu-logo"
+            />
+            <span>ACME Manufacturing</span>
+            <button class="close-menu">×</button>
+          </div>
+          <div class="menu-sections">
+            <div class="menu-section">
+              <h3>Navigation</h3>
+              <a href="index.html">
+                <i class="fa-solid fa-gauge-high menu-icon"></i>
+                Dashboard
+              </a>
+              <a href="machinery.html">
+                <i class="fa-solid fa-gear menu-icon"></i>
+                Machinery
+              </a>
+              <a href="faults.html">
+                <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
+                Fault Cases
+              </a>
+              <a href="collections.html">
+                <i class="fa-solid fa-folder menu-icon"></i>
+                Collections
+              </a>
+              <a href="reports.html">
+                <i class="fa-solid fa-chart-bar menu-icon"></i>
+                Reports
+              </a>
+            </div>
+
+            <div class="menu-section">
+              <h3>Management</h3>
+              <a href="users.html">
+                <i class="fa-solid fa-users menu-icon"></i>
+                Users
+              </a>
+              <a href="settings.html">
+                <i class="fa-solid fa-cog menu-icon"></i>
+                Settings
+              </a>
+              <a href="api-test.html">
+                <i class="fa-solid fa-code menu-icon"></i>
+                API Testing
+              </a>
+            </div>
+
+            <div class="menu-section">
+              <h3>Account</h3>
+              <a href="profile.html">
+                <i class="fa-solid fa-user menu-icon"></i>
+                Your Profile
+              </a>
+              <a href="login.html" class="logout-link">
+                <i class="fa-solid fa-right-from-bracket menu-icon"></i>
+                Logout
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <button class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Logo and Title -->
+        <div class="logo">
+          <a href="index.html">
+            <img src="./static/images/favicon.svg" alt="ACME Logo" />
+            <h1>ACME Manufacturing</h1>
+          </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+          <a class="hideable-nav-item" href="machinery.html">Machinery</a>
+          <a class="hideable-nav-item" href="faults.html">Faults</a>
+          <a class="hideable-nav-item" href="collections.html">Collections</a>
+
+          <!-- Profile Dropdown for logged-in users -->
+          <div class="profile-dropdown">
+            <div class="profile-trigger">
+              <div class="profile-icon">EA</div>
+            </div>
+            <div class="dropdown-content">
+              <a href="profile.html">My Profile</a>
+              <a href="settings.html">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a href="login.html" class="logout-link">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+      <!-- Breadcrumb Navigation -->
+      <div style="margin-bottom: 1rem">
+        <a
+          href="machine-details.html?id=DRL8456"
+          style="color: var(--text-light); text-decoration: none"
+        >
+          <i class="fa-solid fa-chevron-left"></i> Back to Machine Details
+        </a>
+      </div>
+
+      <div class="machine-edit">
+        <!-- Page Header -->
+        <div>
+          <h2>Edit Machine: Precision Drill (DRL8456)</h2>
+        </div>
+
+        <!-- Machine Editing Form -->
+        <div class="form-container">
+          <form id="edit-machine-form">
+            <div
+              class="form-grid"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+              "
+            >
+              <div>
+                <h3
+                  style="
+                    margin-bottom: 1.5rem;
+                    border-bottom: 1px solid var(--border-color);
+                    padding-bottom: 0.5rem;
+                  "
+                >
+                  Basic Information
+                </h3>
+
+                <div class="form-group">
+                  <label for="machine-id">Machine ID</label>
+                  <input
+                    type="text"
+                    id="machine-id"
+                    name="machine-id"
+                    value="DRL8456"
+                    required
+                    readonly
+                  />
+                  <div
+                    style="
+                      font-size: 0.85rem;
+                      color: var(--text-light);
+                      margin-top: 0.5rem;
+                    "
+                  >
+                    Machine ID cannot be changed after creation
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="machine-name">Name</label>
+                  <input
+                    type="text"
+                    id="machine-name"
+                    name="machine-name"
+                    value="Precision Drill"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="machine-model">Model</label>
+                  <input
+                    type="text"
+                    id="machine-model"
+                    name="machine-model"
+                    value="DL-5000 Pro"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="machine-manufacturer">Manufacturer</label>
+                  <input
+                    type="text"
+                    id="machine-manufacturer"
+                    name="machine-manufacturer"
+                    value="DeWalt Industrial"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="machine-serial">Serial Number</label>
+                  <input
+                    type="text"
+                    id="machine-serial"
+                    name="machine-serial"
+                    value="SN-45678-DLP-2023"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="machine-location">Location</label>
+                  <input
+                    type="text"
+                    id="machine-location"
+                    name="machine-location"
+                    value="Building A, Room 101"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <h3
+                  style="
+                    margin-bottom: 1.5rem;
+                    border-bottom: 1px solid var(--border-color);
+                    padding-bottom: 0.5rem;
+                  "
+                >
+                  Additional Details
+                </h3>
+
+                <div class="form-group">
+                  <label for="machine-purchase-date">Purchase Date</label>
+                  <input
+                    type="date"
+                    id="machine-purchase-date"
+                    name="machine-purchase-date"
+                    value="2023-01-15"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="machine-warranty">Warranty Until</label>
+                  <input
+                    type="date"
+                    id="machine-warranty"
+                    name="machine-warranty"
+                    value="2026-01-15"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="machine-maintained">Last Maintained</label>
+                  <input
+                    type="date"
+                    id="machine-maintained"
+                    name="machine-maintained"
+                    value="2025-03-15"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="machine-priority">Priority Level (0-100)</label>
+                  <input
+                    type="number"
+                    id="machine-priority"
+                    name="machine-priority"
+                    min="0"
+                    max="100"
+                    value="80"
+                  />
+                  <div
+                    style="
+                      font-size: 0.85rem;
+                      color: var(--text-light);
+                      margin-top: 0.5rem;
+                    "
+                  >
+                    Higher priority machines appear first in lists
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="machine-assigned">Assigned To</label>
+                  <select id="machine-assigned" name="machine-assigned">
+                    <option value="">Not Assigned</option>
+                    <option value="elias">Elias Amro</option>
+                    <option value="joe" selected>Joe Mullaly</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="machine-description">Description</label>
+                  <textarea
+                    id="machine-description"
+                    name="machine-description"
+                    rows="4"
+                  >
+Heavy-duty precision drill for manufacturing applications. Features adjustable speed control and automatic depth stop. Requires regular maintenance every 3 months.</textarea
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 1.5rem">
+              <label>Collections</label>
+              <div
+                class="collections-grid"
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                  gap: 1rem;
+                  margin-top: 0.5rem;
+                "
+              >
+                <div class="collection-checkbox">
+                  <input
+                    type="checkbox"
+                    id="collection-1"
+                    name="collection[]"
+                    value="1"
+                    checked
+                  />
+                  <label for="collection-1">Main-Campus</label>
+                </div>
+                <div class="collection-checkbox">
+                  <input
+                    type="checkbox"
+                    id="collection-2"
+                    name="collection[]"
+                    value="2"
+                    checked
+                  />
+                  <label for="collection-2">Building-A</label>
+                </div>
+                <div class="collection-checkbox">
+                  <input
+                    type="checkbox"
+                    id="collection-3"
+                    name="collection[]"
+                    value="3"
+                  />
+                  <label for="collection-3">Building-B</label>
+                </div>
+                <div class="collection-checkbox">
+                  <input
+                    type="checkbox"
+                    id="collection-4"
+                    name="collection[]"
+                    value="4"
+                  />
+                  <label for="collection-4">Production-Floor</label>
+                </div>
+                <div class="collection-checkbox">
+                  <input
+                    type="checkbox"
+                    id="collection-5"
+                    name="collection[]"
+                    value="5"
+                  />
+                  <label for="collection-5">Assembly-Line</label>
+                </div>
+                <div class="collection-checkbox">
+                  <input
+                    type="checkbox"
+                    id="collection-6"
+                    name="collection[]"
+                    value="6"
+                    checked
+                  />
+                  <label for="collection-6">Drilling-Equipment</label>
+                </div>
+                <div class="collection-checkbox">
+                  <input
+                    type="checkbox"
+                    id="collection-7"
+                    name="collection[]"
+                    value="7"
+                  />
+                  <label for="collection-7">Measuring-Tools</label>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 2rem">
+              <button type="submit" class="btn btn-primary">
+                Save Changes
+              </button>
+              <a href="machine-details.html?id=DRL8456" class="btn">Cancel</a>
+              <button
+                type="button"
+                class="btn btn-danger"
+                style="margin-left: auto"
+                onclick="confirmDelete()"
+              >
+                <i class="fa-solid fa-trash"></i> Delete Machine
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="{% static 'js/dynamic-menu.js' %}" alt="ACME Logo" />
+          <span>ACME Manufacturing Corp.</span>
+        </div>
+        <div class="footer-links">
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-copyright">
+          &copy; 2025 ACME Manufacturing Corp. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/dynamic-menu.js' %}"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Form submission handler
+        const form = document.getElementById("edit-machine-form");
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Basic validation
+          const name = document.getElementById("machine-name").value.trim();
+          const model = document.getElementById("machine-model").value.trim();
+          const manufacturer = document
+            .getElementById("machine-manufacturer")
+            .value.trim();
+          const location = document
+            .getElementById("machine-location")
+            .value.trim();
+
+          if (!name || !model || !manufacturer || !location) {
+            alert("Please fill in all required fields");
+            return;
+          }
+
+          // In a real application, this would submit to the server
+          // For demo, just show a message and redirect
+          alert("Machine updated successfully!");
+          window.location.href = "machine-details.html?id=DRL8456";
+        });
+
+        // Style the collection checkboxes
+        const collectionCheckboxes = document.querySelectorAll(
+          ".collection-checkbox"
+        );
+        collectionCheckboxes.forEach((checkbox) => {
+          checkbox.style.padding = "0.75rem";
+          checkbox.style.border = "1px solid var(--border-color)";
+          checkbox.style.borderRadius = "8px";
+          checkbox.style.display = "flex";
+          checkbox.style.alignItems = "center";
+
+          const input = checkbox.querySelector("input");
+          const label = checkbox.querySelector("label");
+
+          input.style.marginRight = "0.5rem";
+
+          // Change background color when checked
+          input.addEventListener("change", function () {
+            if (this.checked) {
+              checkbox.style.backgroundColor = "#f0f9ff";
+              checkbox.style.borderColor = "#90cdf4";
+            } else {
+              checkbox.style.backgroundColor = "white";
+              checkbox.style.borderColor = "var(--border-color)";
+            }
+          });
+
+          // Set initial state
+          if (input.checked) {
+            checkbox.style.backgroundColor = "#f0f9ff";
+            checkbox.style.borderColor = "#90cdf4";
+          }
+        });
+      });
+
+      // Confirm delete action
+      function confirmDelete() {
+        if (
+          confirm(
+            "Are you sure you want to delete this machine? This action cannot be undone."
+          )
+        ) {
+          alert("Machine deleted successfully!");
+          window.location.href = "machinery.html";
+        }
+      }
+    </script>
+  </body>
+</html>
