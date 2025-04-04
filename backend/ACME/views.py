@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 import csv
 from django.http import HttpResponse
-from .models import Machine
+from .models import Machine, Collection
+from .forms import CollectionForm
 def index(request):
     return render(request, 'index.html')
 
@@ -56,3 +57,31 @@ def export_machines_csv(request):
         writer.writerow([machine.name, machine.status, machine.priority, machine.created_at])
 
     return response
+
+def collections_view(request):
+    search_query = request.GET.get('search', '')
+    collections = Collection.objects.filter(name__icontains=search_query)
+    return render(request, 'collections.html', {'collections': collections})
+
+def collection_details_view(request, id):
+    collection = Collection.objects.get(id=id)
+    machines = Machine.objects.filter(collection_id=id)
+    return render(request, 'collection-details.html', {'collection': collection, 'machines': machines})
+
+def add_collection_view(request):
+    if request.method == 'POST':
+        form = CollectionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('collections')  
+    else:
+        form = CollectionForm()
+    return render(request, 'collection-create.html', {'form': form})
+
+def delete_collection_view(request, id):
+    if request.method == 'POST':  
+        collection = get_object_or_404(Collection, id=id)
+        collection.delete()
+        return redirect('collections')  
+    else:
+        return HttpResponse("Invalid request method", status=405)

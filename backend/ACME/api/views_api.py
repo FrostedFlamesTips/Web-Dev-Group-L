@@ -1,7 +1,9 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from ACME.models import Machine
-from .serializers import MachineSerializer, WarningSerializer, FaultCaseSerializer  
+from ACME.models import Machine, Warning, Collection
+from .serializers import MachineSerializer, WarningSerializer, CollectionSerializer
+from rest_framework.viewsets import ModelViewSet
+
 
 @api_view(['GET'])
 def machine_list(request):
@@ -18,4 +20,6 @@ def report_warning(request):
     return Response(serializer.errors, status=400)
 
 
-
+class CollectionViewSet(ModelViewSet):
+    queryset = Collection.objects.all()
+    serializer_class = CollectionSerializer

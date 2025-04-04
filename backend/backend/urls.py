@@ -31,6 +31,7 @@ from ACME.views import report_fault
 from ACME.views import warnings
 from django.conf import settings
 from django.conf.urls.static import static
+from ACME import views
 
 urlpatterns = [
     path('admin', admin.site.urls),
@@ -38,7 +39,6 @@ urlpatterns = [
     path ('index.html', index),
     path('collection-details.html', collection_details),
     path('collection-edit.html', collection_edit),
-    path('collections.html', collections),
     path('edit-fault.html', edit_fault),
     path('edit-machine.html', edit_machine),
     path('fault-details.html', fault_details),
@@ -49,6 +49,9 @@ urlpatterns = [
     path('report-fault.html', report_fault),
     path('warnings.html', warnings),
     path('api/', include('ACME.api.urls')),
+    path('collections/delete/<int:id>/', views.delete_collection_view, name='delete_collection'),
+    path('collection-create.html', views.add_collection_view, name='add_collection'),
+    path('collections.html', views.collections_view, name='collections'),
 ]
 
 if settings.DEBUG:
