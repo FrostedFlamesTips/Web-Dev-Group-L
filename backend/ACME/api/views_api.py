@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from ACME.models import Machine, Warning, Collection
 from .serializers import MachineSerializer, WarningSerializer, CollectionSerializer
 from rest_framework.viewsets import ModelViewSet
+from rest_framework import generics, permissions
+from .permissions import IsManager
 
 
 @api_view(['GET'])
@@ -23,3 +25,16 @@ def report_warning(request):
 class CollectionViewSet(ModelViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
+
+class MachineListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Machine.objects.all()
+    serializer_class = MachineSerializer
+
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            return [permissions.IsAuthenticated(), IsManager()]
+        return [permissions.AllowAny()]
+
+class MachineDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Machine.objects.all()
+    serializer_class = MachineSerializer

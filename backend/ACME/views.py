@@ -3,6 +3,8 @@ import csv
 from django.http import HttpResponse
 from .models import Machine, Collection
 from .forms import CollectionForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 def index(request):
     return render(request, 'index.html')
 
@@ -85,3 +87,21 @@ def delete_collection_view(request, id):
         return redirect('collections')  
     else:
         return HttpResponse("Invalid request method", status=405)
+
+
+def machinery_list(request):
+    machines = Machine.objects.all().prefetch_related('collections', 'technicians', 'repair_personnel')
+    return render(request, 'machinery.html', {'machines': machines})
+
+def machinery_detail(request, machine_id):
+    machine = get_object_or_404(Machine, id=machine_id)
+    return render(request, 'machinery-details.html', {'machine': machine})
+
+#@login_required  Not currently functional, but can be added later
+def machinery_list_view(request):
+    User = get_user_model()
+    request.user = User.objects.filter(role='Manager').first()  # test user
+    return render(request, 'machinery.html')
+
+def add_machine_view(request):
+    return HttpResponse("This is where you'd add a machine.") #Placeholder needs to be implemented

@@ -3,9 +3,14 @@ from ..models import Machine, FaultCase, Warning, Collection
 
 
 class MachineSerializer(serializers.ModelSerializer):
+    technicians = serializers.StringRelatedField(many=True)
+    repair_personnel = serializers.StringRelatedField(many=True)
+    collections = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Machine
         fields = '__all__'
+
 
 class FaultCaseSerializer(serializers.ModelSerializer):
     class Meta:
