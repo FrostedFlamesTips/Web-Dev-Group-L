@@ -4,7 +4,9 @@ from django.http import HttpResponse
 from .models import Machine, Collection
 from .forms import CollectionForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib import messages
+
 def index(request):
     return render(request, 'index.html')
 
@@ -28,9 +30,6 @@ def fault_details(request):
 
 def faults(request):
     return render(request, 'faults.html')
-
-def login(request):
-    return render(request, 'login.html')
 
 def machine_details(request):
     return render(request, 'machine-details.html')
@@ -88,6 +87,18 @@ def delete_collection_view(request, id):
     else:
         return HttpResponse("Invalid request method", status=405)
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('index')  # or your desired landing page
+        else:
+            return render(request, 'login.html', {'error': 'Invalid username or password'})
+    return render(request, 'login.html')
 
 def machinery_list(request):
     machines = Machine.objects.all().prefetch_related('collections', 'technicians', 'repair_personnel')
@@ -97,11 +108,12 @@ def machinery_detail(request, machine_id):
     machine = get_object_or_404(Machine, id=machine_id)
     return render(request, 'machinery-details.html', {'machine': machine})
 
-#@login_required  Not currently functional, but can be added later
+@login_required
 def machinery_list_view(request):
-    User = get_user_model()
-    request.user = User.objects.filter(role='Manager').first()  # test user
     return render(request, 'machinery.html')
 
 def add_machine_view(request):
     return HttpResponse("This is where you'd add a machine.") #Placeholder needs to be implemented
+
+def index_view(request):
+    return render(request, 'index.html')

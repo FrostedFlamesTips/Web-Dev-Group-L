@@ -32,19 +32,20 @@ from ACME.views import warnings
 from django.conf import settings
 from django.conf.urls.static import static
 from ACME import views
-from ACME.views import machinery_list_view, add_machine_view
+from ACME.views import machinery_list_view, add_machine_view, login_view
 
 urlpatterns = [
     path('admin', admin.site.urls),
     path('', index),
     path ('index.html', index),
+    path('index.html', views.index_view, name='index'),
     path('collection-details.html', collection_details),
     path('collection-edit.html', collection_edit),
     path('edit-fault.html', edit_fault),
     path('edit-machine.html', edit_machine),
     path('fault-details.html', fault_details),
     path('faults.html', faults),
-    path('login.html', login),
+    path('login/', login_view, name='login'),
     path('machine-details.html', machine_details),
     #path('machinery.html', machinery),
     path('report-fault.html', report_fault),
