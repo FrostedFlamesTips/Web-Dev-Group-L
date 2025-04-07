@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import Machine, FaultCase, Warning, Collection
+from ..models import Machine, FaultCase, MachineWarning, Collection
 
 
 class MachineSerializer(serializers.ModelSerializer):
@@ -19,7 +19,7 @@ class FaultCaseSerializer(serializers.ModelSerializer):
 
 class WarningSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Warning
+        model = MachineWarning
         fields = '__all__'
 
 class CollectionSerializer(serializers.ModelSerializer):

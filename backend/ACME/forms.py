@@ -1,6 +1,7 @@
 from django import forms
 from .models import Collection, Machine, FaultCase
 from django.contrib.auth import get_user_model
+from .models import MachineWarning
 
 class CollectionForm(forms.ModelForm):
     class Meta:
@@ -32,3 +33,10 @@ class FaultCaseForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
         label="Assign Technicians"
     )
+
+
+class MachineWarningForm(forms.ModelForm):
+    class Meta:
+        model = MachineWarning
+        fields = ['machine', 'warning_text']
+

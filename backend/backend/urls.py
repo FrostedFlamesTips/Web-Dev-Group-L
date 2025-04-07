@@ -32,7 +32,7 @@ from ACME.views import warnings
 from django.conf import settings
 from django.conf.urls.static import static
 from ACME import views
-from ACME.views import machinery_list_view, add_machine_view, login_view, create_fault_view, faults_list_view
+from ACME.views import machinery_list_view, add_machine_view, login_view, create_fault_view, faults_list_view, create_warning_view
 
 urlpatterns = [
     path('admin', admin.site.urls),
@@ -49,7 +49,7 @@ urlpatterns = [
     path('machine-details.html', machine_details),
     #path('machinery.html', machinery),
     #path('report-fault.html', report_fault),
-    path('warnings.html', warnings),
+    #path('warnings.html', warnings),
     path('api/', include('ACME.api.urls')),
     path('collections/delete/<int:id>/', views.delete_collection_view, name='delete_collection'),
     path('collection-create.html', views.add_collection_view, name='add_collection'),
@@ -58,6 +58,9 @@ urlpatterns = [
     path('machinery/add/', add_machine_view, name='add_machine'),
     path('report-fault/', create_fault_view, name='report_fault'),
     path('faults.html', faults_list_view, name='faults_list'),
+    path('warnings/', views.warnings_view, name='warnings'),
+    path('warnings/create/', views.create_warning_view, name='create_warning'),
+    path('warnings/resolve/<int:warning_id>/', views.resolve_warning_view, name='resolve_warning'),
 ]
 
 if settings.DEBUG:

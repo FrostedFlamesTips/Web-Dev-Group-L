@@ -5,212 +5,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Warnings - ACME Manufacturing</title>
-
-    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/svg"
-      href="{% static 'images/favicon.svg' %}"
-    />
-    <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="icon" type="image/svg" href="{% static 'images/favicon.svg' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
 
   <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
       <div class="nav-container">
-        <div class="menu-overlay"></div>
-        <div class="side-menu">
-          <div class="side-menu-header">
-            <img
-              src="./static/images/favicon.svg"
-              alt="Logo"
-              class="menu-logo"
-            />
-            <span>ACME Manufacturing</span>
-            <button class="close-menu">×</button>
-          </div>
-          <div class="menu-sections">
-            <div class="menu-section">
-              <h3>Navigation</h3>
-              <a href="index.html">
-                <i class="fa-solid fa-gauge-high menu-icon"></i>
-                Dashboard
-              </a>
-              <a href="machinery.html">
-                <i class="fa-solid fa-gear menu-icon"></i>
-                Machinery
-              </a>
-              <a href="faults.html">
-                <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
-                Fault Cases
-              </a>
-              <a href="collections.html">
-                <i class="fa-solid fa-folder menu-icon"></i>
-                Collections
-              </a>
-              <a href="reports.html">
-                <i class="fa-solid fa-chart-bar menu-icon"></i>
-                Reports
-              </a>
-            </div>
-
-            <div class="menu-section">
-              <h3>Management</h3>
-              <a href="users.html">
-                <i class="fa-solid fa-users menu-icon"></i>
-                Users
-              </a>
-              <a href="settings.html">
-                <i class="fa-solid fa-cog menu-icon"></i>
-                Settings
-              </a>
-              <a href="api-test.html">
-                <i class="fa-solid fa-code menu-icon"></i>
-                API Testing
-              </a>
-            </div>
-
-            <div class="menu-section">
-              <h3>Account</h3>
-              <a href="profile.html">
-                <i class="fa-solid fa-user menu-icon"></i>
-                Your Profile
-              </a>
-              <a href="login.html" class="logout-link">
-                <i class="fa-solid fa-right-from-bracket menu-icon"></i>
-                Logout
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <button class="menu-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <!-- Logo and Title -->
         <div class="logo">
-          <a href="index.html">
-            <img src="./static/images/favicon.svg" alt="ACME Logo" />
+          <a href="{% url 'index' %}">
+            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
             <h1>ACME Manufacturing</h1>
           </a>
         </div>
-
-        <!-- Navigation Links -->
         <div class="nav-links">
-          <a class="hideable-nav-item" href="machinery.html">Machinery</a>
-          <a class="hideable-nav-item" href="faults.html">Faults</a>
-          <a class="hideable-nav-item" href="collections.html">Collections</a>
-
-          <!-- Profile Dropdown for logged-in users -->
-          <div class="profile-dropdown">
-            <div class="profile-trigger">
-              <div class="profile-icon">EA</div>
-            </div>
-            <div class="dropdown-content">
-              <a href="profile.html">My Profile</a>
-              <a href="settings.html">Settings</a>
-              <div class="dropdown-divider"></div>
-              <a href="login.html" class="logout-link">Logout</a>
-            </div>
-          </div>
+          <a href="{% url 'machinery_list' %}">Machinery</a>
+          <a href="{% url 'faults_list' %}">Faults</a>
+          <a href="{% url 'collections' %}">Collections</a>
+          <a href="{% url 'warnings' %}" class="active">Warnings</a>
         </div>
       </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-container">
-      <div class="alert alert-success">
-        <i class="fa-solid fa-circle-check alert-icon"></i>
-        <div>
-          <strong>Welcome back, Elias Amro!</strong>
-          <p>
-            You are logged in as a Manager. You have 5 active warnings requiring
-            attention.
-          </p>
-        </div>
-      </div>
-
-      <div class="user-list">
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          "
-        >
+      <div class="fault-list">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
           <h2>Active Warnings</h2>
+          {% if user.is_authenticated and user.role in 'Manager Technician' %}
+          <a href="{% url 'create_warning' %}" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Add Warning
+          </a>
+          {% endif %}
         </div>
 
-        <!-- Search and Filter Controls -->
-        <div class="filters-section">
-          <form method="get" action="warnings.html">
-            <div class="search-container">
-              <i class="fa-solid fa-search search-icon"></i>
-              <input
-                type="text"
-                name="search"
-                class="search-input"
-                placeholder="Search by machine name, ID, location..."
-              />
-            </div>
-
-            <div class="filters-grid">
-              <div class="filter-group">
-                <label for="machine-filter">Machine</label>
-                <select id="machine-filter" name="machine">
-                  <option value="">All Machines</option>
-                  <option value="DRL8456">Precision Drill (DRL8456)</option>
-                  <option value="LVL7891">Laser Level (LVL7891)</option>
-                  <option value="THM6745">Thermal Camera (THM6745)</option>
-                  <option value="WRN2374">Impact Wrench (WRN2374)</option>
-                </select>
-              </div>
-
-              <div class="filter-group">
-                <label for="collection-filter">Collection</label>
-                <select id="collection-filter" name="collection">
-                  <option value="">All Collections</option>
-                  <option value="main-campus">Main Campus</option>
-                  <option value="building-a">Building A</option>
-                  <option value="building-b">Building B</option>
-                  <option value="production-floor">Production Floor</option>
-                  <option value="assembly-line">Assembly Line</option>
-                </select>
-              </div>
-
-              <div class="filter-group">
-                <label for="date-filter">Date Added</label>
-                <select id="date-filter" name="date">
-                  <option value="">Any Time</option>
-                  <option value="today">Today</option>
-                  <option value="yesterday">Yesterday</option>
-                  <option value="last-week">Last 7 Days</option>
-                  <option value="last-month">Last 30 Days</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="filter-buttons">
-              <button type="submit" class="btn btn-primary">
-                Apply Filters
-              </button>
-              <a href="warnings.html" class="btn">Reset</a>
-            </div>
-          </form>
-        </div>
-
-        <!-- Warnings Table -->
+        <!-- Table -->
         <table class="data-table">
           <thead>
             <tr>
@@ -218,139 +48,41 @@
               <th>Warning Message</th>
               <th>Reported</th>
               <th>Created By</th>
-              <th>Location</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <a href="machine-details.html?id=THM6745"
-                  >Thermal Camera (THM6745)</a
-                >
-              </td>
-              <td>Battery low - Requires charging</td>
-              <td>March 28, 2025</td>
-              <td>Joe Mullaly</td>
-              <td>Building A, Room 105</td>
-              <td>
-                <div class="action-buttons">
-                  <a href="machine-details.html?id=THM6745" class="action-btn">
-                    <i class="fa-solid fa-eye"></i>
-                  </a>
-                  <button class="action-btn warning-resolve-btn" data-id="1">
-                    <i class="fa-solid fa-check"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="machine-details.html?id=LVL7891"
-                  >Laser Level (LVL7891)</a
-                >
-              </td>
-              <td>Calibration due in 5 days</td>
-              <td>March 27, 2025</td>
-              <td>System</td>
-              <td>Building B, Room 203</td>
-              <td>
-                <div class="action-buttons">
-                  <a href="machine-details.html?id=LVL7891" class="action-btn">
-                    <i class="fa-solid fa-eye"></i>
-                  </a>
-                  <button class="action-btn warning-resolve-btn" data-id="2">
-                    <i class="fa-solid fa-check"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="machine-details.html?id=WRN2374"
-                  >Impact Wrench (WRN2374)</a
-                >
-              </td>
-              <td>Maintenance check scheduled for next week</td>
-              <td>March 25, 2025</td>
-              <td>Elias Amro</td>
-              <td>Production Floor, Section 3</td>
-              <td>
-                <div class="action-buttons">
-                  <a href="machine-details.html?id=WRN2374" class="action-btn">
-                    <i class="fa-solid fa-eye"></i>
-                  </a>
-                  <button class="action-btn warning-resolve-btn" data-id="3">
-                    <i class="fa-solid fa-check"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="machine-details.html?id=DRL8456"
-                  >Precision Drill (DRL8456)</a
-                >
-              </td>
-              <td>Maintenance overdue by 14 days</td>
-              <td>March 15, 2025</td>
-              <td>System</td>
-              <td>Building A, Room 101</td>
-              <td>
-                <div class="action-buttons">
-                  <a href="machine-details.html?id=DRL8456" class="action-btn">
-                    <i class="fa-solid fa-eye"></i>
-                  </a>
-                  <button class="action-btn warning-resolve-btn" data-id="4">
-                    <i class="fa-solid fa-check"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="machine-details.html?id=DRL8456"
-                  >Precision Drill (DRL8456)</a
-                >
-              </td>
-              <td>Battery replacement recommended</td>
-              <td>March 14, 2025</td>
-              <td>Joe Mullaly</td>
-              <td>Building A, Room 101</td>
-              <td>
-                <div class="action-buttons">
-                  <a href="machine-details.html?id=DRL8456" class="action-btn">
-                    <i class="fa-solid fa-eye"></i>
-                  </a>
-                  <button class="action-btn warning-resolve-btn" data-id="5">
-                    <i class="fa-solid fa-check"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
+            {% for warning in warnings %}
+              <tr>
+                <td>
+                  <a href="#">{{ warning.machine.name }}</a>
+                </td>
+                <td>{{ warning.warning_text }}</td>
+                <td>{{ warning.added_at|date:"M d, Y" }}</td>
+                <td>{{ warning.added_by.username|default:"System" }}</td>
+                <td>
+                  <div class="action-buttons">
+                    <a href="#" class="action-btn">
+                      <i class="fa-solid fa-eye"></i>
+                    </a>
+                    {% if user.is_authenticated and user.role in 'Manager Technician' %}
+                      <form method="POST" action="{% url 'resolve_warning' warning.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="action-btn" title="Resolve">
+                          <i class="fa-solid fa-check"></i>
+                        </button>
+                      </form>
+                    {% endif %}
+                  </div>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="5" style="text-align: center;">No active warnings at the moment.</td>
+              </tr>
+            {% endfor %}
           </tbody>
         </table>
-
-        <!-- Pagination -->
-        <div class="pagination">
-          <a href="#" class="pagination-item">
-            <i class="fa-solid fa-angles-left"></i>
-          </a>
-          <a href="#" class="pagination-item">
-            <i class="fa-solid fa-chevron-left"></i>
-          </a>
-          <a href="#" class="pagination-item active">1</a>
-          <a href="#" class="pagination-item">2</a>
-          <a href="#" class="pagination-item">3</a>
-          <span class="pagination-item">...</span>
-          <a href="#" class="pagination-item">10</a>
-          <a href="#" class="pagination-item">
-            <i class="fa-solid fa-chevron-right"></i>
-          </a>
-          <a href="#" class="pagination-item">
-            <i class="fa-solid fa-angles-right"></i>
-          </a>
-        </div>
       </div>
     </main>
 
@@ -358,14 +90,13 @@
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-logo">
-          <img src="{% static 'js/dynamic-menu.js' %}" alt="ACME Logo" />
+          <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
           <span>ACME Manufacturing Corp.</span>
         </div>
         <div class="footer-links">
-          <a href="about.html">About</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
-          <a href="contact.html">Contact</a>
+          <a href="#">About</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
         </div>
         <div class="footer-copyright">
           &copy; 2025 ACME Manufacturing Corp. All rights reserved.
@@ -373,29 +104,6 @@
       </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="{% static 'js/dynamic-menu.js' %}"></script>
-    <script>
-      // Handle warning resolution
-      document.addEventListener("DOMContentLoaded", function () {
-        const resolveButtons = document.querySelectorAll(
-          ".warning-resolve-btn"
-        );
-
-        resolveButtons.forEach((button) => {
-          button.addEventListener("click", function () {
-            const warningId = this.getAttribute("data-id");
-            if (confirm("Are you sure you want to resolve this warning?")) {
-              // In a real application, this would make an API call
-              // For demo purposes, just remove the row
-              this.closest("tr").remove();
-
-              // Show success message
-              alert("Warning resolved successfully!");
-            }
-          });
-        });
-      });
-    </script>
   </body>
 </html>

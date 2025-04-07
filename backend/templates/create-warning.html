@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Create Warning - ACME Manufacturing</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        .form-section {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .form-section h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        .back-link {
+            display: block;
+            margin-top: 1rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="form-section">
+            <h2>Report a New Warning</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Submit Warning
+                </button>
+            </form>
+            <a href="{% url 'warnings' %}">Back to Warnings</a>
+        </div>
+    </div>
+</body>
+</html>
+    </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from ACME.models import Machine, Warning, Collection
+from ACME.models import Machine, MachineWarning, Collection
 from .serializers import MachineSerializer, WarningSerializer, CollectionSerializer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import generics, permissions

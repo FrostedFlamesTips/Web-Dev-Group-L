@@ -53,7 +53,7 @@ class Machine(models.Model):
         return f"{self.name} ({self.id})"
 
 
-class Warning(models.Model):
+class MachineWarning(models.Model):
     machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
     warning_text = models.TextField()
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='warnings_added')

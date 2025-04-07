@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 import csv
 from django.http import HttpResponse
 from .models import Machine, Collection, FaultCase, FaultImage
-from .forms import CollectionForm, MachineForm, FaultCaseForm
+from .forms import CollectionForm, MachineForm, FaultCaseForm, MachineWarningForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model, authenticate, login
 from django.contrib import messages
 from django.http import HttpResponseForbidden
+from .models import MachineWarning
+from django.utils import timezone
 
 def index(request):
     return render(request, 'index.html')
@@ -167,3 +169,30 @@ def create_fault_view(request):
 def faults_list_view(request):
     faults = FaultCase.objects.select_related('machine', 'created_by', 'resolved_by')
     return render(request, 'faults.html', {'faults': faults})
+
+@login_required
+def warnings_view(request):
+    warnings = MachineWarning.objects.filter(resolved=False).select_related('machine', 'added_by')
+    return render(request, 'warnings.html', {'warnings': warnings})
+
+@login_required
+def create_warning_view(request):
+    if request.method == 'POST':
+        form = MachineWarningForm(request.POST)
+        if form.is_valid():
+            warning = form.save(commit=False)
+            warning.added_by = request.user
+            warning.save()
+            return redirect('warnings')  
+    else:
+        form = MachineWarningForm()
+    return render(request, 'create-warning.html', {'form': form})
+
+@login_required
+def resolve_warning_view(request, warning_id):
+    warning = get_object_or_404(MachineWarning, id=warning_id)
+    warning.resolved = True
+    warning.resolved_by = request.user
+    warning.resolved_at = timezone.now()
+    warning.save()
+    return redirect('warnings') 
