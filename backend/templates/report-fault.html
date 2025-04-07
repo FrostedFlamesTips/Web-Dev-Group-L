@@ -29,11 +29,7 @@
         <div class="menu-overlay"></div>
         <div class="side-menu">
           <div class="side-menu-header">
-            <img
-              src="./static/images/favicon.svg"
-              alt="Logo"
-              class="menu-logo"
-            />
+            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" class="menu-logo" />
             <span>ACME Manufacturing</span>
             <button class="close-menu">×</button>
           </div>
@@ -101,7 +97,7 @@
         <!-- Logo and Title -->
         <div class="logo">
           <a href="index.html">
-            <img src="./static/images/favicon.svg" alt="ACME Logo" />
+            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo"/>
             <h1>ACME Manufacturing</h1>
           </a>
         </div>
@@ -130,147 +126,36 @@
 
     <!-- Main Content -->
     <main class="main-container">
-      <!-- Breadcrumb Navigation -->
-      <div style="margin-bottom: 1rem">
-        <a
-          href="machine-details.html?id=DRL8456"
-          style="color: var(--text-light); text-decoration: none"
-        >
-          <i class="fa-solid fa-chevron-left"></i> Back to Machine Details
+      <div class="form-section">
+        <h2><i class="fa-solid fa-triangle-exclamation"></i> Report New Fault</h2>
+  
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+  
+          {% for field in form %}
+            <div class="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+  
+              {% if field.errors %}
+                <div class="form-error">{{ field.errors|striptags }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+  
+          <div class="form-group">
+            <label for="images">Upload Images</label>
+            <input type="file" name="images" multiple>
+          </div>
+  
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-bug"></i> Submit Fault
+          </button>
+        </form>
+  
+        <a href="{% url 'faults_list' %}" class="back-link">
+          <i class="fa-solid fa-arrow-left"></i> Back to Fault Cases
         </a>
-      </div>
-
-      <div class="machinery-list">
-        <!-- Page Header -->
-        <div>
-          <h2>Report Fault: Precision Drill (DRL8456)</h2>
-          <p style="color: var(--text-light)">
-            <i class="fa-solid fa-location-dot"></i> Building A, Room 101
-          </p>
-        </div>
-
-        <!-- Fault Reporting Form -->
-        <div class="form-container">
-          <form id="fault-report-form">
-            <div class="form-group">
-              <label for="fault-title">Fault Title</label>
-              <input
-                type="text"
-                id="fault-title"
-                name="fault-title"
-                placeholder="Brief description of the fault"
-                required
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="fault-category">Fault Category</label>
-              <select id="fault-category" name="fault-category" required>
-                <option value="">Select a category</option>
-                <option value="mechanical">Mechanical Issue</option>
-                <option value="electrical">Electrical Issue</option>
-                <option value="software">Software/Control Issue</option>
-                <option value="calibration">Calibration Issue</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="fault-description">Detailed Description</label>
-              <textarea
-                id="fault-description"
-                name="fault-description"
-                rows="5"
-                placeholder="Please provide a detailed description of the fault. Include when it started, any circumstances that might have caused it, and any troubleshooting already attempted."
-                required
-              ></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="fault-priority">Priority Level</label>
-              <select id="fault-priority" name="fault-priority" required>
-                <option value="">Select priority</option>
-                <option value="low">Low - Not urgent, can be scheduled</option>
-                <option value="medium">Medium - Needs attention soon</option>
-                <option value="high">High - Urgent repair needed</option>
-                <option value="critical">Critical - Production halted</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label>Images (optional)</label>
-              <div
-                style="
-                  border: 2px dashed var(--border-color);
-                  padding: 2rem;
-                  border-radius: 8px;
-                  text-align: center;
-                "
-              >
-                <i
-                  class="fa-solid fa-cloud-arrow-up"
-                  style="font-size: 2rem; color: var(--text-light)"
-                ></i>
-                <p style="margin-top: 1rem; color: var(--text-light)">
-                  Drag and drop images here or
-                  <label
-                    for="file-upload"
-                    style="color: var(--primary-color); cursor: pointer"
-                  >
-                    browse files
-                  </label>
-                </p>
-                <input
-                  type="file"
-                  id="file-upload"
-                  name="file-upload"
-                  style="display: none"
-                  multiple
-                  accept="image/*"
-                />
-                <p
-                  style="
-                    font-size: 0.85rem;
-                    color: var(--text-light);
-                    margin-top: 0.5rem;
-                  "
-                >
-                  Maximum 5 images, 5MB each (JPEG, PNG)
-                </p>
-              </div>
-              <div
-                id="image-preview"
-                style="
-                  display: flex;
-                  flex-wrap: wrap;
-                  gap: 1rem;
-                  margin-top: 1rem;
-                "
-              >
-                <!-- Image previews will be added here -->
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="assigned-to">Assign To (optional)</label>
-              <select id="assigned-to" name="assigned-to">
-                <option value="">
-                  Select a technician or leave unassigned
-                </option>
-                <option value="jdoe">Elias Amro (Technician)</option>
-                <option value="asmith">Alice Smith (Repair)</option>
-                <option value="bjones">Bob Jones (Technician)</option>
-              </select>
-            </div>
-
-            <div style="display: flex; gap: 1rem; margin-top: 2rem">
-              <button type="submit" class="btn btn-primary">
-                Submit Fault Report
-              </button>
-              <a href="machine-details.html?id=DRL8456" class="btn">Cancel</a>
-            </div>
-          </form>
-        </div>
       </div>
     </main>
 

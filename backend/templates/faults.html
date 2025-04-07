@@ -211,155 +211,73 @@
         </div>
 
         <!-- Fault Cases Table -->
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Case ID</th>
-              <th>Machine</th>
-              <th>Title</th>
-              <th>Priority</th>
-              <th>Status</th>
-              <th>Reported</th>
-              <th>Assigned To</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <a href="fault-details.html?id=FLT2025-042">FLT2025-042</a>
-              </td>
-              <td>
-                <a href="machine-details.html?id=DRL8456">Precision Drill</a>
-              </td>
-              <td>Motor Failure</td>
-              <td>
-                <span style="color: var(--danger-color)">High</span>
-              </td>
-              <td><span class="status-badge status-fault">Open</span></td>
-              <td>Mar 28, 2025</td>
-              <td>Joe Mullaly</td>
-              <td>
-                <div class="action-buttons">
-                  <a
-                    href="fault-details.html?id=FLT2025-042"
-                    class="action-btn"
-                  >
-                    <i class="fa-solid fa-eye"></i>
-                  </a>
-                  <a href="edit-fault.html?id=FLT2025-042" class="action-btn">
-                    <i class="fa-solid fa-pencil"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="fault-details.html?id=FLT2025-041">FLT2025-041</a>
-              </td>
-              <td><a href="machine-details.html?id=LVL7891">Laser Level</a></td>
-              <td>Calibration Issue</td>
-              <td>
-                <span style="color: var(--warning-color)">Medium</span>
-              </td>
-              <td>
-                <span class="status-badge status-warning">In Progress</span>
-              </td>
-              <td>Mar 27, 2025</td>
-              <td>Elias Amro</td>
-              <td>
-                <div class="action-buttons">
-                  <a
-                    href="fault-details.html?id=FLT2025-041"
-                    class="action-btn"
-                  >
-                    <i class="fa-solid fa-eye"></i>
-                  </a>
-                  <a href="edit-fault.html?id=FLT2025-041" class="action-btn">
-                    <i class="fa-solid fa-pencil"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="fault-details.html?id=FLT2025-040">FLT2025-040</a>
-              </td>
-              <td>
-                <a href="machine-details.html?id=WRN2374">Impact Wrench</a>
-              </td>
-              <td>Battery Not Charging</td>
-              <td>
-                <span style="color: var(--text-light)">Low</span>
-              </td>
-              <td><span class="status-badge status-success">Resolved</span></td>
-              <td>Mar 26, 2025</td>
-              <td>Joe Mullaly</td>
-              <td>
-                <div class="action-buttons">
-                  <a
-                    href="fault-details.html?id=FLT2025-040"
-                    class="action-btn"
-                  >
-                    <i class="fa-solid fa-eye"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="fault-details.html?id=FLT2025-039">FLT2025-039</a>
-              </td>
-              <td>
-                <a href="machine-details.html?id=THM6745">Thermal Camera</a>
-              </td>
-              <td>Display Malfunction</td>
-              <td>
-                <span style="color: var(--warning-color)">Medium</span>
-              </td>
-              <td><span class="status-badge status-success">Resolved</span></td>
-              <td>Mar 25, 2025</td>
-              <td>Elias Amro</td>
-              <td>
-                <div class="action-buttons">
-                  <a
-                    href="fault-details.html?id=FLT2025-039"
-                    class="action-btn"
-                  >
-                    <i class="fa-solid fa-eye"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="fault-details.html?id=FLT2025-038">FLT2025-038</a>
-              </td>
-              <td>
-                <a href="machine-details.html?id=DRL8456">Precision Drill</a>
-              </td>
-              <td>Overheating</td>
-              <td>
-                <span style="color: var(--danger-color); font-weight: bold"
-                  >Critical</span
-                >
-              </td>
-              <td><span class="status-badge status-success">Resolved</span></td>
-              <td>Mar 24, 2025</td>
-              <td>Joe Mullaly</td>
-              <td>
-                <div class="action-buttons">
-                  <a
-                    href="fault-details.html?id=FLT2025-038"
-                    class="action-btn"
-                  >
-                    <i class="fa-solid fa-eye"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>Case ID</th>
+      <th>Machine</th>
+      <th>Title</th>
+      <th>Priority</th>
+      <th>Status</th>
+      <th>Reported</th>
+      <th>Assigned To</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for fault in faults %}
+      <tr>
+        <td>
+          <a href="#">{{ fault.case_number }}</a>
+        </td>
+        <td>
+          {% if fault.machine %}
+            <a href="#">{{ fault.machine.name }}</a>
+          {% else %}
+            <em>Unknown</em>
+          {% endif %}
+        </td>
+        <td>
+          {{ fault.summary|default:"(No summary)"|truncatechars:40 }}
+        </td>
+        <td>
+          {% if fault.machine.priority >= 3 %}
+            <span style="color: var(--danger-color); font-weight: bold;">High</span>
+          {% elif fault.machine.priority == 2 %}
+            <span style="color: var(--warning-color);">Medium</span>
+          {% else %}
+            <span style="color: var(--text-light);">Low</span>
+          {% endif %}
+        </td>
+        <td>
+          <span class="status-badge {% if fault.resolved %}status-success{% else %}status-fault{% endif %}">
+            {% if fault.resolved %}Resolved{% else %}Open{% endif %}
+          </span>
+        </td>
+        <td>{{ fault.created_at|date:"M d, Y" }}</td>
+        <td>{{ fault.created_by.username|default:"(Unknown)" }}</td>
+        <td>
+          <div class="action-buttons">
+            <a href="#" class="action-btn">
+              <i class="fa-solid fa-eye"></i>
+            </a>
+            <a href="#" class="action-btn">
+              <i class="fa-solid fa-pencil"></i>
+            </a>
+          </div>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="8" style="text-align: center;">
+          No faults reported yet.
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+        
 
         <!-- Pagination -->
         <div class="pagination">

@@ -48,6 +48,9 @@ class Machine(models.Model):
         elif self.status != 'Fault':
             self.status = 'OK'
         self.save()
+        
+    def __str__(self):
+        return f"{self.name} ({self.id})"
 
 
 class Warning(models.Model):
@@ -68,6 +71,12 @@ class FaultCase(models.Model):
     resolved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='faults_resolved')
     resolved_at = models.DateTimeField(null=True, blank=True)
     summary = models.TextField(blank=True, null=True)
+    assigned_technicians = models.ManyToManyField(
+    User,
+    blank=True,
+    related_name='assigned_fault_cases',
+    limit_choices_to={'role': 'Technician'}
+)
 
 class FaultNote(models.Model):
     fault_case = models.ForeignKey(FaultCase, on_delete=models.CASCADE)

@@ -32,7 +32,7 @@ from ACME.views import warnings
 from django.conf import settings
 from django.conf.urls.static import static
 from ACME import views
-from ACME.views import machinery_list_view, add_machine_view, login_view
+from ACME.views import machinery_list_view, add_machine_view, login_view, create_fault_view, faults_list_view
 
 urlpatterns = [
     path('admin', admin.site.urls),
@@ -44,11 +44,11 @@ urlpatterns = [
     path('edit-fault.html', edit_fault),
     path('edit-machine.html', edit_machine),
     path('fault-details.html', fault_details),
-    path('faults.html', faults),
+    #path('faults.html', faults),
     path('login/', login_view, name='login'),
     path('machine-details.html', machine_details),
     #path('machinery.html', machinery),
-    path('report-fault.html', report_fault),
+    #path('report-fault.html', report_fault),
     path('warnings.html', warnings),
     path('api/', include('ACME.api.urls')),
     path('collections/delete/<int:id>/', views.delete_collection_view, name='delete_collection'),
@@ -56,6 +56,8 @@ urlpatterns = [
     path('collections.html', views.collections_view, name='collections'),
     path('machinery/', machinery_list_view, name='machinery_list'),
     path('machinery/add/', add_machine_view, name='add_machine'),
+    path('report-fault/', create_fault_view, name='report_fault'),
+    path('faults.html', faults_list_view, name='faults_list'),
 ]
 
 if settings.DEBUG:

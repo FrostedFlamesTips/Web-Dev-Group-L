@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 import csv
 from django.http import HttpResponse
-from .models import Machine, Collection
-from .forms import CollectionForm, MachineForm
+from .models import Machine, Collection, FaultCase, FaultImage
+from .forms import CollectionForm, MachineForm, FaultCaseForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model, authenticate, login
 from django.contrib import messages
@@ -131,3 +131,39 @@ def add_machine_view(request):
 
 def index_view(request):
     return render(request, 'index.html')
+
+@login_required
+def create_fault_view(request):
+    machine_id = request.GET.get('id')
+    initial = {}
+
+    if machine_id:
+        machine = get_object_or_404(Machine, id=machine_id)
+        initial['machine'] = machine
+
+    if request.method == 'POST':
+        form = FaultCaseForm(request.POST, request.FILES)
+        files = request.FILES.getlist('images')
+
+        if form.is_valid():
+            fault = form.save(commit=False)
+            fault.created_by = request.user
+            fault.save()
+            form.save_m2m()
+
+            for f in files:
+                FaultImage.objects.create(
+                    fault_case=fault,
+                    image_file=f,
+                    uploaded_by=request.user
+                )
+
+            return redirect('faults_list')
+    else:
+        form = FaultCaseForm(initial=initial)
+
+    return render(request, 'report-fault.html', {'form': form})
+
+def faults_list_view(request):
+    faults = FaultCase.objects.select_related('machine', 'created_by', 'resolved_by')
+    return render(request, 'faults.html', {'faults': faults})
