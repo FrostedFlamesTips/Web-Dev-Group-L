@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 import csv
 from django.http import HttpResponse
 from .models import Machine, Collection
-from .forms import CollectionForm
+from .forms import CollectionForm, MachineForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model, authenticate, login
 from django.contrib import messages
+from django.http import HttpResponseForbidden
 
 def index(request):
     return render(request, 'index.html')
@@ -112,8 +113,21 @@ def machinery_detail(request, machine_id):
 def machinery_list_view(request):
     return render(request, 'machinery.html')
 
+
+@login_required
 def add_machine_view(request):
-    return HttpResponse("This is where you'd add a machine.") #Placeholder needs to be implemented
+    if request.user.role != 'Manager':
+        return HttpResponseForbidden("Only managers can add machines.")
+
+    if request.method == 'POST':
+        form = MachineForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('machinery_list')
+    else:
+        form = MachineForm()
+
+    return render(request, 'add_machine.html', {'form': form})
 
 def index_view(request):
     return render(request, 'index.html')
