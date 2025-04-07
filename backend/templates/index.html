@@ -1,10 +1,10 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ACME Manufacturing - Machinery Tracking System</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACME Manufacturing - Machinery Tracking System</title>
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
@@ -129,321 +129,160 @@
         </div>
       </div>
     </nav>
+  <main class="main-container">
+    <h2>Dashboard Overview</h2>
 
-    <!-- Main Content -->
-    <main class="main-container">
-      <div class="dashboard-container">
-        <!-- Welcome Alert Banner -->
-        <div class="alert alert-success">
-          <i class="fa-solid fa-circle-check alert-icon"></i>
-          <div>
-            <strong>Welcome back, Elias!</strong>
-            <p>
-              You are logged in as a Manager. You have 3 new fault reports
-              awaiting your review.
-            </p>
-          </div>
-        </div>
-
-        <h2>Dashboard Overview</h2>
-
-        <!-- Dashboard Summary Stats -->
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i
-                class="fa-solid fa-gear"
-                style="color: var(--primary-color)"
-              ></i>
-            </div>
-            <div class="stat-value">147</div>
-            <div class="stat-label">Total Machinery</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i
-                class="fa-solid fa-check-circle"
-                style="color: var(--success-color)"
-              ></i>
-            </div>
-            <div class="stat-value">125</div>
-            <div class="stat-label">Operational</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i
-                class="fa-solid fa-triangle-exclamation"
-                style="color: var(--warning-color)"
-              ></i>
-            </div>
-            <div class="stat-value">15</div>
-            <div class="stat-label">Warnings</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fa-solid fa-ban" style="color: var(--danger-color)"></i>
-            </div>
-            <div class="stat-value">7</div>
-            <div class="stat-label">Faults</div>
-          </div>
-        </div>
-
-        <!-- Machinery Status Chart -->
-        <div class="card" style="margin-top: 2rem">
-          <div class="card-content">
-            <h3>Machinery Status by Collection</h3>
-            <!-- The canvas now includes an inline max-height style to prevent it from extending -->
-            <canvas
-              id="machineryStatusChart"
-              height="250"
-              style="max-height: 250px"
-            ></canvas>
-          </div>
-        </div>
-
-        <!-- Recent Faults -->
-        <h2 style="margin-top: 2rem">Recent Fault Cases</h2>
-        <div class="card">
-          <div class="card-content">
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 1rem;
-              "
-            >
-              <h3>Recent Issues</h3>
-              <a href="faults.html" class="btn btn-primary">View All Faults</a>
-            </div>
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Case ID</th>
-                  <th>Machine</th>
-                  <th>Issue Type</th>
-                  <th>Reported</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <a href="fault-details.html?id=FLT2025-042">FLT2025-042</a>
-                  </td>
-                  <td>Precision Drill (DRL8456)</td>
-                  <td>Motor Failure</td>
-                  <td>Mar 28, 2025</td>
-                  <td><span class="status-badge status-fault">Fault</span></td>
-                  <td>
-                    <div class="action-buttons">
-                      <a
-                        href="fault-details.html?id=FLT2025-042"
-                        class="action-btn"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                      </a>
-                      <a
-                        href="edit-fault.html?id=FLT2025-042"
-                        class="action-btn"
-                      >
-                        <i class="fa-solid fa-pencil"></i>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="fault-details.html?id=FLT2025-041">FLT2025-041</a>
-                  </td>
-                  <td>Laser Level (LVL7891)</td>
-                  <td>Calibration Issue</td>
-                  <td>Mar 27, 2025</td>
-                  <td>
-                    <span class="status-badge status-warning">In Progress</span>
-                  </td>
-                  <td>
-                    <div class="action-buttons">
-                      <a
-                        href="fault-details.html?id=FLT2025-041"
-                        class="action-btn"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                      </a>
-                      <a
-                        href="edit-fault.html?id=FLT2025-041"
-                        class="action-btn"
-                      >
-                        <i class="fa-solid fa-pencil"></i>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="fault-details.html?id=FLT2025-040">FLT2025-040</a>
-                  </td>
-                  <td>Impact Wrench (WRN2374)</td>
-                  <td>Battery Not Charging</td>
-                  <td>Mar 26, 2025</td>
-                  <td>
-                    <span class="status-badge status-success">Resolved</span>
-                  </td>
-                  <td>
-                    <div class="action-buttons">
-                      <a
-                        href="fault-details.html?id=FLT2025-040"
-                        class="action-btn"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Recent Warnings -->
-        <h2 style="margin-top: 2rem">Active Warnings</h2>
-        <div class="card">
-          <div class="card-content">
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 1rem;
-              "
-            >
-              <h3>Machinery Warnings</h3>
-              <a href="warnings.html" class="btn btn-primary"
-                >View All Warnings</a
-              >
-            </div>
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Machine</th>
-                  <th>Warning Message</th>
-                  <th>Reported</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Thermal Camera (THM6745)</td>
-                  <td>Battery low - Requires charging</td>
-                  <td>Mar 28, 2025</td>
-                  <td>
-                    <button class="btn btn-warning">Resolve</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Laser Level (LVL7891)</td>
-                  <td>Calibration due in 5 days</td>
-                  <td>Mar 27, 2025</td>
-                  <td>
-                    <button class="btn btn-warning">Resolve</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Impact Wrench (WRN2374)</td>
-                  <td>Maintenance check scheduled for next week</td>
-                  <td>Mar 25, 2025</td>
-                  <td>
-                    <button class="btn btn-warning">Resolve</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <div class="card" style="margin-top: 2rem">
+      <div class="card-content">
+        <h3>Machinery Status by Collection</h3>
+        <canvas id="machineryStatusChart" height="250" style="max-height: 250px"></canvas>
       </div>
-    </main>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-logo">
-          <img src="{% static 'images/logo.svg' %}" alt="ACME Logo" />
-          <span>ACME Manufacturing Corp.</span>
-        </div>
-        <div class="footer-links">
-          <a href="about.html">About</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
-          <a href="contact.html">Contact</a>
-        </div>
-        <div class="footer-copyright">
-          &copy; 2025 ACME Manufacturing Corp. All rights reserved.
-        </div>
+    <h2 style="margin-top: 2rem">Recent Fault Cases</h2>
+    <div class="card">
+      <div class="card-content">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Machine</th>
+              <th>Issue Type</th>
+              <th>Reported</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for fault in recent_faults %}
+            <tr>
+              <td><a href="#">{{ fault.case_number }}</a></td>
+              <td>{{ fault.machine.name }}</td>
+              <td>{{ fault.summary|truncatechars:40 }}</td>
+              <td>{{ fault.created_at|date:"M d, Y" }}</td>
+              <td>
+                <span class="status-badge {% if fault.resolved %}status-success{% else %}status-fault{% endif %}">
+                  {% if fault.resolved %}Resolved{% else %}Open{% endif %}
+                </span>
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <a href="#" class="action-btn"><i class="fa-solid fa-eye"></i></a>
+                </div>
+              </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6" style="text-align: center;">No faults reported yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-    </footer>
+    </div>
 
-    <!-- Scripts -->
-    <script src="{% static 'js/dynamic-menu.js' %}"></script>
-    <script>
-      // Initialize charts when DOM is loaded
-      document.addEventListener("DOMContentLoaded", function () {
-        // Machinery Status Chart
-        const ctx = document
-          .getElementById("machineryStatusChart")
-          .getContext("2d");
-        const machineryStatusChart = new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: [
-              "Main Campus",
-              "Building A",
-              "Building B",
-              "Production Floor",
-              "Assembly Line",
-            ],
-            datasets: [
-              {
-                label: "Operational",
-                data: [42, 28, 18, 22, 15],
-                backgroundColor: "#10B981",
-              },
-              {
-                label: "Warning",
-                data: [5, 3, 2, 3, 2],
-                backgroundColor: "#F59E0B",
-              },
-              {
-                label: "Fault",
-                data: [2, 1, 1, 2, 1],
-                backgroundColor: "#EF4444",
-              },
-            ],
+    <h2 style="margin-top: 2rem">Active Warnings</h2>
+    <div class="card">
+      <div class="card-content">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Machine</th>
+              <th>Warning Message</th>
+              <th>Reported</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for warning in active_warnings %}
+            <tr>
+              <td>{{ warning.machine.name }}</td>
+              <td>{{ warning.warning_text }}</td>
+              <td>{{ warning.added_at|date:"M d, Y" }}</td>
+              <td>
+                <form method="post" action="{% url 'resolve_warning' warning.id %}">
+                  {% csrf_token %}
+                  <button class="btn btn-warning">Resolve</button>
+                </form>
+              </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" style="text-align: center;">No active warnings.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="{% static 'images/logo.svg' %}" alt="ACME Logo" />
+        <span>ACME Manufacturing Corp.</span>
+      </div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2025 ACME Manufacturing Corp. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+
+{{ labels|json_script:"labels-data" }}
+{{ ok_data|json_script:"ok-data" }}
+{{ warning_data|json_script:"warning-data" }}
+{{ fault_data|json_script:"fault-data" }}
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const labels = JSON.parse(document.getElementById('labels-data').textContent);
+    const okData = JSON.parse(document.getElementById('ok-data').textContent);
+    const warningData = JSON.parse(document.getElementById('warning-data').textContent);
+    const faultData = JSON.parse(document.getElementById('fault-data').textContent);
+
+    const ctx = document.getElementById("machineryStatusChart").getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Operational",
+            data: okData,
+            backgroundColor: "#10B981"
           },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                position: "top",
-              },
-              title: {
-                display: false,
-              },
-            },
-            scales: {
-              x: {
-                stacked: true,
-              },
-              y: {
-                stacked: true,
-                beginAtZero: true,
-              },
-            },
+          {
+            label: "Warning",
+            data: warningData,
+            backgroundColor: "#F59E0B"
           },
-        });
-      });
-    </script>
-  </body>
+          {
+            label: "Fault",
+            data: faultData,
+            backgroundColor: "#EF4444"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: "top" }
+        },
+        scales: {
+          x: { stacked: true },
+          y: { stacked: true, beginAtZero: true }
+        }
+      }
+    });
+  });
+</script>
+  
+</body>
 </html>

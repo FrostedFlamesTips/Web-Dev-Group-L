@@ -9,9 +9,65 @@ from django.contrib import messages
 from django.http import HttpResponseForbidden
 from .models import MachineWarning
 from django.utils import timezone
+from collections import defaultdict
+import json
 
 def index(request):
-    return render(request, 'index.html')
+    # Chart Data
+    collections = Collection.objects.prefetch_related('machines')
+    chart_data = defaultdict(lambda: {'OK': 0, 'Warning': 0, 'Fault': 0})
+
+    for collection in collections:
+        for machine in collection.machines.all():
+            chart_data[collection.name][machine.status] += 1
+
+    labels = list(chart_data.keys())
+    datasets = {
+        'OK': [chart_data[label]['OK'] for label in labels],
+        'Warning': [chart_data[label]['Warning'] for label in labels],
+        'Fault': [chart_data[label]['Fault'] for label in labels],
+    }
+
+    # Faults and Warnings
+    recent_faults = FaultCase.objects.select_related('machine').order_by('-created_at')[:3]
+    active_warnings = MachineWarning.objects.filter(resolved=False).select_related('machine').order_by('-added_at')[:3]
+
+    context = {
+        'labels': labels,
+        'ok_data': datasets['OK'],
+        'warning_data': datasets['Warning'],
+        'fault_data': datasets['Fault'],
+        'recent_faults': recent_faults,
+        'active_warnings': active_warnings,
+    }
+
+    return render(request, 'index.html', context)
+
+def index_view(request):
+    collections = Collection.objects.all()
+    recent_faults = FaultCase.objects.select_related('machine').order_by('-created_at')[:3]
+    active_warnings = MachineWarning.objects.filter(resolved=False).select_related('machine').order_by('-added_at')[:3]
+
+    labels = []
+    ok_data = []
+    warning_data = []
+    fault_data = []
+
+    for collection in collections:
+        labels.append(collection.name)
+        machines = collection.machines.all()
+        ok_data.append(machines.filter(status='OK').count())
+        warning_data.append(machines.filter(status='Warning').count())
+        fault_data.append(machines.filter(status='Fault').count())
+
+    context = {
+    'labels': labels,
+    'ok_data': ok_data,
+    'warning_data': warning_data,
+    'fault_data': fault_data,
+    }
+    return render(request, 'index.html', context)
+
 
 def collection_details(request):
     return render(request, 'collection-details.html')
