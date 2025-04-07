@@ -29,6 +29,8 @@ ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'ACME.User'  # Added to use custom user model
 
+LOGIN_URL = '/login/' #To deal with logined users
+
 # Application definition
 
 INSTALLED_APPS = [

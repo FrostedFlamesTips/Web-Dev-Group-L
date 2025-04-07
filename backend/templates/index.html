@@ -46,7 +46,7 @@
                 <i class="fa-solid fa-gauge-high menu-icon"></i>
                 Dashboard
               </a>
-              <a href="machinery.html">
+              <a href="{% url 'machinery_list' %}">
                 <i class="fa-solid fa-gear menu-icon"></i>
                 Machinery
               </a>
@@ -110,7 +110,7 @@
 
         <!-- Navigation Links -->
         <div class="nav-links">
-          <a class="hideable-nav-item" href="machinery.html">Machinery</a>
+          <a class="hideable-nav-item" href="{% url 'machinery_list' %}">Machinery</a>
           <a class="hideable-nav-item" href="faults.html">Faults</a>
           <a class="hideable-nav-item" href="collections.html">Collections</a>
 

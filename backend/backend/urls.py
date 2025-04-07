@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from ACME.views import index
 from ACME.views import collection_details
 from ACME.views import collection_edit
@@ -31,23 +31,36 @@ from ACME.views import report_fault
 from ACME.views import warnings
 from django.conf import settings
 from django.conf.urls.static import static
+from ACME import views
+from ACME.views import machinery_list_view, add_machine_view, login_view, create_fault_view, faults_list_view, create_warning_view
 
 urlpatterns = [
     path('admin', admin.site.urls),
     path('', index),
     path ('index.html', index),
+    path('index.html', views.index_view, name='index'),
     path('collection-details.html', collection_details),
     path('collection-edit.html', collection_edit),
-    path('collections.html', collections),
     path('edit-fault.html', edit_fault),
     path('edit-machine.html', edit_machine),
     path('fault-details.html', fault_details),
-    path('faults.html', faults),
-    path('login.html', login),
+    #path('faults.html', faults),
+    path('login/', login_view, name='login'),
     path('machine-details.html', machine_details),
-    path('machinery.html', machinery),
-    path('report-fault.html', report_fault),
-    path('warnings.html', warnings),
+    #path('machinery.html', machinery),
+    #path('report-fault.html', report_fault),
+    #path('warnings.html', warnings),
+    path('api/', include('ACME.api.urls')),
+    path('collections/delete/<int:id>/', views.delete_collection_view, name='delete_collection'),
+    path('collection-create.html', views.add_collection_view, name='add_collection'),
+    path('collections.html', views.collections_view, name='collections'),
+    path('machinery/', machinery_list_view, name='machinery_list'),
+    path('machinery/add/', add_machine_view, name='add_machine'),
+    path('report-fault/', create_fault_view, name='report_fault'),
+    path('faults/', faults_list_view, name='faults_list'),
+    path('warnings/', views.warnings_view, name='warnings'),
+    path('warnings/create/', views.create_warning_view, name='create_warning'),
+    path('warnings/resolve/<int:warning_id>/', views.resolve_warning_view, name='resolve_warning'),
 ]
 
 if settings.DEBUG:

@@ -141,11 +141,7 @@
         <div class="menu-overlay"></div>
         <div class="side-menu">
           <div class="side-menu-header">
-            <img
-              src="./static/images/favicon.svg"
-              alt="Logo"
-              class="menu-logo"
-            />
+            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" class="menu-logo"/>
             <span>ACME Manufacturing</span>
             <button class="close-menu">×</button>
           </div>
@@ -213,7 +209,7 @@
         <!-- Logo and Title -->
         <div class="logo">
           <a href="index.html">
-            <img src="./static/images/favicon.svg" alt="ACME Logo" />
+            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
             <h1>ACME Manufacturing</h1>
           </a>
         </div>
@@ -243,16 +239,19 @@
     <div class="login-container">
       <div class="login-card">
         <div class="login-header">
-          <img src="./static/images/favicon.svg" alt="ACME Logo" />
+          <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
           <h1>ACME Manufacturing</h1>
           <p>Machinery Tracking System</p>
         </div>
 
-        <div class="form-error">
-          Invalid username or password. Please try again.
+        {% if error %}
+        <div class="form-error" style="display: block;">
+          {{ error }}
         </div>
+        {% endif %}
 
-        <form id="login-form" data-validate="true" data-form-type="login">
+        <form id="login-form" method="POST" action="{% url 'login' %}">
+          {% csrf_token %}
           <div class="form-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required />
@@ -278,35 +277,7 @@
         </div>
       </div>
     </div>
-
-    <!-- Demo accounts info section - only for demonstration purposes -->
-    <div class="demo-accounts">
-      <h3>Demo Accounts for Testing</h3>
-
-      <div class="demo-account">
-        <div class="demo-role">Manager Role</div>
-        <div class="demo-credentials">
-          Username: manager<br />
-          Password: manager123
-        </div>
-      </div>
-
-      <div class="demo-account">
-        <div class="demo-role">Technician Role</div>
-        <div class="demo-credentials">
-          Username: tech<br />
-          Password: tech123
-        </div>
-      </div>
-
-      <div class="demo-account">
-        <div class="demo-role">Repair Role</div>
-        <div class="demo-credentials">
-          Username: repair<br />
-          Password: repair123
-        </div>
-      </div>
-    </div>
+    
 
     <!-- Footer -->
     <footer class="footer">
