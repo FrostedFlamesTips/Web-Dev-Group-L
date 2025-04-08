@@ -46,28 +46,50 @@ def index(request):
     return render(request, 'index.html', context)
 
 def index_view(request):
+    user = request.user
     collections = Collection.objects.all()
     recent_faults = FaultCase.objects.select_related('machine').order_by('-created_at')[:3]
     active_warnings = MachineWarning.objects.filter(resolved=False).select_related('machine').order_by('-added_at')[:3]
 
-    labels = []
-    ok_data = []
-    warning_data = []
-    fault_data = []
+    view_all = request.GET.get('view') == 'all'
+    assigned_machines = Machine.objects.none()
 
+    if user.is_authenticated:
+        print(f"User role: {user.role}")
+        if user.role == 'Technician':
+            assigned_machines = user.assigned_machines_technician.all()
+        elif user.role == 'Repair':
+            assigned_machines = user.assigned_machines_repair.all()
+        print("Assigned machines queryset:", assigned_machines)
+        print("Assigned machine names:", [m.name for m in assigned_machines])
+
+    # Force evaluation
+    assigned_machines_list = list(assigned_machines)
+    print("Assigned machines list length:", len(assigned_machines_list))
+
+    labels, ok_data, warning_data, fault_data = [], [], [], []
     for collection in collections:
-        labels.append(collection.name)
         machines = collection.machines.all()
+        if user.role in ['Technician', 'Repair'] and not view_all:
+            machines = machines.filter(id__in=[m.id for m in assigned_machines_list])
+        labels.append(collection.name)
         ok_data.append(machines.filter(status='OK').count())
         warning_data.append(machines.filter(status='Warning').count())
         fault_data.append(machines.filter(status='Fault').count())
 
     context = {
-    'labels': labels,
-    'ok_data': ok_data,
-    'warning_data': warning_data,
-    'fault_data': fault_data,
+        'labels': labels,
+        'ok_data': ok_data,
+        'warning_data': warning_data,
+        'fault_data': fault_data,
+        'recent_faults': recent_faults,
+        'active_warnings': active_warnings,
+        'assigned_machines': assigned_machines_list,
+        'assigned_machines_count': len(assigned_machines_list),
+        'show_toggle': user.role in ['Technician', 'Repair'],
+        'view_all': view_all,
     }
+
     return render(request, 'index.html', context)
 
 
@@ -321,3 +343,50 @@ def resolve_warning_view(request, warning_id):
 def warning_detail_view(request, warning_id):
     warning = get_object_or_404(MachineWarning, id=warning_id)
     return render(request, 'warning-details.html', {'warning': warning})
+
+@login_required
+def dashboard_view(request):
+    user = request.user
+    view_all = request.GET.get('view') == 'all'
+
+    # Decide which machines to show based on role
+    if user.role == 'Manager' or view_all:
+        machines = Machine.objects.all()
+    elif user.role == 'Technician':
+        machines = Machine.objects.filter(technicians=user)
+    elif user.role == 'Repair':
+        machines = Machine.objects.filter(repair_personnel=user)
+    else:
+        machines = Machine.objects.none()
+
+    # Pull recent fault cases and active warnings based on those machines
+    recent_faults = FaultCase.objects.filter(machine__in=machines).select_related('machine').order_by('-created_at')[:3]
+    active_warnings = MachineWarning.objects.filter(machine__in=machines, resolved=False).select_related('machine').order_by('-added_at')[:3]
+
+    # Build chart data for machinery status per collection
+    collections = Collection.objects.all()
+    labels = []
+    ok_data = []
+    warning_data = []
+    fault_data = []
+
+    for collection in collections:
+        collection_machines = machines.filter(collections=collection)
+        labels.append(collection.name)
+        ok_data.append(collection_machines.filter(status='OK').count())
+        warning_data.append(collection_machines.filter(status='Warning').count())
+        fault_data.append(collection_machines.filter(status='Fault').count())
+
+    context = {
+        'labels': labels,
+        'ok_data': ok_data,
+        'warning_data': warning_data,
+        'fault_data': fault_data,
+        'recent_faults': recent_faults,
+        'active_warnings': active_warnings,
+        'machines': machines,
+        'view_all': view_all,
+        'show_toggle': user.role in ['Technician', 'Repair'],
+    }
+
+    return render(request, 'index.html', context)

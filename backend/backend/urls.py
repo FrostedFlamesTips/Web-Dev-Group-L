@@ -28,7 +28,7 @@ from ACME.views import login
 from ACME.views import machine_details
 from ACME.views import machinery
 from ACME.views import report_fault
-from ACME.views import warnings
+from ACME.views import warnings, dashboard_view
 from django.conf import settings
 from django.conf.urls.static import static
 from ACME import views
@@ -36,9 +36,7 @@ from ACME.views import machinery_list_view, add_machine_view, login_view, create
 
 urlpatterns = [
     path('admin', admin.site.urls),
-    path('', index),
-    path ('index.html', index),
-    path('index.html', views.index_view, name='index'),
+    path('', dashboard_view, name='index'),
     path('collection-details.html', collection_details),
     path('collection-edit.html', collection_edit),
     path('edit-fault.html', edit_fault),

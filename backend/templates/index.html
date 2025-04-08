@@ -130,7 +130,42 @@
       </div>
     </nav>
   <main class="main-container">
-    <h2>Dashboard Overview</h2>
+    {% if show_toggle %}
+  <div style="margin-bottom: 1rem;">
+    {% if view_all %}
+      <a href="{% url 'index' %}" class="btn btn-primary">
+        <i class="fa-solid fa-filter-circle-xmark"></i> View Only My Machines
+      </a>
+    {% else %}
+      <a href="{% url 'index' %}?view=all" class="btn btn-primary">
+        <i class="fa-solid fa-globe"></i> View All Machines
+      </a>
+    {% endif %}
+  </div>
+{% endif %}
+
+<h2 style="margin-bottom: 1rem;">
+  {% if user.role == "Manager" %}
+    All Machines
+  {% elif view_all %}
+    All Machines (Viewing as {{ user.role }})
+  {% else %}
+    Your Assigned Machines
+  {% endif %}
+</h2>
+
+  <ul style="margin-bottom: 2rem;">
+    {% for machine in machines %}
+      <li>
+        <strong>{{ machine.name }}</strong> -
+        <span class="status-badge status-{{ machine.status|lower }}">
+          {{ machine.status }}
+        </span>
+      </li>
+    {% empty %}
+      <li>No machines assigned to you.</li>
+    {% endfor %}
+  </ul>
 
     <div class="card" style="margin-top: 2rem">
       <div class="card-content">
