@@ -238,7 +238,7 @@
 {{ warning_data|json_script:"warning-data" }}
 {{ fault_data|json_script:"fault-data" }}
 
-
+<script src="{% static 'js/dynamic-menu.js' %}"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const labels = JSON.parse(document.getElementById('labels-data').textContent);

@@ -316,3 +316,8 @@ def resolve_warning_view(request, warning_id):
     warning.resolved_at = timezone.now()
     warning.save()
     return redirect('warnings') 
+
+@login_required
+def warning_detail_view(request, warning_id):
+    warning = get_object_or_404(MachineWarning, id=warning_id)
+    return render(request, 'warning-details.html', {'warning': warning})

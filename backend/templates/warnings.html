@@ -62,7 +62,7 @@
                 <td>{{ warning.added_by.username|default:"System" }}</td>
                 <td>
                   <div class="action-buttons">
-                    <a href="#" class="action-btn">
+                    <a href="{% url 'warning_detail' warning.id %}" class="action-btn">
                       <i class="fa-solid fa-eye"></i>
                     </a>
                     {% if user.is_authenticated and user.role in 'Manager Technician' %}

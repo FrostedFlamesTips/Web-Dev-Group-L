@@ -66,6 +66,7 @@ urlpatterns = [
     path('warnings/', views.warnings_view, name='warnings'),
     path('warnings/create/', views.create_warning_view, name='create_warning'),
     path('warnings/resolve/<int:warning_id>/', views.resolve_warning_view, name='resolve_warning'),
+    path('warnings/<int:warning_id>/', views.warning_detail_view, name='warning_detail'),
 ]
 
 if settings.DEBUG:
