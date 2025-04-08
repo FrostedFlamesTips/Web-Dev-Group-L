@@ -133,19 +133,37 @@
           {% csrf_token %}
   
           {% for field in form %}
-            <div class="form-group">
-              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-              {{ field }}
-  
-              {% if field.errors %}
-                <div class="form-error">{{ field.errors|striptags }}</div>
-              {% endif %}
-            </div>
+            {% if field.name != 'assigned_technicians' %}
+              <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                  <div class="form-error">{{ field.errors|striptags }}</div>
+                {% endif %}
+              </div>
+            {% endif %}
           {% endfor %}
   
+          <!-- Assigned Technicians Section -->
+          <div class="form-group">
+            <label>{{ form.assigned_technicians.label }}</label>
+            <div class="tech-checkboxes">
+              {% for checkbox in form.assigned_technicians %}
+                <label class="tech-checkbox-item">
+                  {{ checkbox.tag }}
+                  {{ checkbox.choice_label }}
+                </label>
+              {% endfor %}
+            </div>
+            {% if form.assigned_technicians.errors %}
+              <div class="form-error">{{ form.assigned_technicians.errors|striptags }}</div>
+            {% endif %}
+          </div>
+  
+          <!-- File Upload -->
           <div class="form-group">
             <label for="images">Upload Images</label>
-            <input type="file" name="images" multiple>
+            <input type="file" name="images" multiple />
           </div>
   
           <button type="submit" class="btn btn-primary">
@@ -158,7 +176,6 @@
         </a>
       </div>
     </main>
-
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-content">

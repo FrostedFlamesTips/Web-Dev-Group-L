@@ -969,3 +969,28 @@ so they don't take entire page on bigger screens */
 
 
 }
+
+.tech-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 0.5rem;
+  }
+  
+  .tech-checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    background-color: #f9f9f9;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .tech-checkbox-item:hover {
+    background-color: #f1f5f9;
+  }
+  

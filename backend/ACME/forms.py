@@ -22,7 +22,7 @@ User = get_user_model()  #Needed in fault case form
 class FaultCaseForm(forms.ModelForm):
     class Meta:
         model = FaultCase
-        fields = ['machine', 'summary', 'resolved', 'resolved_by']
+        fields = ['machine', 'summary', 'resolved', 'resolved_by', 'assigned_technicians']
         widgets = {
             'summary': forms.Textarea(attrs={'rows': 3}),
         }

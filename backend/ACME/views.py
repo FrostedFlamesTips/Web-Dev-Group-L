@@ -252,12 +252,43 @@ def create_fault_view(request):
             return redirect('faults_list')
     else:
         form = FaultCaseForm(initial=initial)
-
+        form.fields['assigned_technicians'].queryset = User.objects.filter(role='Technician')
     return render(request, 'report-fault.html', {'form': form})
 
 def faults_list_view(request):
     faults = FaultCase.objects.select_related('machine', 'created_by', 'resolved_by')
     return render(request, 'faults.html', {'faults': faults})
+
+def fault_detail(request, fault_id):
+    fault = get_object_or_404(FaultCase, id=fault_id)
+    return render(request, 'fault-details.html', {'fault': fault})
+
+@login_required
+def resolve_fault(request, fault_id):
+    fault = get_object_or_404(FaultCase, id=fault_id)
+    if request.method == 'POST':
+        fault.resolved = True
+        fault.resolved_by = request.user
+        fault.resolved_at = timezone.now()
+        fault.save()
+    return redirect('fault_detail', fault_id=fault.id)
+
+@login_required
+def edit_fault(request, fault_id):
+    fault = get_object_or_404(FaultCase, id=fault_id)
+
+    if request.method == 'POST':
+        form = FaultCaseForm(request.POST, instance=fault)
+        if form.is_valid():
+            fault = form.save(commit=False)
+            fault.save()
+            form.save_m2m()  
+            return redirect('faults_list')
+    else:
+        form = FaultCaseForm(instance=fault)
+        form.fields['assigned_technicians'].initial = fault.assigned_technicians.all()
+
+    return render(request, 'edit-fault.html', {'form': form, 'fault': fault})
 
 @login_required
 def warnings_view(request):
