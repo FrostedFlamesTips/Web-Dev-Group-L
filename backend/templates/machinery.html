@@ -297,7 +297,13 @@
                 <td>${assignedUser}</td>
                 <td>
                   <div class="action-buttons">
-                    <a href="/machinery/${machine.id}/" class="action-btn"><i class="fa-solid fa-eye"></i></a>
+                    {% if machine.id %}
+                      <a href="{% url 'machinery_detail' machine.id %}" class="action-btn">
+                        <i class="fa-solid fa-eye"></i>
+                      </a>
+                    {% else %}
+                      
+                    {% endif %}
                     <a href="/machinery/${machine.id}/edit/" class="action-btn"><i class="fa-solid fa-pencil"></i></a>
                     <a href="{% url 'report_fault' %}?id={{ machine.id }}" class="action-btn">
                       <i class="fa-solid fa-triangle-exclamation"></i>

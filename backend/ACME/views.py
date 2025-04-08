@@ -5,6 +5,8 @@ from .models import Machine, Collection, FaultCase, FaultImage
 from .forms import CollectionForm, MachineForm, FaultCaseForm, MachineWarningForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model, authenticate, login
+
+User = get_user_model()
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 from .models import MachineWarning
@@ -186,6 +188,37 @@ def add_machine_view(request):
         form = MachineForm()
 
     return render(request, 'add_machine.html', {'form': form})
+
+@login_required
+def edit_machine_view(request, machine_id):
+    machine = get_object_or_404(Machine, id=machine_id)
+
+    # Only managers can edit
+    if request.user.role != 'Manager':
+        return HttpResponseForbidden("Only managers can edit machines.")
+
+    if request.method == 'POST':
+        form = MachineForm(request.POST, instance=machine)
+        if form.is_valid():
+            form.save()
+            return redirect('machinery_list')
+    else:
+        form = MachineForm(instance=machine)
+
+    
+    technicians = User.objects.filter(role='Technician')
+    collections = Collection.objects.all()
+
+    return render(request, 'edit-machine.html', {
+        'machine': machine,
+        'form': form,
+        'technicians': technicians,
+        'collections': collections
+    })
+
+def machinery_detail(request, machine_id):
+    machine = get_object_or_404(Machine, id=machine_id)
+    return render(request, 'machine-details.html', {'machine': machine})
 
 def index_view(request):
     return render(request, 'index.html')
