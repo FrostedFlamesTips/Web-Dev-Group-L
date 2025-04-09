@@ -28,17 +28,16 @@ from ACME.views import login
 from ACME.views import machine_details
 from ACME.views import machinery
 from ACME.views import report_fault
-from ACME.views import warnings
+from ACME.views import warnings, dashboard_view
 from django.conf import settings
 from django.conf.urls.static import static
 from ACME import views
 from ACME.views import machinery_list_view, add_machine_view, login_view, create_fault_view, faults_list_view, create_warning_view
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin', admin.site.urls),
-    path('', index),
-    path ('index.html', index),
-    path('index.html', views.index_view, name='index'),
+    path('', dashboard_view, name='index'),
     path('collection-details.html', collection_details),
     path('collection-edit.html', collection_edit),
     path('edit-fault.html', edit_fault),
@@ -56,11 +55,20 @@ urlpatterns = [
     path('collections.html', views.collections_view, name='collections'),
     path('machinery/', machinery_list_view, name='machinery_list'),
     path('machinery/add/', add_machine_view, name='add_machine'),
+    path('machinery/<int:machine_id>/edit/', views.edit_machine_view, name='edit_machine'),
+    path('machinery/<int:machine_id>/', views.machinery_detail, name='machinery_detail'),
+    path('export/csv/', views.export_machines_csv, name='export_machines_csv'),
     path('report-fault/', create_fault_view, name='report_fault'),
-    path('faults/', faults_list_view, name='faults_list'),
+    path('faults/', views.faults_list_view, name='faults_list'),
+    path('faults/<int:fault_id>/', views.fault_detail, name='fault_detail'),
+    path('faults/<int:fault_id>/resolve/', views.resolve_fault, name='resolve_fault'),
+    path('faults/<int:fault_id>/edit/', views.edit_fault, name='edit_fault'),
     path('warnings/', views.warnings_view, name='warnings'),
     path('warnings/create/', views.create_warning_view, name='create_warning'),
     path('warnings/resolve/<int:warning_id>/', views.resolve_warning_view, name='resolve_warning'),
+    path('warnings/<int:warning_id>/', views.warning_detail_view, name='warning_detail'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('api/test-record/', views.test_record_api_view, name='test_record_api'),
 ]
 
 if settings.DEBUG:

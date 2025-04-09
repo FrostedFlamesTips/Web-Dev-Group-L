@@ -121,6 +121,7 @@
           <a href="{% url 'add_machine' %}" class="btn btn-primary">
             <i class="fa-solid fa-plus"></i> Add Machine
           </a>
+          <a href="{% url 'export_machines_csv' %}" class="btn btn-primary">Export All Machines</a>
           {% endif %}
         </div>
 
@@ -297,7 +298,13 @@
                 <td>${assignedUser}</td>
                 <td>
                   <div class="action-buttons">
-                    <a href="/machinery/${machine.id}/" class="action-btn"><i class="fa-solid fa-eye"></i></a>
+                    {% if machine.id %}
+                      <a href="{% url 'machinery_detail' machine.id %}" class="action-btn">
+                        <i class="fa-solid fa-eye"></i>
+                      </a>
+                    {% else %}
+                      
+                    {% endif %}
                     <a href="/machinery/${machine.id}/edit/" class="action-btn"><i class="fa-solid fa-pencil"></i></a>
                     <a href="{% url 'report_fault' %}?id={{ machine.id }}" class="action-btn">
                       <i class="fa-solid fa-triangle-exclamation"></i>

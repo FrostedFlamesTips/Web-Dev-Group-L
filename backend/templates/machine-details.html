@@ -4,23 +4,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Precision Drill (DRL8456) - ACME Manufacturing</title>
-
-    <!-- Main Stylesheet -->
+    <title>{{ machine.name }} - ACME Manufacturing</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/svg"
-      href="{% static 'images/favicon.svg' %}"
-    />
-    <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <!-- Chart.js for maintenance history graph -->
+    <link rel="icon" type="image/svg" href="{% static 'images/favicon.svg' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
@@ -103,7 +90,7 @@
         <!-- Logo and Title -->
         <div class="logo">
           <a href="index.html">
-            <img src="./static/images/favicon.svg" alt="ACME Logo" />
+            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
             <h1>ACME Manufacturing</h1>
           </a>
         </div>
@@ -130,388 +117,100 @@
       </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-container">
-      <!-- Breadcrumb Navigation -->
       <div style="margin-bottom: 1rem">
-        <a
-          href="machinery.html"
-          style="color: var(--text-light); text-decoration: none"
-        >
+        <a href="{% url 'machinery_list' %}" style="color: var(--text-light); text-decoration: none">
           <i class="fa-solid fa-chevron-left"></i> Back to Machinery List
         </a>
       </div>
 
       <div class="machinery-list">
-        <!-- Machine Header -->
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          "
-        >
+        <div style="display: flex; justify-content: space-between; align-items: center;">
           <div>
-            <h2>Precision Drill (DRL8456)</h2>
+            <h2>{{ machine.name }}</h2>
             <div>
-              <span class="status-badge status-fault">Fault</span>
-              <span style="color: var(--text-light); margin-left: 1rem">
-                <i class="fa-solid fa-location-dot"></i> Building A, Room 101
-              </span>
+              <span class="status-badge status-{{ machine.status|lower }}">{{ machine.status }}</span>
             </div>
           </div>
           <div>
-            <a href="edit-machine.html?id=DRL8456" class="btn btn-primary">
+            <a href="{% url 'export_machines_csv' %}?machine_id={{ machine.id }}" class="btn btn-primary">Export This Machine</a>
+            <a href="{% url 'edit_machine' machine.id %}" class="btn btn-primary">
               <i class="fa-solid fa-pencil"></i> Edit
             </a>
-            <a
-              href="report-fault.html?id=DRL8456"
-              class="btn btn-danger"
-              style="margin-left: 0.5rem"
-            >
+            <a href="{% url 'report_fault' %}?id={{ machine.id }}" class="btn btn-danger" style="margin-left: 0.5rem">
               <i class="fa-solid fa-triangle-exclamation"></i> Report Fault
             </a>
           </div>
         </div>
 
-        <!-- Machine Details Section -->
+        <!-- Machine Details -->
         <div class="machine-details">
-          <!-- Left side: Machine Information -->
           <div class="detail-card">
             <h3>Machine Information</h3>
 
-            <div class="detail-item">
-              <div class="detail-label">ID:</div>
-              <div class="detail-value">DRL8456</div>
-            </div>
+            <div class="detail-item"><div class="detail-label">ID:</div><div class="detail-value">{{ machine.id }}</div></div>
+            <div class="detail-item"><div class="detail-label">Name:</div><div class="detail-value">{{ machine.name }}</div></div>
+            <div class="detail-item"><div class="detail-label">Status:</div><div class="detail-value">{{ machine.status }}</div></div>
+            <div class="detail-item"><div class="detail-label">Priority:</div><div class="detail-value">{{ machine.priority }}</div></div>
+            <div class="detail-item"><div class="detail-label">Created:</div><div class="detail-value">{{ machine.created_at|date:"F j, Y H:i" }}</div></div>
+            <div class="detail-item"><div class="detail-label">Last Updated:</div><div class="detail-value">{{ machine.updated_at|date:"F j, Y H:i" }}</div></div>
 
-            <div class="detail-item">
-              <div class="detail-label">Name:</div>
-              <div class="detail-value">Precision Drill</div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-label">Model:</div>
-              <div class="detail-value">DL-5000 Pro</div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-label">Manufacturer:</div>
-              <div class="detail-value">DeWalt Industrial</div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-label">Serial Number:</div>
-              <div class="detail-value">SN-45678-DLP-2023</div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-label">Purchase Date:</div>
-              <div class="detail-value">January 15, 2023</div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-label">Warranty Until:</div>
-              <div class="detail-value">January 15, 2026</div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-label">Current Status:</div>
+            <div class="detail-item"><div class="detail-label">Technicians:</div>
               <div class="detail-value">
-                <span class="status-badge status-fault">Fault</span>
+                {% if machine.technicians.all %}
+                  {{ machine.technicians.all|join:", " }}
+                {% else %}
+                  <span style="color: var(--text-light);">No technicians assigned</span>
+                {% endif %}
               </div>
             </div>
 
-            <div class="detail-item">
-              <div class="detail-label">Priority Level:</div>
-              <div class="detail-value">High</div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-label">Assigned To:</div>
-              <div class="detail-value">Elias Amro (Technician)</div>
+            <div class="detail-item"><div class="detail-label">Repair Personnel:</div>
+              <div class="detail-value">
+                {% if machine.repair_personnel.all %}
+                  {{ machine.repair_personnel.all|join:", " }}
+                {% else %}
+                  <span style="color: var(--text-light);">No repair personnel assigned</span>
+                {% endif %}
+              </div>
             </div>
 
             <h3 style="margin-top: 2rem">Collections</h3>
-            <div
-              style="
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.5rem;
-                margin-top: 0.5rem;
-              "
-            >
-              <span
-                style="
-                  background-color: #f3f4f6;
-                  padding: 0.4rem 0.8rem;
-                  border-radius: 20px;
-                  font-size: 0.85rem;
-                "
-                >Main-Campus</span
-              >
-              <span
-                style="
-                  background-color: #f3f4f6;
-                  padding: 0.4rem 0.8rem;
-                  border-radius: 20px;
-                  font-size: 0.85rem;
-                "
-                >Building-A</span
-              >
-              <span
-                style="
-                  background-color: #f3f4f6;
-                  padding: 0.4rem 0.8rem;
-                  border-radius: 20px;
-                  font-size: 0.85rem;
-                "
-                >Floor-1</span
-              >
-              <span
-                style="
-                  background-color: #f3f4f6;
-                  padding: 0.4rem 0.8rem;
-                  border-radius: 20px;
-                  font-size: 0.85rem;
-                "
-                >Drilling-Equipment</span
-              >
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+              {% for collection in machine.collections.all %}
+                <span style="background-color: #f3f4f6; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem;">
+                  {{ collection.name }}
+                </span>
+              {% empty %}
+                <span style="color: var(--text-light); font-size: 0.9rem;">No collections assigned</span>
+              {% endfor %}
             </div>
           </div>
 
-          <!-- Right side: Tabs for details, history, etc. -->
+          <!-- Right side tabs -->
           <div>
             <div class="tabs">
-              <div class="tab active" data-tab="current-status">
-                Current Status
-              </div>
+              <div class="tab active" data-tab="description">Description</div>
               <div class="tab" data-tab="fault-history">Fault History</div>
-              <div class="tab" data-tab="maintenance">Maintenance History</div>
+              <div class="tab" data-tab="maintenance">Maintenance</div>
               <div class="tab" data-tab="documents">Documents</div>
             </div>
 
-            <!-- Current Status Tab -->
-            <div class="tab-content active" id="current-status">
-              <div class="alert alert-danger">
-                <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
-                <div>
-                  <strong>Current Fault: Motor Failure</strong>
-                  <p>
-                    Case #FLT2025-042 - Reported on March 28, 2025 by Joe
-                    Mullaly
-                  </p>
-                </div>
-              </div>
-
-              <div style="margin-top: 1.5rem">
-                <h4 style="margin-bottom: 0.5rem; color: var(--text-color)">
-                  Fault Description
-                </h4>
-                <p style="color: var(--text-color)">
-                  The motor stops running after approximately 2 minutes of use.
-                  There is a burning smell and unusual noise before it cuts out.
-                  The issue started after it was used for a particularly tough
-                  drilling job yesterday.
-                </p>
-              </div>
-
-              <div style="margin-top: 1.5rem">
-                <h4 style="margin-bottom: 0.5rem; color: var(--text-color)">
-                  Active Warnings
-                </h4>
-                <ul style="padding-left: 1.5rem; color: var(--text-light)">
-                  <li>Maintenance overdue by 14 days</li>
-                  <li>Battery replacement recommended</li>
-                </ul>
-              </div>
-
-              <div style="margin-top: 1.5rem; display: flex; gap: 1rem">
-                <a
-                  href="fault-details.html?id=FLT2025-042"
-                  class="btn btn-primary"
-                >
-                  View Fault Case
-                </a>
-                <button class="btn btn-warning">Add Warning</button>
-              </div>
+            <div class="tab-content active" id="description">
+              <h4>Description</h4>
+              <p>{{ machine.description|default:"No description provided." }}</p>
             </div>
 
-            <!-- Fault History Tab -->
             <div class="tab-content" id="fault-history">
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <div class="timeline-date">March 28, 2025</div>
-                    <div class="timeline-title">
-                      Motor Failure (Case #FLT2025-042)
-                    </div>
-                    <div class="timeline-body">
-                      Motor stops running after 2 minutes. Burning smell and
-                      unusual noise before cutout.
-                    </div>
-                    <div style="margin-top: 0.5rem">
-                      <span class="status-badge status-fault">Ongoing</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <div class="timeline-date">February 12, 2025</div>
-                    <div class="timeline-title">
-                      Chuck Replacement (Case #FLT2025-031)
-                    </div>
-                    <div class="timeline-body">
-                      Chuck not gripping bits properly. Replaced with new
-                      assembly.
-                    </div>
-                    <div style="margin-top: 0.5rem">
-                      <span class="status-badge status-success">Resolved</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <div class="timeline-date">December 5, 2024</div>
-                    <div class="timeline-title">
-                      Power Issues (Case #FLT2024-118)
-                    </div>
-                    <div class="timeline-body">
-                      Intermittent power loss during operation. Fixed by
-                      replacing power module.
-                    </div>
-                    <div style="margin-top: 0.5rem">
-                      <span class="status-badge status-success">Resolved</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <p>Fault history coming soon.</p>
             </div>
 
-            <!-- Maintenance History Tab -->
             <div class="tab-content" id="maintenance">
-              <div
-                class="chart-wrapper"
-                style="
-                  position: relative;
-                  height: 200px;
-                  width: 100%;
-                  max-width: 600px;
-                "
-              >
-                <canvas id="maintenanceChart"></canvas>
-              </div>
-
-              <table class="data-table" style="margin-top: 1.5rem">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Performed by</th>
-                    <th>Notes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>March 15, 2025</td>
-                    <td>Scheduled Maintenance</td>
-                    <td>Alice Smith</td>
-                    <td>Regular inspection and lubrication</td>
-                  </tr>
-                  <tr>
-                    <td>February 12, 2025</td>
-                    <td>Repair</td>
-                    <td>Bob Jones</td>
-                    <td>Chuck assembly replacement</td>
-                  </tr>
-                  <tr>
-                    <td>January 10, 2025</td>
-                    <td>Scheduled Maintenance</td>
-                    <td>Alice Smith</td>
-                    <td>Calibration and safety check</td>
-                  </tr>
-                  <tr>
-                    <td>December 5, 2024</td>
-                    <td>Repair</td>
-                    <td>Elias Amro</td>
-                    <td>Power module replacement</td>
-                  </tr>
-                </tbody>
-              </table>
+              <p>Maintenance records coming soon.</p>
             </div>
 
-            <!-- Documents Tab -->
             <div class="tab-content" id="documents">
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                  gap: 1rem;
-                "
-              >
-                <div class="card">
-                  <div class="card-content">
-                    <h3>User Manual</h3>
-                    <p>DL-5000 Pro Series Operating Instructions</p>
-                    <a
-                      href="#"
-                      class="btn btn-primary"
-                      style="margin-top: 0.5rem"
-                      >Download</a
-                    >
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div class="card-content">
-                    <h3>Maintenance Guide</h3>
-                    <p>Preventative maintenance procedures</p>
-                    <a
-                      href="#"
-                      class="btn btn-primary"
-                      style="margin-top: 0.5rem"
-                      >Download</a
-                    >
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div class="card-content">
-                    <h3>Warranty Certificate</h3>
-                    <p>3-year extended warranty details</p>
-                    <a
-                      href="#"
-                      class="btn btn-primary"
-                      style="margin-top: 0.5rem"
-                      >Download</a
-                    >
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div class="card-content">
-                    <h3>Safety Guide</h3>
-                    <p>Safety protocols and procedures</p>
-                    <a
-                      href="#"
-                      class="btn btn-primary"
-                      style="margin-top: 0.5rem"
-                      >Download</a
-                    >
-                  </div>
-                </div>
-              </div>
-
-              <div style="margin-top: 1.5rem">
-                <button class="btn btn-primary">
-                  <i class="fa-solid fa-upload"></i> Upload Document
-                </button>
-              </div>
+              <p>Documents and manuals coming soon.</p>
             </div>
           </div>
         </div>
@@ -537,59 +236,19 @@
       </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="{% static 'js/dynamic-menu.js' %}"></script>
     <script>
-      // Tab switching functionality
       document.addEventListener("DOMContentLoaded", function () {
         const tabs = document.querySelectorAll(".tab");
         const tabContents = document.querySelectorAll(".tab-content");
 
         tabs.forEach((tab) => {
           tab.addEventListener("click", () => {
-            // Remove active class from all tabs
             tabs.forEach((t) => t.classList.remove("active"));
             tabContents.forEach((c) => c.classList.remove("active"));
-
-            // Add active class to clicked tab
             tab.classList.add("active");
-            const tabContentId = tab.getAttribute("data-tab");
-            document.getElementById(tabContentId).classList.add("active");
+            document.getElementById(tab.getAttribute("data-tab")).classList.add("active");
           });
-        });
-
-        // Initialize maintenance chart
-        const ctx = document
-          .getElementById("maintenanceChart")
-          .getContext("2d");
-        const maintenanceChart = new Chart(ctx, {
-          type: "line",
-          data: {
-            labels: ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"],
-            datasets: [
-              {
-                label: "Maintenance Events",
-                data: [1, 0, 2, 1, 1, 1],
-                borderColor: "#2563EB",
-                backgroundColor: "rgba(37, 99, 235, 0.1)",
-                borderWidth: 2,
-                tension: 0.1,
-                fill: true,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              y: {
-                beginAtZero: true,
-                ticks: {
-                  stepSize: 1,
-                },
-              },
-            },
-          },
         });
       });
     </script>

@@ -42,10 +42,12 @@ class Machine(models.Model):
         related_name='assigned_machines_repair',
         limit_choices_to={'role': 'Repair'}
     )
-    def update_status_based_on_warnings(self):
-        if self.warning_set.filter(resolved=False).exists():
+    def update_status(self):
+        if self.faultcase_set.filter(resolved=False).exists():
+            self.status = 'Fault'
+        elif self.warnings.filter(resolved=False).exists():
             self.status = 'Warning'
-        elif self.status != 'Fault':
+        else:
             self.status = 'OK'
         self.save()
         
@@ -54,7 +56,7 @@ class Machine(models.Model):
 
 
 class MachineWarning(models.Model):
-    machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
+    machine = models.ForeignKey(Machine, on_delete=models.CASCADE, related_name='warnings')
     warning_text = models.TextField()
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='warnings_added')
     added_at = models.DateTimeField(auto_now_add=True)

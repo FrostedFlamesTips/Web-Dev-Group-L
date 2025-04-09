@@ -163,24 +163,31 @@
             </div>
           </form>
         </div>
-
         <!-- Collections Grid -->
         <div class="card-grid">
           {% for collection in collections %}
           <div class="card">
             <div class="card-content">
-                <h3>{{ collection.name }}</h3>
-                <p>{{ collection.description }}</p>
+              <h3>{{ collection.name }}</h3>
+              <p>{{ collection.description }}</p>
+        
+              <!-- Button Container -->
+              <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
                 <form action="{% url 'delete_collection' collection.id %}" method="post" onsubmit="return confirm('Are you sure you want to delete this collection?');">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fa-solid fa-trash"></i> Delete
-                    </button>
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">
+                    <i class="fa-solid fa-trash"></i> Delete
+                  </button>
                 </form>
+        
+                <a href="{% url 'export_machines_csv' %}?collection_id={{ collection.id }}" class="btn btn-primary">
+                  Export This Collection
+                </a>
+              </div>
             </div>
-        </div>
+          </div>
           {% endfor %}
-      </div>
+        </div>
 
         <!-- Pagination -->
         <div class="pagination">

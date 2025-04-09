@@ -29,11 +29,7 @@
         <div class="menu-overlay"></div>
         <div class="side-menu">
           <div class="side-menu-header">
-            <img
-              src="./static/images/favicon.svg"
-              alt="Logo"
-              class="menu-logo"
-            />
+            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" class="menu-logo" />
             <span>ACME Manufacturing</span>
             <button class="close-menu">×</button>
           </div>
@@ -101,7 +97,7 @@
         <!-- Logo and Title -->
         <div class="logo">
           <a href="index.html">
-            <img src="./static/images/favicon.svg" alt="ACME Logo" />
+            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
             <h1>ACME Manufacturing</h1>
           </a>
         </div>
@@ -228,11 +224,11 @@
     {% for fault in faults %}
       <tr>
         <td>
-          <a href="#">{{ fault.case_number }}</a>
+          <a href="{% url 'fault_detail' fault.id %}">{{ fault.case_number }}</a>
         </td>
         <td>
           {% if fault.machine %}
-            <a href="#">{{ fault.machine.name }}</a>
+            <a href="{% url 'fault_detail' fault.id %}">{{ fault.machine.name }}</a>
           {% else %}
             <em>Unknown</em>
           {% endif %}
@@ -255,13 +251,23 @@
           </span>
         </td>
         <td>{{ fault.created_at|date:"M d, Y" }}</td>
-        <td>{{ fault.created_by.username|default:"(Unknown)" }}</td>
+        <td>
+          {% if fault.assigned_technicians.all %}
+            {% for tech in fault.assigned_technicians.all %}
+              {{ tech.username }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+              <em>Unassigned</em>
+            {% endfor %}
+          {% else %}
+            <em>Unassigned</em>
+          {% endif %}
+        </td>
         <td>
           <div class="action-buttons">
-            <a href="#" class="action-btn">
+            <a href="{% url 'fault_detail' fault.id %}" class="action-btn">
               <i class="fa-solid fa-eye"></i>
             </a>
-            <a href="#" class="action-btn">
+            <a href="{% url 'edit_fault' fault.id %}" class="action-btn">
               <i class="fa-solid fa-pencil"></i>
             </a>
           </div>
