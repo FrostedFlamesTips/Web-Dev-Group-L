@@ -7,12 +7,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model, authenticate, login
 
 User = get_user_model()
-from django.contrib import messages
 from django.http import HttpResponseForbidden
 from .models import MachineWarning
 from django.utils import timezone
 from collections import defaultdict
-import json
+
+
 
 def index(request):
     # Chart Data
@@ -127,8 +127,21 @@ def warnings(request):
     return render(request, 'warnings.html')
 
 def export_machines_csv(request):
-    if request.user.role != 'Manager':
+    if not request.user.is_authenticated or request.user.role != 'Manager':
         return HttpResponse("Unauthorized", status=401)
+
+    collection_id = request.GET.get('collection_id')
+    machine_id = request.GET.get('machine_id')
+
+    machines = Machine.objects.all()
+
+    if collection_id:
+        machines = machines.filter(collections__id=collection_id)
+
+    if machine_id:
+        machines = machines.filter(id=machine_id)
+
+    machines = machines.distinct().order_by('-priority')
 
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="machines_report.csv"'
@@ -136,9 +149,13 @@ def export_machines_csv(request):
     writer = csv.writer(response)
     writer.writerow(['Name', 'Status', 'Priority', 'Created At'])
 
-    machines = Machine.objects.all().order_by('-priority')
     for machine in machines:
-        writer.writerow([machine.name, machine.status, machine.priority, machine.created_at])
+        writer.writerow([
+            machine.name,
+            machine.status,
+            machine.priority,
+            machine.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        ])
 
     return response
 
@@ -390,3 +407,6 @@ def dashboard_view(request):
     }
 
     return render(request, 'index.html', context)
+
+def test_record_api_view(request):
+    return render(request, 'test-record-api.html')

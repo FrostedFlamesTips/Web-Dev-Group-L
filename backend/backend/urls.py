@@ -57,6 +57,7 @@ urlpatterns = [
     path('machinery/add/', add_machine_view, name='add_machine'),
     path('machinery/<int:machine_id>/edit/', views.edit_machine_view, name='edit_machine'),
     path('machinery/<int:machine_id>/', views.machinery_detail, name='machinery_detail'),
+    path('export/csv/', views.export_machines_csv, name='export_machines_csv'),
     path('report-fault/', create_fault_view, name='report_fault'),
     path('faults/', views.faults_list_view, name='faults_list'),
     path('faults/<int:fault_id>/', views.fault_detail, name='fault_detail'),
@@ -67,6 +68,7 @@ urlpatterns = [
     path('warnings/resolve/<int:warning_id>/', views.resolve_warning_view, name='resolve_warning'),
     path('warnings/<int:warning_id>/', views.warning_detail_view, name='warning_detail'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('api/test-record/', views.test_record_api_view, name='test_record_api'),
 ]
 
 if settings.DEBUG:

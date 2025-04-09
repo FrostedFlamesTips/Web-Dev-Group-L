@@ -133,6 +133,7 @@
             </div>
           </div>
           <div>
+            <a href="{% url 'export_machines_csv' %}?machine_id={{ machine.id }}" class="btn btn-primary">Export This Machine</a>
             <a href="{% url 'edit_machine' machine.id %}" class="btn btn-primary">
               <i class="fa-solid fa-pencil"></i> Edit
             </a>
