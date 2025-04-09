@@ -33,6 +33,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from ACME import views
 from ACME.views import machinery_list_view, add_machine_view, login_view, create_fault_view, faults_list_view, create_warning_view
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin', admin.site.urls),
@@ -65,6 +66,7 @@ urlpatterns = [
     path('warnings/create/', views.create_warning_view, name='create_warning'),
     path('warnings/resolve/<int:warning_id>/', views.resolve_warning_view, name='resolve_warning'),
     path('warnings/<int:warning_id>/', views.warning_detail_view, name='warning_detail'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 ]
 
 if settings.DEBUG:

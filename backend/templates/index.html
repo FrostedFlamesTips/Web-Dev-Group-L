@@ -86,10 +86,12 @@
                 <i class="fa-solid fa-user menu-icon"></i>
                 Your Profile
               </a>
-              <a href="login.html" class="logout-link">
-                <i class="fa-solid fa-right-from-bracket menu-icon"></i>
-                Logout
-              </a>
+              <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-link">
+                  <i class="fa-solid fa-right-from-bracket menu-icon"></i> Logout
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -123,7 +125,12 @@
               <a href="profile.html">My Profile</a>
               <a href="settings.html">Settings</a>
               <div class="dropdown-divider"></div>
-              <a href="login.html" class="logout-link">Logout</a>
+              <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">
+                  <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+              </form>
             </div>
           </div>
         </div>
