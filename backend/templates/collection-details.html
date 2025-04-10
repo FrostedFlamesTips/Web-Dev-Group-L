@@ -41,19 +41,19 @@
           <div class="menu-sections">
             <div class="menu-section">
               <h3>Navigation</h3>
-              <a href="index.html">
+              <a href="{% url 'index' %}">
                 <i class="fa-solid fa-gauge-high menu-icon"></i>
                 Dashboard
               </a>
-              <a href="machinery.html">
+              <a href="{% url 'machinery_list' %}">
                 <i class="fa-solid fa-gear menu-icon"></i>
                 Machinery
               </a>
-              <a href="faults.html">
+              <a href="{% url 'faults_list' %}">
                 <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
                 Fault Cases
               </a>
-              <a href="collections.html">
+              <a href="{% url 'collections' %}">
                 <i class="fa-solid fa-folder menu-icon"></i>
                 Collections
               </a>
@@ -101,7 +101,7 @@
 
         <!-- Logo and Title -->
         <div class="logo">
-          <a href="index.html">
+          <a href="{% url 'index' %}">
             <img src="./static/images/favicon.svg" alt="ACME Logo" />
             <h1>ACME Manufacturing</h1>
           </a>
@@ -109,9 +109,13 @@
 
         <!-- Navigation Links -->
         <div class="nav-links">
-          <a class="hideable-nav-item" href="machinery.html">Machinery</a>
-          <a class="hideable-nav-item" href="faults.html">Faults</a>
-          <a class="hideable-nav-item" href="collections.html">Collections</a>
+          <a class="hideable-nav-item" href="{% url 'machinery_list' %}"
+            >Machinery</a
+          >
+          <a class="hideable-nav-item" href="{% url 'faults_list' %}">Faults</a>
+          <a class="hideable-nav-item" href="{% url 'collections' %}"
+            >Collections</a
+          >
 
           <!-- Profile Dropdown for logged-in users -->
           <div class="profile-dropdown">
@@ -134,7 +138,7 @@
       <!-- Breadcrumb Navigation -->
       <div style="margin-bottom: 1rem">
         <a
-          href="collections.html"
+          href="{% url 'collections' %}"
           style="color: var(--text-light); text-decoration: none"
         >
           <i class="fa-solid fa-chevron-left"></i> Back to Collections

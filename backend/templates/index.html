@@ -1,10 +1,10 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ACME Manufacturing - Machinery Tracking System</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ACME Manufacturing - Machinery Tracking System</title>
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
@@ -42,7 +42,7 @@
           <div class="menu-sections">
             <div class="menu-section">
               <h3>Navigation</h3>
-              <a href="index.html">
+              <a href="{% url 'index' %}">
                 <i class="fa-solid fa-gauge-high menu-icon"></i>
                 Dashboard
               </a>
@@ -50,11 +50,11 @@
                 <i class="fa-solid fa-gear menu-icon"></i>
                 Machinery
               </a>
-              <a href="faults.html">
+              <a href="{% url 'faults_list' %}">
                 <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
                 Fault Cases
               </a>
-              <a href="collections.html">
+              <a href="{% url 'collections' %}">
                 <i class="fa-solid fa-folder menu-icon"></i>
                 Collections
               </a>
@@ -86,10 +86,15 @@
                 <i class="fa-solid fa-user menu-icon"></i>
                 Your Profile
               </a>
-              <form method="post" action="{% url 'logout' %}" style="display: inline;">
+              <form
+                method="post"
+                action="{% url 'logout' %}"
+                style="display: inline"
+              >
                 {% csrf_token %}
                 <button type="submit" class="logout-link">
-                  <i class="fa-solid fa-right-from-bracket menu-icon"></i> Logout
+                  <i class="fa-solid fa-right-from-bracket menu-icon"></i>
+                  Logout
                 </button>
               </form>
             </div>
@@ -104,7 +109,7 @@
 
         <!-- Logo and Title -->
         <div class="logo">
-          <a href="index.html">
+          <a href="{% url 'index' %}">
             <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
             <h1>ACME Manufacturing</h1>
           </a>
@@ -112,9 +117,13 @@
 
         <!-- Navigation Links -->
         <div class="nav-links">
-          <a class="hideable-nav-item" href="{% url 'machinery_list' %}">Machinery</a>
-          <a class="hideable-nav-item" href="faults.html">Faults</a>
-          <a class="hideable-nav-item" href="collections.html">Collections</a>
+          <a class="hideable-nav-item" href="{% url 'machinery_list' %}"
+            >Machinery</a
+          >
+          <a class="hideable-nav-item" href="{% url 'faults_list' %}">Faults</a>
+          <a class="hideable-nav-item" href="{% url 'collections' %}"
+            >Collections</a
+          >
 
           <!-- Profile Dropdown for logged-in users -->
           <div class="profile-dropdown">
@@ -136,195 +145,217 @@
         </div>
       </div>
     </nav>
-  <main class="main-container">
-    {% if show_toggle %}
-  <div style="margin-bottom: 1rem;">
-    {% if view_all %}
-      <a href="{% url 'index' %}" class="btn btn-primary">
-        <i class="fa-solid fa-filter-circle-xmark"></i> View Only My Machines
-      </a>
-    {% else %}
-      <a href="{% url 'index' %}?view=all" class="btn btn-primary">
-        <i class="fa-solid fa-globe"></i> View All Machines
-      </a>
-    {% endif %}
-  </div>
-{% endif %}
-
-<h2 style="margin-bottom: 1rem;">
-  {% if user.role == "Manager" %}
-    All Machines
-  {% elif view_all %}
-    All Machines (Viewing as {{ user.role }})
-  {% else %}
-    Your Assigned Machines
-  {% endif %}
-</h2>
-
-  <ul style="margin-bottom: 2rem;">
-    {% for machine in machines %}
-      <li>
-        <strong>{{ machine.name }}</strong> -
-        <span class="status-badge status-{{ machine.status|lower }}">
-          {{ machine.status }}
-        </span>
-      </li>
-    {% empty %}
-      <li>No machines assigned to you.</li>
-    {% endfor %}
-  </ul>
-
-    <div class="card" style="margin-top: 2rem">
-      <div class="card-content">
-        <h3>Machinery Status by Collection</h3>
-        <canvas id="machineryStatusChart" height="250" style="max-height: 250px"></canvas>
+    <main class="main-container">
+      {% if show_toggle %}
+      <div style="margin-bottom: 1rem">
+        {% if view_all %}
+        <a href="{% url 'index' %}" class="btn btn-primary">
+          <i class="fa-solid fa-filter-circle-xmark"></i> View Only My Machines
+        </a>
+        {% else %}
+        <a href="{% url 'index' %}?view=all" class="btn btn-primary">
+          <i class="fa-solid fa-globe"></i> View All Machines
+        </a>
+        {% endif %}
       </div>
-    </div>
+      {% endif %}
 
-    <h2 style="margin-top: 2rem">Recent Fault Cases</h2>
-    <div class="card">
-      <div class="card-content">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Case ID</th>
-              <th>Machine</th>
-              <th>Issue Type</th>
-              <th>Reported</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for fault in recent_faults %}
-            <tr>
-              <td><a href="#">{{ fault.case_number }}</a></td>
-              <td>{{ fault.machine.name }}</td>
-              <td>{{ fault.summary|truncatechars:40 }}</td>
-              <td>{{ fault.created_at|date:"M d, Y" }}</td>
-              <td>
-                <span class="status-badge {% if fault.resolved %}status-success{% else %}status-fault{% endif %}">
-                  {% if fault.resolved %}Resolved{% else %}Open{% endif %}
-                </span>
-              </td>
-              <td>
-                <div class="action-buttons">
-                  <a href="#" class="action-btn"><i class="fa-solid fa-eye"></i></a>
-                </div>
-              </td>
-            </tr>
-            {% empty %}
-            <tr><td colspan="6" style="text-align: center;">No faults reported yet.</td></tr>
-            {% endfor %}
-          </tbody>
-        </table>
+      <h2 style="margin-bottom: 1rem">
+        {% if user.role == "Manager" %} All Machines {% elif view_all %} All
+        Machines (Viewing as {{ user.role }}) {% else %} Your Assigned Machines
+        {% endif %}
+      </h2>
+
+      <ul style="margin-bottom: 2rem">
+        {% for machine in machines %}
+        <li>
+          <strong>{{ machine.name }}</strong> -
+          <span class="status-badge status-{{ machine.status|lower }}">
+            {{ machine.status }}
+          </span>
+        </li>
+        {% empty %}
+        <li>No machines assigned to you.</li>
+        {% endfor %}
+      </ul>
+
+      <div class="card" style="margin-top: 2rem">
+        <div class="card-content">
+          <h3>Machinery Status by Collection</h3>
+          <canvas
+            id="machineryStatusChart"
+            height="250"
+            style="max-height: 250px"
+          ></canvas>
+        </div>
       </div>
-    </div>
 
-    <h2 style="margin-top: 2rem">Active Warnings</h2>
-    <div class="card">
-      <div class="card-content">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Machine</th>
-              <th>Warning Message</th>
-              <th>Reported</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for warning in active_warnings %}
-            <tr>
-              <td>{{ warning.machine.name }}</td>
-              <td>{{ warning.warning_text }}</td>
-              <td>{{ warning.added_at|date:"M d, Y" }}</td>
-              <td>
-                <form method="post" action="{% url 'resolve_warning' warning.id %}">
-                  {% csrf_token %}
-                  <button class="btn btn-warning">Resolve</button>
-                </form>
-              </td>
-            </tr>
-            {% empty %}
-            <tr><td colspan="4" style="text-align: center;">No active warnings.</td></tr>
-            {% endfor %}
-          </tbody>
-        </table>
+      <h2 style="margin-top: 2rem">Recent Fault Cases</h2>
+      <div class="card">
+        <div class="card-content">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Case ID</th>
+                <th>Machine</th>
+                <th>Issue Type</th>
+                <th>Reported</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for fault in recent_faults %}
+              <tr>
+                <td><a href="#">{{ fault.case_number }}</a></td>
+                <td>{{ fault.machine.name }}</td>
+                <td>{{ fault.summary|truncatechars:40 }}</td>
+                <td>{{ fault.created_at|date:"M d, Y" }}</td>
+                <td>
+                  <span
+                    class="status-badge {% if fault.resolved %}status-success{% else %}status-fault{% endif %}"
+                  >
+                    {% if fault.resolved %}Resolved{% else %}Open{% endif %}
+                  </span>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <a href="#" class="action-btn"
+                      ><i class="fa-solid fa-eye"></i
+                    ></a>
+                  </div>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="6" style="text-align: center">
+                  No faults reported yet.
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-logo">
-        <img src="{% static 'images/logo.svg' %}" alt="ACME Logo" />
-        <span>ACME Manufacturing Corp.</span>
+      <h2 style="margin-top: 2rem">Active Warnings</h2>
+      <div class="card">
+        <div class="card-content">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Machine</th>
+                <th>Warning Message</th>
+                <th>Reported</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for warning in active_warnings %}
+              <tr>
+                <td>{{ warning.machine.name }}</td>
+                <td>{{ warning.warning_text }}</td>
+                <td>{{ warning.added_at|date:"M d, Y" }}</td>
+                <td>
+                  <form
+                    method="post"
+                    action="{% url 'resolve_warning' warning.id %}"
+                  >
+                    {% csrf_token %}
+                    <button class="btn btn-warning">Resolve</button>
+                  </form>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="4" style="text-align: center">
+                  No active warnings.
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="about.html">About</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="contact.html">Contact</a>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="{% static 'images/logo.svg' %}" alt="ACME Logo" />
+          <span>ACME Manufacturing Corp.</span>
+        </div>
+        <div class="footer-links">
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-copyright">
+          &copy; 2025 ACME Manufacturing Corp. All rights reserved.
+        </div>
       </div>
-      <div class="footer-copyright">
-        &copy; 2025 ACME Manufacturing Corp. All rights reserved.
-      </div>
-    </div>
-  </footer>
+    </footer>
 
+    {{ labels|json_script:"labels-data" }} {{ ok_data|json_script:"ok-data" }}
+    {{ warning_data|json_script:"warning-data" }} {{
+    fault_data|json_script:"fault-data" }}
 
-{{ labels|json_script:"labels-data" }}
-{{ ok_data|json_script:"ok-data" }}
-{{ warning_data|json_script:"warning-data" }}
-{{ fault_data|json_script:"fault-data" }}
+    <script src="{% static 'js/dynamic-menu.js' %}"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const labels = JSON.parse(
+          document.getElementById("labels-data").textContent
+        );
+        const okData = JSON.parse(
+          document.getElementById("ok-data").textContent
+        );
+        const warningData = JSON.parse(
+          document.getElementById("warning-data").textContent
+        );
+        const faultData = JSON.parse(
+          document.getElementById("fault-data").textContent
+        );
 
-<script src="{% static 'js/dynamic-menu.js' %}"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const labels = JSON.parse(document.getElementById('labels-data').textContent);
-    const okData = JSON.parse(document.getElementById('ok-data').textContent);
-    const warningData = JSON.parse(document.getElementById('warning-data').textContent);
-    const faultData = JSON.parse(document.getElementById('fault-data').textContent);
-
-    const ctx = document.getElementById("machineryStatusChart").getContext("2d");
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Operational",
-            data: okData,
-            backgroundColor: "#10B981"
+        const ctx = document
+          .getElementById("machineryStatusChart")
+          .getContext("2d");
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Operational",
+                data: okData,
+                backgroundColor: "#10B981",
+              },
+              {
+                label: "Warning",
+                data: warningData,
+                backgroundColor: "#F59E0B",
+              },
+              {
+                label: "Fault",
+                data: faultData,
+                backgroundColor: "#EF4444",
+              },
+            ],
           },
-          {
-            label: "Warning",
-            data: warningData,
-            backgroundColor: "#F59E0B"
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: "top" },
+            },
+            scales: {
+              x: { stacked: true },
+              y: { stacked: true, beginAtZero: true },
+            },
           },
-          {
-            label: "Fault",
-            data: faultData,
-            backgroundColor: "#EF4444"
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { position: "top" }
-        },
-        scales: {
-          x: { stacked: true },
-          y: { stacked: true, beginAtZero: true }
-        }
-      }
-    });
-  });
-</script>
-  
-</body>
+        });
+      });
+    </script>
+  </body>
 </html>

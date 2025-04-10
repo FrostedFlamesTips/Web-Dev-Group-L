@@ -6,8 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fault Case #{{ fault.case_number }} - ACME Manufacturing</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-    <link rel="icon" type="image/svg" href="{% static 'images/favicon.svg' %}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      rel="icon"
+      type="image/svg"
+      href="{% static 'images/favicon.svg' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
 
   <body>
@@ -28,19 +35,19 @@
           <div class="menu-sections">
             <div class="menu-section">
               <h3>Navigation</h3>
-              <a href="index.html">
+              <a href="{% url 'index' %}">
                 <i class="fa-solid fa-gauge-high menu-icon"></i>
                 Dashboard
               </a>
-              <a href="machinery.html">
+              <a href="{% url 'machinery_list' %}">
                 <i class="fa-solid fa-gear menu-icon"></i>
                 Machinery
               </a>
-              <a href="faults.html">
+              <a href="{% url 'faults_list' %}">
                 <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
                 Fault Cases
               </a>
-              <a href="collections.html">
+              <a href="{% url 'collections' %}">
                 <i class="fa-solid fa-folder menu-icon"></i>
                 Collections
               </a>
@@ -88,7 +95,7 @@
 
         <!-- Logo and Title -->
         <div class="logo">
-          <a href="index.html">
+          <a href="{% url 'index' %}">
             <img src="./static/images/favicon.svg" alt="ACME Logo" />
             <h1>ACME Manufacturing</h1>
           </a>
@@ -96,9 +103,13 @@
 
         <!-- Navigation Links -->
         <div class="nav-links">
-          <a class="hideable-nav-item" href="machinery.html">Machinery</a>
-          <a class="hideable-nav-item" href="faults.html">Faults</a>
-          <a class="hideable-nav-item" href="collections.html">Collections</a>
+          <a class="hideable-nav-item" href="{% url 'machinery_list' %}"
+            >Machinery</a
+          >
+          <a class="hideable-nav-item" href="{% url 'faults_list' %}">Faults</a>
+          <a class="hideable-nav-item" href="{% url 'collections' %}"
+            >Collections</a
+          >
 
           <!-- Profile Dropdown for logged-in users -->
           <div class="profile-dropdown">
@@ -118,51 +129,79 @@
 
     <main class="main-container">
       <div style="margin-bottom: 1rem">
-        <a href="{% url 'faults_list' %}" style="color: var(--text-light); text-decoration: none">
+        <a
+          href="{% url 'faults_list' %}"
+          style="color: var(--text-light); text-decoration: none"
+        >
           <i class="fa-solid fa-chevron-left"></i> Back to Fault Cases
         </a>
       </div>
 
       <div class="fault-details">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+          "
+        >
           <div>
             <h2>Fault Case #{{ fault.case_number }}</h2>
             <div style="margin-top: 0.5rem">
               <div style="display: flex; gap: 2rem; flex-wrap: wrap">
                 <div>
                   <strong>Machine:</strong>
-                  <a href="{% url 'machinery_detail' fault.machine.id %}" style="color: var(--primary-color); margin-left: 0.5rem">
+                  <a
+                    href="{% url 'machinery_detail' fault.machine.id %}"
+                    style="color: var(--primary-color); margin-left: 0.5rem"
+                  >
                     {{ fault.machine.name }}
                   </a>
                 </div>
                 <div>
                   <strong>Status:</strong>
-                  <span class="status-badge status-{{ fault.resolved|yesno:'success,fault' }}" style="margin-left: 0.5rem">
+                  <span
+                    class="status-badge status-{{ fault.resolved|yesno:'success,fault' }}"
+                    style="margin-left: 0.5rem"
+                  >
                     {% if fault.resolved %}Resolved{% else %}Open{% endif %}
                   </span>
                 </div>
               </div>
 
-              <div style="margin-top: 0.5rem; display: flex; gap: 2rem; flex-wrap: wrap">
+              <div
+                style="
+                  margin-top: 0.5rem;
+                  display: flex;
+                  gap: 2rem;
+                  flex-wrap: wrap;
+                "
+              >
                 <div>
                   <strong>Priority:</strong>
-                  <span style="margin-left: 0.5rem">{{ fault.machine.priority }}</span>
+                  <span style="margin-left: 0.5rem"
+                    >{{ fault.machine.priority }}</span
+                  >
                 </div>
                 <div>
                   <strong>Reported By:</strong>
-                  <span style="margin-left: 0.5rem">{{ fault.created_by.get_full_name }}</span>
+                  <span style="margin-left: 0.5rem"
+                    >{{ fault.created_by.get_full_name }}</span
+                  >
                 </div>
                 <div>
                   <strong>Reported Date:</strong>
-                  <span style="margin-left: 0.5rem">{{ fault.created_at|date:"F j, Y - g:i A" }}</span>
+                  <span style="margin-left: 0.5rem"
+                    >{{ fault.created_at|date:"F j, Y - g:i A" }}</span
+                  >
                 </div>
                 <div>
                   <strong>Assigned To:</strong>
                   <span style="margin-left: 0.5rem">
-                    {% for tech in fault.assigned_technicians.all %}
-                      {{ tech.get_full_name }}{% if not forloop.last %}, {% endif %}
+                    {% for tech in fault.assigned_technicians.all %} {{
+                    tech.get_full_name }}{% if not forloop.last %}, {% endif %}
                     {% empty %}
-                      <span style="color: gray;">None</span>
+                    <span style="color: gray">None</span>
                     {% endfor %}
                   </span>
                 </div>
@@ -170,20 +209,22 @@
 
               {% if fault.resolved %}
               <div style="margin-top: 0.5rem">
-                <strong>Resolved By:</strong> {{ fault.resolved_by.get_full_name }}<br />
-                <strong>Resolved At:</strong> {{ fault.resolved_at|date:"F j, Y - g:i A" }}
+                <strong>Resolved By:</strong> {{ fault.resolved_by.get_full_name
+                }}<br />
+                <strong>Resolved At:</strong> {{ fault.resolved_at|date:"F j, Y
+                - g:i A" }}
               </div>
               {% endif %}
             </div>
           </div>
           <div style="display: flex; gap: 0.5rem">
             {% if not fault.resolved %}
-              <form method="post" action="{% url 'resolve_fault' fault.id %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-primary">
-                  <i class="fa-solid fa-check"></i> Mark as Resolved
-                </button>
-              </form>
+            <form method="post" action="{% url 'resolve_fault' fault.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-check"></i> Mark as Resolved
+              </button>
+            </form>
             {% endif %}
             <a href="{% url 'edit_fault' fault.id %}" class="btn">
               <i class="fa-solid fa-pencil"></i> Edit
@@ -191,7 +232,10 @@
           </div>
         </div>
 
-        <div class="machine-details" style="margin-top: 2rem; grid-template-columns: 2fr 1fr">
+        <div
+          class="machine-details"
+          style="margin-top: 2rem; grid-template-columns: 2fr 1fr"
+        >
           <div>
             <div class="detail-card">
               <h3>Fault Summary</h3>
@@ -211,7 +255,11 @@
               <div><strong>Status:</strong> {{ fault.machine.status }}</div>
               <div><strong>Priority:</strong> {{ fault.machine.priority }}</div>
               <div style="margin-top: 0.75rem">
-                <a href="{% url 'machinery_detail' fault.machine.id %}" class="btn btn-secondary">View Machine</a>
+                <a
+                  href="{% url 'machinery_detail' fault.machine.id %}"
+                  class="btn btn-secondary"
+                  >View Machine</a
+                >
               </div>
             </div>
           </div>

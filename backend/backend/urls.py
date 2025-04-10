@@ -16,49 +16,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from ACME.views import index
-from ACME.views import collection_details
-from ACME.views import collection_edit
-from ACME.views import collections
-from ACME.views import edit_fault
-from ACME.views import edit_machine
-from ACME.views import fault_details
-from ACME.views import faults
-from ACME.views import login
-from ACME.views import machine_details
-from ACME.views import machinery
-from ACME.views import report_fault
-from ACME.views import warnings, dashboard_view
+from ACME.views import dashboard_view, add_collection_view
 from django.conf import settings
 from django.conf.urls.static import static
 from ACME import views
-from ACME.views import machinery_list_view, add_machine_view, login_view, create_fault_view, faults_list_view, create_warning_view
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin', admin.site.urls),
     path('', dashboard_view, name='index'),
-    path('collection-details.html', collection_details),
-    path('collection-edit.html', collection_edit),
-    path('edit-fault.html', edit_fault),
-    path('edit-machine.html', edit_machine),
-    path('fault-details.html', fault_details),
-    #path('faults.html', faults),
-    path('login/', login_view, name='login'),
-    path('machine-details.html', machine_details),
-    #path('machinery.html', machinery),
-    #path('report-fault.html', report_fault),
-    #path('warnings.html', warnings),
+    path('login/', views.login_view, name='login'),
     path('api/', include('ACME.api.urls')),
     path('collections/delete/<int:id>/', views.delete_collection_view, name='delete_collection'),
-    path('collection-create.html', views.add_collection_view, name='add_collection'),
-    path('collections.html', views.collections_view, name='collections'),
-    path('machinery/', machinery_list_view, name='machinery_list'),
-    path('machinery/add/', add_machine_view, name='add_machine'),
+    path('collection-create/', add_collection_view, name='add_collection'),
+    path('collections/', views.collections_view, name='collections'),
+    path('machinery/', views.machinery_list_view, name='machinery_list'),
+    path('machinery/add/', views.add_machine_view, name='add_machine'),
     path('machinery/<int:machine_id>/edit/', views.edit_machine_view, name='edit_machine'),
     path('machinery/<int:machine_id>/', views.machinery_detail, name='machinery_detail'),
     path('export/csv/', views.export_machines_csv, name='export_machines_csv'),
-    path('report-fault/', create_fault_view, name='report_fault'),
+    path('report-fault/', views.create_fault_view, name='report_fault'),
     path('faults/', views.faults_list_view, name='faults_list'),
     path('faults/<int:fault_id>/', views.fault_detail, name='fault_detail'),
     path('faults/<int:fault_id>/resolve/', views.resolve_fault, name='resolve_fault'),
