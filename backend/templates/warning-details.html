@@ -176,8 +176,7 @@
           >
             <i class="fa-solid fa-eye"></i> View Machine
           </a>
-          {% if not warning.resolved and user.role == 'Manager' or user.role ==
-          'Technician' %}
+          {% if not warning.resolved and user.role == 'Manager' or user.role == 'Technician' %}
           <a
             href="{% url 'resolve_warning' warning.id %}"
             class="btn btn-success"
