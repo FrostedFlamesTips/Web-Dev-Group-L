@@ -141,26 +141,30 @@
         <div class="menu-overlay"></div>
         <div class="side-menu">
           <div class="side-menu-header">
-            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" class="menu-logo"/>
+            <img
+              src="{% static 'images/favicon.svg' %}"
+              alt="ACME Logo"
+              class="menu-logo"
+            />
             <span>ACME Manufacturing</span>
             <button class="close-menu">×</button>
           </div>
           <div class="menu-sections">
             <div class="menu-section">
               <h3>Navigation</h3>
-              <a href="index.html">
+              <a href="{% url 'index' %}">
                 <i class="fa-solid fa-gauge-high menu-icon"></i>
                 Dashboard
               </a>
-              <a href="machinery.html">
+              <a href="{% url 'machinery_list' %}">
                 <i class="fa-solid fa-gear menu-icon"></i>
                 Machinery
               </a>
-              <a href="faults.html">
+              <a href="{% url 'faults_list' %}">
                 <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
                 Fault Cases
               </a>
-              <a href="collections.html">
+              <a href="{% url 'collections' %}">
                 <i class="fa-solid fa-folder menu-icon"></i>
                 Collections
               </a>
@@ -208,7 +212,7 @@
 
         <!-- Logo and Title -->
         <div class="logo">
-          <a href="index.html">
+          <a href="{% url 'index' %}">
             <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
             <h1>ACME Manufacturing</h1>
           </a>
@@ -216,9 +220,13 @@
 
         <!-- Navigation Links -->
         <div class="nav-links">
-          <a class="hideable-nav-item" href="machinery.html">Machinery</a>
-          <a class="hideable-nav-item" href="faults.html">Faults</a>
-          <a class="hideable-nav-item" href="collections.html">Collections</a>
+          <a class="hideable-nav-item" href="{% url 'machinery_list' %}"
+            >Machinery</a
+          >
+          <a class="hideable-nav-item" href="{% url 'faults_list' %}">Faults</a>
+          <a class="hideable-nav-item" href="{% url 'collections' %}"
+            >Collections</a
+          >
 
           <!-- Profile Dropdown for logged-in users -->
           <div class="profile-dropdown">
@@ -245,9 +253,7 @@
         </div>
 
         {% if error %}
-        <div class="form-error" style="display: block;">
-          {{ error }}
-        </div>
+        <div class="form-error" style="display: block">{{ error }}</div>
         {% endif %}
 
         <form id="login-form" method="POST" action="{% url 'login' %}">
@@ -277,7 +283,6 @@
         </div>
       </div>
     </div>
-    
 
     <!-- Footer -->
     <footer class="footer">

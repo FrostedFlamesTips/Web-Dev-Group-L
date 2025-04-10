@@ -42,7 +42,7 @@
           <div class="menu-sections">
             <div class="menu-section">
               <h3>Navigation</h3>
-              <a href="index.html">
+              <a href="{% url 'index' %}">
                 <i class="fa-solid fa-gauge-high menu-icon"></i>
                 Dashboard
               </a>
@@ -50,11 +50,11 @@
                 <i class="fa-solid fa-gear menu-icon"></i>
                 Machinery
               </a>
-              <a href="faults.html">
+              <a href="{% url 'faults_list' %}">
                 <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
                 Fault Cases
               </a>
-              <a href="collections.html">
+              <a href="{% url 'collections' %}">
                 <i class="fa-solid fa-folder menu-icon"></i>
                 Collections
               </a>
@@ -104,7 +104,7 @@
 
         <!-- Logo and Title -->
         <div class="logo">
-          <a href="index.html">
+          <a href="{% url 'index' %}">
             <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
             <h1>ACME Manufacturing</h1>
           </a>
@@ -112,10 +112,13 @@
 
         <!-- Navigation Links -->
         <div class="nav-links">
-          <a class="hideable-nav-item" href="{% url 'machinery_list' %}">Machinery</a>
-          <a class="hideable-nav-item" href="faults.html">Faults</a>
-          <a class="hideable-nav-item" href="collections.html">Collections</a>
-
+          <a class="hideable-nav-item" href="{% url 'machinery_list' %}"
+            >Machinery</a
+          >
+          <a class="hideable-nav-item" href="{% url 'faults_list' %}">Faults</a>
+          <a class="hideable-nav-item" href="{% url 'collections' %}"
+            >Collections</a
+          >
           <!-- Profile Dropdown for logged-in users -->
           <div class="profile-dropdown">
             <div class="profile-trigger">
@@ -198,7 +201,7 @@
           <tbody>
             {% for fault in recent_faults %}
             <tr>
-              <td><a href="#">{{ fault.case_number }}</a></td>
+              <td><a href="{% url 'fault_detail' fault.id %}">{{ fault.case_number }}</a></td>
               <td>{{ fault.machine.name }}</td>
               <td>{{ fault.summary|truncatechars:40 }}</td>
               <td>{{ fault.created_at|date:"M d, Y" }}</td>
@@ -209,7 +212,7 @@
               </td>
               <td>
                 <div class="action-buttons">
-                  <a href="#" class="action-btn"><i class="fa-solid fa-eye"></i></a>
+                  <a href="{% url 'fault_detail' fault.id %}" class="action-btn"><i class="fa-solid fa-eye"></i></a>
                 </div>
               </td>
             </tr>

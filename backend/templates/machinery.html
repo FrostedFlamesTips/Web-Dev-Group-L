@@ -7,8 +7,15 @@
     <title>Machinery Listing - ACME Manufacturing</title>
 
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-    <link rel="icon" type="image/svg" href="{% static 'images/favicon.svg' %}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      rel="icon"
+      type="image/svg"
+      href="{% static 'images/favicon.svg' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
 
   <body>
@@ -18,26 +25,30 @@
         <div class="menu-overlay"></div>
         <div class="side-menu">
           <div class="side-menu-header">
-            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" class="menu-logo" />
+            <img
+              src="{% static 'images/favicon.svg' %}"
+              alt="ACME Logo"
+              class="menu-logo"
+            />
             <span>ACME Manufacturing</span>
             <button class="close-menu">×</button>
           </div>
           <div class="menu-sections">
             <div class="menu-section">
               <h3>Navigation</h3>
-              <a href="index.html">
+              <a href="{% url 'index' %}">
                 <i class="fa-solid fa-gauge-high menu-icon"></i>
                 Dashboard
               </a>
-              <a href="machinery.html">
+              <a href="{% url 'machinery_list' %}">
                 <i class="fa-solid fa-gear menu-icon"></i>
                 Machinery
               </a>
-              <a href="faults.html">
+              <a href="{% url 'faults_list' %}">
                 <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
                 Fault Cases
               </a>
-              <a href="collections.html">
+              <a href="{% url 'collections' %}">
                 <i class="fa-solid fa-folder menu-icon"></i>
                 Collections
               </a>
@@ -85,7 +96,7 @@
 
         <!-- Logo and Title -->
         <div class="logo">
-          <a href="index.html">
+          <a href="{% url 'index' %}">
             <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
             <h1>ACME Manufacturing</h1>
           </a>
@@ -93,9 +104,13 @@
 
         <!-- Navigation Links -->
         <div class="nav-links">
-          <a class="hideable-nav-item" href="machinery.html">Machinery</a>
-          <a class="hideable-nav-item" href="faults.html">Faults</a>
-          <a class="hideable-nav-item" href="collections.html">Collections</a>
+          <a class="hideable-nav-item" href="{% url 'machinery_list' %}"
+            >Machinery</a
+          >
+          <a class="hideable-nav-item" href="{% url 'faults_list' %}">Faults</a>
+          <a class="hideable-nav-item" href="{% url 'collections' %}"
+            >Collections</a
+          >
 
           <!-- Profile Dropdown for logged-in users -->
           <div class="profile-dropdown">
@@ -115,13 +130,21 @@
 
     <main class="main-container">
       <div class="machinery-list">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
           <h2>Machinery Listing</h2>
           {% if user.is_authenticated and user.role == "Manager" %}
           <a href="{% url 'add_machine' %}" class="btn btn-primary">
             <i class="fa-solid fa-plus"></i> Add Machine
           </a>
-          <a href="{% url 'export_machines_csv' %}" class="btn btn-primary">Export All Machines</a>
+          <a href="{% url 'export_machines_csv' %}" class="btn btn-primary"
+            >Export All Machines</a
+          >
           {% endif %}
         </div>
 
@@ -165,7 +188,9 @@
                 <option value="">All Users</option>
                 <option value="elias amro">Elias Amro (Technician)</option>
                 <option value="harry potter">Harry Potter (Repair)</option>
-                <option value="hermoine granger">Hermoine Granger (Technician)</option>
+                <option value="hermoine granger">
+                  Hermoine Granger (Technician)
+                </option>
               </select>
             </div>
           </div>
@@ -196,13 +221,17 @@
 
         <!-- Pagination (can be expanded later) -->
         <div class="pagination">
-          <a href="#" class="pagination-item"><i class="fa-solid fa-chevron-left"></i></a>
+          <a href="#" class="pagination-item"
+            ><i class="fa-solid fa-chevron-left"></i
+          ></a>
           <a href="#" class="pagination-item active">1</a>
           <a href="#" class="pagination-item">2</a>
           <a href="#" class="pagination-item">3</a>
           <span class="pagination-item">...</span>
           <a href="#" class="pagination-item">10</a>
-          <a href="#" class="pagination-item"><i class="fa-solid fa-chevron-right"></i></a>
+          <a href="#" class="pagination-item"
+            ><i class="fa-solid fa-chevron-right"></i
+          ></a>
         </div>
       </div>
     </main>
@@ -229,21 +258,25 @@
     <!-- Scripts -->
     <script src="{% static 'js/dynamic-menu.js' %}"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener("DOMContentLoaded", () => {
         let allMachines = [];
 
-        const tbody = document.getElementById('machine-table-body');
-        const searchInput = document.querySelector('.search-input');
-        const statusFilter = document.getElementById('status-filter');
-        const collectionFilter = document.getElementById('collection-filter');
-        const assignedFilter = document.getElementById('assigned-filter');
-        const applyButton = document.querySelector('.filter-buttons .btn-primary');
-        const resetButton = document.querySelector('.filter-buttons .btn:not(.btn-primary)');
+        const tbody = document.getElementById("machine-table-body");
+        const searchInput = document.querySelector(".search-input");
+        const statusFilter = document.getElementById("status-filter");
+        const collectionFilter = document.getElementById("collection-filter");
+        const assignedFilter = document.getElementById("assigned-filter");
+        const applyButton = document.querySelector(
+          ".filter-buttons .btn-primary"
+        );
+        const resetButton = document.querySelector(
+          ".filter-buttons .btn:not(.btn-primary)"
+        );
 
         // Fetch and cache machine data
-        fetch('/api/machines/')
-          .then(response => response.json())
-          .then(data => {
+        fetch("/api/machines/")
+          .then((response) => response.json())
+          .then((data) => {
             allMachines = data;
             renderTable(data);
           });
@@ -254,46 +287,62 @@
           const collectionVal = collectionFilter.value.toLowerCase();
           const assignedVal = assignedFilter.value.toLowerCase();
 
-          const filtered = allMachines.filter(machine => {
+          const filtered = allMachines.filter((machine) => {
             const searchMatch =
               machine.name.toLowerCase().includes(searchTerm) ||
               machine.id.toLowerCase().includes(searchTerm) ||
-              machine.collections.some(c => c.toLowerCase().includes(searchTerm));
+              machine.collections.some((c) =>
+                c.toLowerCase().includes(searchTerm)
+              );
 
-            const statusMatch = !statusVal || machine.status.toLowerCase() === statusVal;
-            const collectionMatch = !collectionVal || machine.collections.some(c => c.toLowerCase() === collectionVal);
+            const statusMatch =
+              !statusVal || machine.status.toLowerCase() === statusVal;
+            const collectionMatch =
+              !collectionVal ||
+              machine.collections.some(
+                (c) => c.toLowerCase() === collectionVal
+              );
             const assignedMatch =
               !assignedVal ||
-              (machine.technicians[0] && machine.technicians[0].toLowerCase().includes(assignedVal)) ||
-              (machine.repair_personnel[0] && machine.repair_personnel[0].toLowerCase().includes(assignedVal));
+              (machine.technicians[0] &&
+                machine.technicians[0].toLowerCase().includes(assignedVal)) ||
+              (machine.repair_personnel[0] &&
+                machine.repair_personnel[0]
+                  .toLowerCase()
+                  .includes(assignedVal));
 
-            return searchMatch && statusMatch && collectionMatch && assignedMatch;
+            return (
+              searchMatch && statusMatch && collectionMatch && assignedMatch
+            );
           });
 
           renderTable(filtered);
         }
 
         function renderTable(machines) {
-          tbody.innerHTML = '';
+          tbody.innerHTML = "";
           if (machines.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="7">No machines found.</td></tr>';
+            tbody.innerHTML =
+              '<tr><td colspan="7">No machines found.</td></tr>';
             return;
           }
 
-          machines.forEach(machine => {
+          machines.forEach((machine) => {
             const assignedUser =
               machine.technicians.length > 0
                 ? machine.technicians[0]
                 : machine.repair_personnel.length > 0
                 ? machine.repair_personnel[0]
-                : '—';
+                : "—";
 
             const row = `
               <tr>
                 <td>${machine.id}</td>
                 <td><a href="/machinery/${machine.id}/">${machine.name}</a></td>
-                <td><span class="status-badge status-${machine.status.toLowerCase()}">${machine.status}</span></td>
-                <td>${machine.collections.join(', ') || '—'}</td>
+                <td><span class="status-badge status-${machine.status.toLowerCase()}">${
+              machine.status
+            }</span></td>
+                <td>${machine.collections.join(", ") || "—"}</td>
                 <td>${new Date(machine.updated_at).toLocaleDateString()}</td>
                 <td>${assignedUser}</td>
                 <td>
@@ -305,7 +354,9 @@
                     {% else %}
                       
                     {% endif %}
-                    <a href="/machinery/${machine.id}/edit/" class="action-btn"><i class="fa-solid fa-pencil"></i></a>
+                    <a href="/machinery/${
+                      machine.id
+                    }/edit/" class="action-btn"><i class="fa-solid fa-pencil"></i></a>
                     <a href="{% url 'report_fault' %}?id={{ machine.id }}" class="action-btn">
                       <i class="fa-solid fa-triangle-exclamation"></i>
                     </a>
@@ -318,12 +369,12 @@
         }
 
         // Event handlers
-        applyButton.addEventListener('click', applyFilters);
-        resetButton.addEventListener('click', () => {
-          searchInput.value = '';
-          statusFilter.value = '';
-          collectionFilter.value = '';
-          assignedFilter.value = '';
+        applyButton.addEventListener("click", applyFilters);
+        resetButton.addEventListener("click", () => {
+          searchInput.value = "";
+          statusFilter.value = "";
+          collectionFilter.value = "";
+          assignedFilter.value = "";
           renderTable(allMachines);
         });
       });

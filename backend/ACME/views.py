@@ -179,6 +179,7 @@ def add_collection_view(request):
         form = CollectionForm()
     return render(request, 'collection-create.html', {'form': form})
 
+
 def delete_collection_view(request, id):
     if request.method == 'POST':  
         collection = get_object_or_404(Collection, id=id)
