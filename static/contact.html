@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | MachTrack</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/contact.css" />
+
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/favicon.svg" alt="MachTrack Logo" />
+          <h1>MachTrack</h1>
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <button class="login-btn">Login</button>
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <aside class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+      <div class="logo">
+        <a href="index.html">MachTrack</a>
+      </div>
+      <button class="close-menu" id="closeMenu">&times;</button>
+    </div>
+    <div class="menu-sections">
+        <div class="menu-section">
+            <a href="index.html">Home</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="testimonials.html">Testimonials</a>
+            <a href="privacy.html">Services</a>
+            <a href="contact.html">Contact</a>
+          </div>
+    </div>
+  </aside>
+
+
+  <section id="contact-hero">
+    <div class="hero-content">
+      <h2>Contact Us</h2>
+      <p>We're here to assist you—get in touch with our team for any inquiries, support or feedback.</p>
+    </div>
+  </section>
+
+
+  <section id="contact-info">
+    <h2>Get in Touch</h2>
+    <div class="info-item">
+      <strong>Office Address</strong>
+      <span>1234 Industrial Ave, Dublin, <br/> Factory City, Ieland</span>
+    </div>
+    <div class="info-item">
+      <strong>Phone</strong>
+      <span><a href="tel:+1234567890" style="color: var(--primary-color); text-decoration: none;">+1 (234) 567-890</a></span>
+    </div>
+    <div class="info-item">
+      <strong>Email</strong>
+      <span><a href="mailto:info@machtrack.com" style="color: var(--primary-color); text-decoration: none;">info@machtrack.com</a></span>
+    </div>
+    <div class="info-item">
+      <strong>Office Hours</strong>
+      <span>Monday - Friday: 9:00 AM to 6:00 PM</span>
+    </div>
+  </section>
+
+  <!-- ---------- Contact Form Section ---------- -->
+  <section id="contact-form">
+    <div class="form-container">
+      <h2 style="text-align: center; margin-bottom: 1.5rem;">Send Us a Message</h2>
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required placeholder="Enter your name" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="Enter your email" />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" required placeholder="Subject of your message" />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" required placeholder="Write your message here..."></textarea>
+        </div>
+        <div style="text-align: center;">
+          <button type="submit" class="btn-submit">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+
+  <section id="contact-cta" style="padding: 4rem 20px; text-align: center; background-image: url('images/repair3.png'); background-size: cover; background-position: center; color: var(--white-color);">
+    <div class="cta-content">
+      <h2>Let's Connect</h2>
+      <p>If you have any questions or need support, we're just one click away. Reach out to us and let's discuss how we can help your operations thrive.</p>
+      <a href="mailto:info@machtrack.com" class="btn btn-primary">Email Us</a>
+    </div>
+  </section>
+
+  <!-- ---------- Footer ---------- -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="index.html">
+          <img src="images/favicon.svg" alt="MachTrack Logo" />
+          <span>MachTrack</span>
+        </a>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="#contact-info">Contact</a>
+      </div>
+      <p>&copy; 2025 MachTrack. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ---------- JavaScript for Mobile Menu (Using your provided structure) ---------- -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sideMenu = document.getElementById('sideMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenu = document.getElementById('closeMenu');
+    if(menuToggle && sideMenu && menuOverlay && closeMenu) {
+      menuToggle.addEventListener('click', () => {
+        sideMenu.classList.add('active');
+        menuOverlay.classList.add('active');
+      });
+      closeMenu.addEventListener('click', () => {
+        sideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+      });
+      menuOverlay.addEventListener('click', () => {
+        sideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+      });
+    }
+  </script>
+</body>
+</html>

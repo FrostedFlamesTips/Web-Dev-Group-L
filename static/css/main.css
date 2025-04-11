@@ -16,6 +16,25 @@ body {
     background-color: #f5f5f5;
 }
 
+    /* First Section named has hero */
+    .hero-content h2,
+    .hero-content p {
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    /* Smooth transition for background image change */
+    #heroBg {
+      transition: background-image 1s ease-in-out;
+    }
+    
+    /* Centering  */
+    .hero-section {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
 /* Defining some global colors for reusability*/
 :root {
     --primary-color: #970421;

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | MachTrack</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/privacy.css" />
+
+</head>
+<body>
+  <!-- Header / Navbar (Uses your provided CSS classes) -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/favicon.svg" alt="MachTrack Logo" />
+          <h1>MachTrack</h1>
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <button class="login-btn">Login</button>
+
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <aside class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+      <div class="logo">
+        <a href="index.html">MachTrack</a>
+      </div>
+      <button class="close-menu" id="closeMenu">&times;</button>
+    </div>
+    <div class="menu-sections">
+        <div class="menu-section">
+            <a href="index.html">Home</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="testimonials.html">Testimonials</a>
+            <a href="privacy.html">Services</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          </div>
+  </aside>
+
+  <!-- Privacy Policy Hero Section -->
+  <section id="privacy-hero">
+    <div class="hero-content">
+      <h2>Privacy Policy</h2>
+      <p>Last Updated: March 15, 2025</p>
+    </div>
+  </section>
+
+  <!-- Privacy Policy Content Section -->
+  <section id="privacy-content">
+    <h2>Introduction</h2>
+    <p>
+      At MachTrack, we are committed to protecting your privacy. This Privacy Policy will explain how we use, share aand safeguard your personal and your company information when you use our services. By accessing our site, you agree to the practices described in this policy.
+    </p>
+    
+    <h2>Information We Collect</h2>
+    <p>
+      We may collect various types of information, including;
+    </p>
+    <ul>
+      <li><strong>Personal Information:</strong> Name, email, phone number, and other contact details provided when you register or contact us.</li>
+      <li><strong>Usage Data:</strong> Details about your interactions with our website including pages visited and time spent on the site.</li>
+      <li><strong>Cookies and Tracking Technologies:</strong> Data collected using cookies to enhance your browsing experience and analyze website performance.</li>
+    </ul>
+    
+    <h2>How We Use Your Information</h2>
+    <p>
+      We use the information collected for several purposes, including:
+    </p>
+    <ul>
+      <li>Providing and maintaining our services.</li>
+      <li>Enhancing our website and user experience.</li>
+      <li>Communicating updates, offers, or support-related information.</li>
+      <li>Analyzing website usage to improve our offerings.</li>
+    </ul>
+    
+    <h2>Data Security & Sharing</h2>
+    <p>
+      We implement industry-standard security measures to protect your personal information. Although no transmission method over the Internet is 100% secure, we take significant steps to secure your data.
+    </p>
+    <p>
+      We do not sell or rent your personal information to third parties. Information may be shared with our trusted partners or as required by law.
+    </p>
+    
+    <h2>Your Rights</h2>
+    <p>
+      You have the right to access, update, or delete your personal information. If you have any questions or concerns, please contact us using the details below.
+    </p>
+    
+    <h2>Changes to This Policy</h2>
+    <p>
+      We may update our Privacy Policy occasionally. Any changes will be posted on this page with the new effective date.
+    </p>
+    
+    <h2>Contact Us</h2>
+    <p>
+      For any questions regarding this Privacy Policy or our data practices, please contact us at:
+    </p>
+    <p>
+      <strong>Email:</strong> <a href="mailto:info@machtrack.com" style="color: var(--primary-color); text-decoration: none;">info@machtrack.com</a><br/>
+      <strong>Phone:</strong> <a href="tel:+1234567890" style="color: var(--primary-color); text-decoration: none;">+1 (234) 567-890</a>
+    </p>
+  </section>
+
+  <!-- Call-to-Action Section -->
+  <section id="contact" style="padding: 4rem 20px; text-align: center; background-image: url('images/repair3.png'); background-size: cover; background-position: center; color: var(--white-color);">
+    <div class="cta-content">
+      <h2>Need More Information?</h2>
+      <p>Please reach out with any questions or concerns about our Privacy Policy.</p>
+      <a href="mailto:info@machtrack.com" class="btn btn-primary" style="background-color: var(--primary-color); color: var(--white-color);">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="index.html">
+          <img src="images/favicon.svg" alt="MachTrack Logo" />
+          <span>MachTrack</span>
+        </a>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="privacy.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <p>&copy; 2025 MachTrack. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Mobile Menu (Using your provided structure) -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sideMenu = document.getElementById('sideMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenu = document.getElementById('closeMenu');
+    if (menuToggle && sideMenu && menuOverlay && closeMenu) {
+      menuToggle.addEventListener('click', () => {
+        sideMenu.classList.add('active');
+        menuOverlay.classList.add('active');
+      });
+      closeMenu.addEventListener('click', () => {
+        sideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+      });
+      menuOverlay.addEventListener('click', () => {
+        sideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+      });
+    }
+  </script>
+</body>
+</html>
