@@ -92,6 +92,20 @@ def index_view(request):
 
     return render(request, 'index.html', context)
 
+def home_view(request):
+    return render(request, 'home.html')
+
+def pricing_view(request):
+    return render(request, 'pricing.html')
+
+def testimonials_view(request):
+    return render(request, 'testimonials.html')
+
+def privacy_view(request):
+    return render(request, 'privacy.html')
+
+def contact_view(request):
+    return render(request, 'contact.html')
 
 def collection_details(request):
     return render(request, 'collection-details.html')

@@ -1,114 +1,95 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Modern Pricing & Services | MachTrack</title>
-  <!-- Link to your provided CSS -->
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="css/pricing.css" />
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/pricing.css' %}" />
 </head>
 <body>
-  <!-- ---------- Header / Navbar (Using Provided CSS Classes) ---------- -->
   <nav class="navbar">
     <div class="nav-container">
       <div class="logo">
-        <a href="index.html">
-          <img src="images/favicon.svg" alt="MachTrack Logo" />
+        <a href="{% url 'public-index' %}">
+          <img src="{% static 'images/favicon.svg' %}" alt="MachTrack Logo" />
           <h1>MachTrack</h1>
         </a>
       </div>
       <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="testimonials.html">Testimonials</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="contact.html">Contact Us</a>
+        <a href="{% url 'public-index' %}">Home</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'testimonials' %}">Testimonials</a>
+        <a href="{% url 'privacy' %}">Privacy Policy</a>
+        <a href="{% url 'contact' %}">Contact Us</a>
       </div>
-      <button class="login-btn">Login</button>
-      <!-- Mobile Menu Toggle -->
+      <a href="{% url 'login' %}" class="login-btn">Login</a>
       <button class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- Mobile Side Menu (Structure as per provided CSS) -->
   <div class="menu-overlay" id="menuOverlay"></div>
   <aside class="side-menu" id="sideMenu">
     <div class="side-menu-header">
       <div class="logo">
-        <a href="index.html">MachTrack</a>
+        <a href="{% url 'public-index' %}">MachTrack</a>
       </div>
       <button class="close-menu" id="closeMenu">&times;</button>
     </div>
     <div class="menu-sections">
       <div class="menu-section">
-        <a href="index.html">Home</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="testimonials.html">Testimonials</a>
-        <a href="privacy.html">Services</a>
-        <a href="contact.html">Contact</a>
+        <a href="{% url 'public-index' %}">Home</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'testimonials' %}">Testimonials</a>
+        <a href="{% url 'privacy' %}">Services</a>
+        <a href="{% url 'contact' %}">Contact</a>
       </div>
     </div>
   </aside>
 
-  <!-- ---------- Services Details Section ---------- -->
   <section id="services">
     <h2>Our Innovative Services</h2>
-    <!-- Service Block 1 -->
     <div class="service-block">
       <div class="service-img">
-        <img src="images/monitoring.jpg" alt="Real-Time Monitoring" />
+        <img src="{% static 'images/monitoring.jpg' %}" alt="Real-Time Monitoring" />
       </div>
       <div class="service-text">
         <h3>Real-Time Monitoring</h3>
-        <p>
-          Experience live performance tracking of all your machinery. Our interactive dashboards provide immediate visibility into equipment status, allowing you to tackle issues as soon as they arise.
-        </p>
+        <p>Experience live performance tracking of all your machinery...</p>
       </div>
     </div>
-    <!-- Service Block 2 -->
     <div class="service-block">
       <div class="service-img">
-        <img src="images/analysis.png" alt="Predictive Maintenance" />
+        <img src="{% static 'images/analysis.png' %}" alt="Predictive Maintenance" />
       </div>
       <div class="service-text">
         <h3>Predictive Maintenance</h3>
-        <p>
-          Our advanced predictive maintenance tools analyze historical and current data to forecast potential failures. This enables you to perform maintenance before problems disrupt operations.
-        </p>
+        <p>Our advanced predictive maintenance tools analyze...</p>
       </div>
     </div>
-    <!-- Service Block 3 -->
     <div class="service-block">
       <div class="service-img">
-        <img src="images/alerts.jpg" alt="Automated Alerts" />
+        <img src="{% static 'images/alerts.jpg' %}" alt="Automated Alerts" />
       </div>
       <div class="service-text">
         <h3>Automated Alerts & Notifications</h3>
-        <p>
-          Stay on top of your operations with our customizable alert system. Receive instant notifications via email, SMS, or in-app messages whenever an anomaly is detected, so you’re never caught off guard.
-        </p>
+        <p>Stay on top of your operations with our customizable alert system...</p>
       </div>
     </div>
-    <!-- Service Block 4 -->
     <div class="service-block">
       <div class="service-img">
-        <img src="images/report.jpeg" alt="Advanced Analytics" />
+        <img src="{% static 'images/report.jpeg' %}" alt="Advanced Analytics" />
       </div>
       <div class="service-text">
         <h3>Advanced Analytics & Reporting</h3>
-        <p>
-          Unlock deep insights into your operations with comprehensive analytics and reporting. Make data-driven decisions and continuously improve efficiency with our suite of advanced analysis tools.
-        </p>
+        <p>Unlock deep insights into your operations with comprehensive analytics...</p>
       </div>
     </div>
   </section>
 
-  <!-- ---------- Pricing Section ---------- -->
   <section id="pricing">
     <h2>Flexible Pricing Plans</h2>
     <div class="pricing-toggle">
@@ -120,21 +101,18 @@
       <span class="toggle-label">Yearly</span>
     </div>
     <div class="pricing-cards">
-      <!-- Basic Plan -->
       <div class="card" data-monthly="0" data-yearly="0">
         <h3>Basic</h3>
         <p>Great for small workshops and startups.</p>
         <p class="plan-price">$0/month</p>
         <a href="#contact" class="btn">Get Started</a>
       </div>
-      <!-- Standard Plan -->
       <div class="card" data-monthly="49" data-yearly="39">
         <h3>Standard</h3>
         <p>Ideal for growing operations.</p>
         <p class="plan-price">$49/month</p>
         <a href="#contact" class="btn">Get Started</a>
       </div>
-      <!-- Premium Plan -->
       <div class="card" data-monthly="99" data-yearly="79">
         <h3>Premium</h3>
         <p>For enterprise-level performance.</p>
@@ -144,30 +122,25 @@
     </div>
   </section>
 
-  <!-- ---------- Testimonials Section ---------- -->
   <section id="testimonials">
     <h2>What Our Clients Say</h2>
     <div class="testimonials-grid">
-      <!-- Testimonial 1 -->
       <div class="testimonial-card">
-        <p class="testimonial-text">"MachTrack’s real-time monitoring and predictive maintenance tools revolutionized our plant operations. We now resolve issues before they even occur!"</p>
+        <p class="testimonial-text">"MachTrack’s real-time monitoring and predictive maintenance tools revolutionized our plant operations..."</p>
         <p class="testimonial-author">- Alex R., Plant Manager</p>
       </div>
-      <!-- Testimonial 2 -->
       <div class="testimonial-card">
-        <p class="testimonial-text">"Our downtime has reduced significantly thanks to automated alerts. The platform is truly a game changer."</p>
+        <p class="testimonial-text">"Our downtime has reduced significantly thanks to automated alerts..."</p>
         <p class="testimonial-author">- Jamie L., Operations Lead</p>
       </div>
-      <!-- Testimonial 3 -->
       <div class="testimonial-card">
-        <p class="testimonial-text">"With advanced analytics and proactive notifications, we've optimized every aspect of maintenance and boosted productivity."</p>
+        <p class="testimonial-text">"With advanced analytics and proactive notifications, we've optimized every aspect of maintenance..."</p>
         <p class="testimonial-author">- Morgan S., Maintenance Supervisor</p>
       </div>
     </div>
   </section>
 
-  <!-- ---------- Call-to-Action Section ---------- -->
-  <section id="contact" style="padding: 4rem 20px; text-align: center; background-image: url('images/improve.jpg'); background-size: cover; background-position: center; color: var(--white-color);">
+  <section id="contact" style="padding: 4rem 20px; text-align: center; background-image: url('{% static 'images/improve.jpg' %}'); background-size: cover; background-position: center; color: var(--white-color);">
     <div class="cta-content">
       <h2>Ready to Transform Your Operations?</h2>
       <p>Contact us today for a personalized walkthrough and discover how MachTrack can elevate your maintenance strategy.</p>
@@ -175,32 +148,29 @@
     </div>
   </section>
 
-  <!-- ---------- Footer ---------- -->
   <footer>
     <div class="footer-content">
       <div class="footer-logo">
-        <a href="index.html">
-          <img src="images/favicon.svg" alt="MachTrack Logo" />
+        <a href="{% url 'public-index' %}">
+          <img src="{% static 'images/favicon.svg' %}" alt="MachTrack Logo" />
           <span>MachTrack</span>
         </a>
       </div>
       <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="testimonials.html">Testimonials</a>
-        <a href="privacy.html">Services</a>
-        <a href="contact.html">Contact</a>
+        <a href="{% url 'public-index' %}">Home</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'testimonials' %}">Testimonials</a>
+        <a href="{% url 'privacy' %}">Services</a>
+        <a href="{% url 'contact' %}">Contact</a>
       </div>
       <p>&copy; 2025 MachTrack. All Rights Reserved.</p>
     </div>
   </footer>
 
- 
   <script>
-    // prices will change as soon as montly subscription is changed to yearly subscription
     const pricingToggle = document.getElementById('pricingToggle');
     const pricingCards = document.querySelectorAll('.pricing-cards .card');
-    
+
     pricingToggle.addEventListener('change', () => {
       const isYearly = pricingToggle.checked;
       pricingCards.forEach(card => {

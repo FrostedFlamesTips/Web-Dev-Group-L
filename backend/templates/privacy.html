@@ -1,36 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy | MachTrack</title>
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="css/privacy.css" />
-
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/privacy.css' %}" />
 </head>
 <body>
-  <!-- Header / Navbar (Uses your provided CSS classes) -->
   <nav class="navbar">
     <div class="nav-container">
       <div class="logo">
-        <a href="index.html">
-          <img src="images/favicon.svg" alt="MachTrack Logo" />
+        <a href="{% url 'public-index' %}">
+          <img src="{% static 'images/favicon.svg' %}" alt="MachTrack Logo" />
           <h1>MachTrack</h1>
         </a>
       </div>
       <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="testimonials.html">Testimonials</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="contact.html">Contact Us</a>
+        <a href="{% url 'public-index' %}">Home</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'testimonials' %}">Testimonials</a>
+        <a href="{% url 'privacy' %}">Privacy Policy</a>
+        <a href="{% url 'contact' %}">Contact Us</a>
       </div>
-      <button class="login-btn">Login</button>
-
+      <a href="{% url 'login' %}" class="login-btn">Login</a>
       <button class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
@@ -39,22 +35,21 @@
   <aside class="side-menu" id="sideMenu">
     <div class="side-menu-header">
       <div class="logo">
-        <a href="index.html">MachTrack</a>
+        <a href="{% url 'public-index' %}">MachTrack</a>
       </div>
       <button class="close-menu" id="closeMenu">&times;</button>
     </div>
     <div class="menu-sections">
-        <div class="menu-section">
-            <a href="index.html">Home</a>
-            <a href="pricing.html">Pricing</a>
-            <a href="testimonials.html">Testimonials</a>
-            <a href="privacy.html">Services</a>
-            <a href="contact.html">Contact</a>
-          </div>
-          </div>
+      <div class="menu-section">
+        <a href="{% url 'public-index' %}">Home</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'testimonials' %}">Testimonials</a>
+        <a href="{% url 'privacy' %}">Services</a>
+        <a href="{% url 'contact' %}">Contact</a>
+      </div>
+    </div>
   </aside>
 
-  <!-- Privacy Policy Hero Section -->
   <section id="privacy-hero">
     <div class="hero-content">
       <h2>Privacy Policy</h2>
@@ -62,16 +57,15 @@
     </div>
   </section>
 
-  <!-- Privacy Policy Content Section -->
   <section id="privacy-content">
     <h2>Introduction</h2>
     <p>
-      At MachTrack, we are committed to protecting your privacy. This Privacy Policy will explain how we use, share aand safeguard your personal and your company information when you use our services. By accessing our site, you agree to the practices described in this policy.
+      At MachTrack, we are committed to protecting your privacy. This Privacy Policy explains how we use, share, and safeguard your personal and company information when you use our services. By accessing our site, you agree to the practices described in this policy.
     </p>
     
     <h2>Information We Collect</h2>
     <p>
-      We may collect various types of information, including;
+      We may collect various types of information, including:
     </p>
     <ul>
       <li><strong>Personal Information:</strong> Name, email, phone number, and other contact details provided when you register or contact us.</li>
@@ -118,8 +112,7 @@
     </p>
   </section>
 
-  <!-- Call-to-Action Section -->
-  <section id="contact" style="padding: 4rem 20px; text-align: center; background-image: url('images/repair3.png'); background-size: cover; background-position: center; color: var(--white-color);">
+  <section id="contact" style="padding: 4rem 20px; text-align: center; background-image: url('{% static 'images/repair3.png' %}'); background-size: cover; background-position: center; color: var(--white-color);">
     <div class="cta-content">
       <h2>Need More Information?</h2>
       <p>Please reach out with any questions or concerns about our Privacy Policy.</p>
@@ -127,27 +120,25 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div class="footer-logo">
-        <a href="index.html">
-          <img src="images/favicon.svg" alt="MachTrack Logo" />
+        <a href="{% url 'public-index' %}">
+          <img src="{% static 'images/favicon.svg' %}" alt="MachTrack Logo" />
           <span>MachTrack</span>
         </a>
       </div>
       <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="testimonials.html">Testimonials</a>
-        <a href="privacy.html">Services</a>
-        <a href="contact.html">Contact</a>
+        <a href="{% url 'public-index' %}">Home</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'testimonials' %}">Testimonials</a>
+        <a href="{% url 'privacy' %}">Services</a>
+        <a href="{% url 'contact' %}">Contact</a>
       </div>
       <p>&copy; 2025 MachTrack. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <!-- JavaScript for Mobile Menu (Using your provided structure) -->
   <script>
     const menuToggle = document.getElementById('menuToggle');
     const sideMenu = document.getElementById('sideMenu');

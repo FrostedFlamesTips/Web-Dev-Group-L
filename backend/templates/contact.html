@@ -1,59 +1,55 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us | MachTrack</title>
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="css/contact.css" />
-
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/contact.css' %}" />
 </head>
 <body>
 
   <nav class="navbar">
     <div class="nav-container">
       <div class="logo">
-        <a href="index.html">
-          <img src="images/favicon.svg" alt="MachTrack Logo" />
+        <a href="{% url 'public-index' %}">
+          <img src="{% static 'images/favicon.svg' %}" alt="MachTrack Logo" />
           <h1>MachTrack</h1>
         </a>
       </div>
       <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="testimonials.html">Testimonials</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="contact.html">Contact Us</a>
+        <a href="{% url 'public-index' %}">Home</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'testimonials' %}">Testimonials</a>
+        <a href="{% url 'privacy' %}">Privacy Policy</a>
+        <a href="{% url 'contact' %}">Contact Us</a>
       </div>
-      <button class="login-btn">Login</button>
+      <a href="{% url 'login' %}" class="login-btn">Login</a>
       <button class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
-
 
   <div class="menu-overlay" id="menuOverlay"></div>
   <aside class="side-menu" id="sideMenu">
     <div class="side-menu-header">
       <div class="logo">
-        <a href="index.html">MachTrack</a>
+        <a href="{% url 'public-index' %}">MachTrack</a>
       </div>
       <button class="close-menu" id="closeMenu">&times;</button>
     </div>
     <div class="menu-sections">
-        <div class="menu-section">
-            <a href="index.html">Home</a>
-            <a href="pricing.html">Pricing</a>
-            <a href="testimonials.html">Testimonials</a>
-            <a href="privacy.html">Services</a>
-            <a href="contact.html">Contact</a>
-          </div>
+      <div class="menu-section">
+        <a href="{% url 'public-index' %}">Home</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'testimonials' %}">Testimonials</a>
+        <a href="{% url 'privacy' %}">Services</a>
+        <a href="{% url 'contact' %}">Contact</a>
+      </div>
     </div>
   </aside>
-
 
   <section id="contact-hero">
     <div class="hero-content">
@@ -62,12 +58,11 @@
     </div>
   </section>
 
-
   <section id="contact-info">
     <h2>Get in Touch</h2>
     <div class="info-item">
       <strong>Office Address</strong>
-      <span>1234 Industrial Ave, Dublin, <br/> Factory City, Ieland</span>
+      <span>1234 Industrial Ave, Dublin, <br/> Factory City, Ireland</span>
     </div>
     <div class="info-item">
       <strong>Phone</strong>
@@ -83,7 +78,6 @@
     </div>
   </section>
 
-  <!-- ---------- Contact Form Section ---------- -->
   <section id="contact-form">
     <div class="form-container">
       <h2 style="text-align: center; margin-bottom: 1.5rem;">Send Us a Message</h2>
@@ -111,8 +105,7 @@
     </div>
   </section>
 
-
-  <section id="contact-cta" style="padding: 4rem 20px; text-align: center; background-image: url('images/repair3.png'); background-size: cover; background-position: center; color: var(--white-color);">
+  <section id="contact-cta" style="padding: 4rem 20px; text-align: center; background-image: url('{% static 'images/repair3.png' %}'); background-size: cover; background-position: center; color: var(--white-color);">
     <div class="cta-content">
       <h2>Let's Connect</h2>
       <p>If you have any questions or need support, we're just one click away. Reach out to us and let's discuss how we can help your operations thrive.</p>
@@ -120,30 +113,28 @@
     </div>
   </section>
 
-  <!-- ---------- Footer ---------- -->
   <footer>
     <div class="footer-content">
       <div class="footer-logo">
-        <a href="index.html">
-          <img src="images/favicon.svg" alt="MachTrack Logo" />
+        <a href="{% url 'public-index' %}">
+          <img src="{% static 'images/favicon.svg' %}" alt="MachTrack Logo" />
           <span>MachTrack</span>
         </a>
       </div>
       <div class="footer-links">
-        <a href="index.html">Home</a>
+        <a href="{% url 'public-index' %}">Home</a>
         <a href="#contact-info">Contact</a>
       </div>
       <p>&copy; 2025 MachTrack. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <!-- ---------- JavaScript for Mobile Menu (Using your provided structure) ---------- -->
   <script>
     const menuToggle = document.getElementById('menuToggle');
     const sideMenu = document.getElementById('sideMenu');
     const menuOverlay = document.getElementById('menuOverlay');
     const closeMenu = document.getElementById('closeMenu');
-    if(menuToggle && sideMenu && menuOverlay && closeMenu) {
+    if (menuToggle && sideMenu && menuOverlay && closeMenu) {
       menuToggle.addEventListener('click', () => {
         sideMenu.classList.add('active');
         menuOverlay.classList.add('active');
