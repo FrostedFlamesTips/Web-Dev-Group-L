@@ -24,7 +24,8 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin', admin.site.urls),
-    path('', dashboard_view, name='index'),
+    path('', views.home_view, name='public-index'), #New public facing home page
+    path('dashboard/', dashboard_view, name='index'), #Original index page which is staff dashboard page
     path('login/', views.login_view, name='login'),
     path('api/', include('ACME.api.urls')),
     path('collections/delete/<int:id>/', views.delete_collection_view, name='delete_collection'),
@@ -46,6 +47,10 @@ urlpatterns = [
     path('warnings/<int:warning_id>/', views.warning_detail_view, name='warning_detail'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('api/test-record/', views.test_record_api_view, name='test_record_api'),
+    path('pricing/', views.pricing_view, name='pricing'),
+    path('testimonials/', views.testimonials_view, name='testimonials'),
+    path('privacy/', views.privacy_view, name='privacy'),
+    path('contact/', views.contact_view, name='contact'),
 ]
 
 if settings.DEBUG:
