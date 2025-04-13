@@ -58,22 +58,10 @@
                 <i class="fa-solid fa-folder menu-icon"></i>
                 Collections
               </a>
-              <a href="reports.html">
-                <i class="fa-solid fa-chart-bar menu-icon"></i>
-                Reports
-              </a>
             </div>
 
             <div class="menu-section">
               <h3>Management</h3>
-              <a href="users.html">
-                <i class="fa-solid fa-users menu-icon"></i>
-                Users
-              </a>
-              <a href="settings.html">
-                <i class="fa-solid fa-cog menu-icon"></i>
-                Settings
-              </a>
               <a href="{% url 'test_record_api' %}">
                 <i class="fa-solid fa-code menu-icon"></i>
                 API Testing
@@ -82,10 +70,6 @@
 
             <div class="menu-section">
               <h3>Account</h3>
-              <a href="profile.html">
-                <i class="fa-solid fa-user menu-icon"></i>
-                Your Profile
-              </a>
               <form method="post" action="{% url 'logout' %}" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit" class="logout-link">
@@ -125,9 +109,6 @@
               <div class="profile-icon">EA</div>
             </div>
             <div class="dropdown-content">
-              <a href="profile.html">My Profile</a>
-              <a href="settings.html">Settings</a>
-              <div class="dropdown-divider"></div>
               <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button type="submit">

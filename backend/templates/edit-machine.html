@@ -11,8 +11,101 @@
   </head>
 
   <body>
-    <!-- Navigation Bar and Sidebar (unchanged) -->
-    <!-- ... your existing navigation HTML here ... -->
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="menu-overlay"></div>
+        <div class="side-menu">
+          <div class="side-menu-header">
+            <img
+              src="{% static 'images/favicon.svg' %}"
+              alt="Logo"
+              class="menu-logo"
+            />
+            <span>ACME Manufacturing</span>
+            <button class="close-menu">×</button>
+          </div>
+          <div class="menu-sections">
+            <div class="menu-section">
+              <h3>Navigation</h3>
+              <a href="{% url 'index' %}">
+                <i class="fa-solid fa-gauge-high menu-icon"></i>
+                Dashboard
+              </a>
+              <a href="{% url 'machinery_list' %}">
+                <i class="fa-solid fa-gear menu-icon"></i>
+                Machinery
+              </a>
+              <a href="{% url 'faults_list' %}">
+                <i class="fa-solid fa-triangle-exclamation menu-icon"></i>
+                Fault Cases
+              </a>
+              <a href="{% url 'collections' %}">
+                <i class="fa-solid fa-folder menu-icon"></i>
+                Collections
+              </a>
+            </div>
+
+            <div class="menu-section">
+              <h3>Management</h3>
+              <a href="{% url 'test_record_api' %}">
+                <i class="fa-solid fa-code menu-icon"></i>
+                API Testing
+              </a>
+            </div>
+
+            <div class="menu-section">
+              <h3>Account</h3>
+              <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-link">
+                  <i class="fa-solid fa-right-from-bracket menu-icon"></i> Logout
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <button class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Logo and Title -->
+        <div class="logo">
+          <a href="{% url 'index' %}">
+            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
+            <h1>ACME Manufacturing</h1>
+          </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+          <a class="hideable-nav-item" href="{% url 'machinery_list' %}"
+            >Machinery</a
+          >
+          <a class="hideable-nav-item" href="{% url 'faults_list' %}">Faults</a>
+          <a class="hideable-nav-item" href="{% url 'collections' %}"
+            >Collections</a
+          >
+          <!-- Profile Dropdown for logged-in users -->
+          <div class="profile-dropdown">
+            <div class="profile-trigger">
+              <div class="profile-icon">EA</div>
+            </div>
+            <div class="dropdown-content">
+              <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">
+                  <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
 
     <!-- Main Content -->
     <main class="main-container">
@@ -116,7 +209,7 @@
               <div class="collections-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 0.5rem;">
                 {% for collection in collections %}
                   <div class="collection-checkbox">
-                    <input type="checkbox" id="collection-{{ collection.id }}" name="collection[]" value="{{ collection.id }}"
+                    <input type="checkbox" id="collection-{{ collection.id }}" name="collections" value="{{ collection.id }}"
                       {% if collection in machine.collections.all %}checked{% endif %} />
                     <label for="collection-{{ collection.id }}">{{ collection.name }}</label>
                   </div>

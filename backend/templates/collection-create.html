@@ -56,10 +56,24 @@
                 <i class="fa-solid fa-folder menu-icon"></i>
                 Collections
               </a>
-              <a href="reports.html">
-                <i class="fa-solid fa-chart-bar menu-icon"></i>
-                Reports
+            </div>
+
+            <div class="menu-section">
+              <h3>Management</h3>
+              <a href="{% url 'test_record_api' %}">
+                <i class="fa-solid fa-code menu-icon"></i>
+                API Testing
               </a>
+            </div>
+
+            <div class="menu-section">
+              <h3>Account</h3>
+              <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-link">
+                  <i class="fa-solid fa-right-from-bracket menu-icon"></i> Logout
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -87,6 +101,20 @@
           <a class="hideable-nav-item" href="{% url 'collections' %}"
             >Collections</a
           >
+          <!-- Profile Dropdown for logged-in users -->
+          <div class="profile-dropdown">
+            <div class="profile-trigger">
+              <div class="profile-icon">EA</div>
+            </div>
+            <div class="dropdown-content">
+              <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">
+                  <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
