@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from ..models import Machine, FaultCase, MachineWarning, Collection
 
-
+#JSON serializers
 class MachineSerializer(serializers.ModelSerializer):
     technicians = serializers.StringRelatedField(many=True)
     repair_personnel = serializers.StringRelatedField(many=True)

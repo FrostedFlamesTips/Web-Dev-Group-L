@@ -137,7 +137,7 @@ def report_fault(request):
 def warnings(request):
     return render(request, 'warnings.html')
 
-def export_machines_csv(request):
+def export_machines_csv(request): #For managers to export machine data to csv format
     if not request.user.is_authenticated or request.user.role != 'Manager':
         return HttpResponse("Unauthorized", status=401)
 
@@ -170,17 +170,17 @@ def export_machines_csv(request):
 
     return response
 
-def collections_view(request):
+def collections_view(request): #To display collections page
     search_query = request.GET.get('search', '')
     collections = Collection.objects.filter(name__icontains=search_query)
     return render(request, 'collections.html', {'collections': collections})
 
-def collection_details_view(request, id):
+def collection_details_view(request, id): # To display individual collections details page
     collection = Collection.objects.get(id=id)
     machines = Machine.objects.filter(collection_id=id)
     return render(request, 'collection-details.html', {'collection': collection, 'machines': machines})
 
-def add_collection_view(request):
+def add_collection_view(request): #To display add collection page and check valid form for adding the collection
     if request.method == 'POST':
         form = CollectionForm(request.POST)
         if form.is_valid():
@@ -191,7 +191,7 @@ def add_collection_view(request):
     return render(request, 'collection-create.html', {'form': form})
 
 
-def delete_collection_view(request, id):
+def delete_collection_view(request, id): # To delete collection and display the page
     if request.method == 'POST':  
         collection = get_object_or_404(Collection, id=id)
         collection.delete()
@@ -199,7 +199,7 @@ def delete_collection_view(request, id):
     else:
         return HttpResponse("Invalid request method", status=405)
 
-def login_view(request):
+def login_view(request): # Login page display and functionality
     if request.method == 'POST':
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -207,26 +207,26 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect('index')  # or your desired landing page
+            return redirect('index')  #Re direct to the dashboard page (index) after login
         else:
             return render(request, 'login.html', {'error': 'Invalid username or password'})
     return render(request, 'login.html')
 
-def machinery_list(request):
+def machinery_list(request): #Display machinery page
     machines = Machine.objects.all().prefetch_related('collections', 'technicians', 'repair_personnel')
     return render(request, 'machinery.html', {'machines': machines})
 
-def machinery_detail(request, machine_id):
+def machinery_detail(request, machine_id): #Display individual machine details page
     machine = get_object_or_404(Machine, id=machine_id)
     return render(request, 'machinery-details.html', {'machine': machine})
 
 @login_required
-def machinery_list_view(request):
+def machinery_list_view(request): 
     return render(request, 'machinery.html')
 
 
 @login_required
-def add_machine_view(request):
+def add_machine_view(request): #To display add machine page and check valid form for adding the machine
     if request.user.role != 'Manager':
         return HttpResponseForbidden("Only managers can add machines.")
 
@@ -241,7 +241,7 @@ def add_machine_view(request):
     return render(request, 'add_machine.html', {'form': form})
 
 @login_required
-def edit_machine_view(request, machine_id):
+def edit_machine_view(request, machine_id): #To display edit machine page and deal with form for editing machines
     machine = get_object_or_404(Machine, id=machine_id)
 
     if request.user.role != 'Manager':
@@ -283,15 +283,15 @@ def edit_machine_view(request, machine_id):
         'collections': collections,
     })
 
-def machinery_detail(request, machine_id):
+def machinery_detail(request, machine_id): #Display individual machinery detail page based on id
     machine = get_object_or_404(Machine, id=machine_id)
     return render(request, 'machine-details.html', {'machine': machine})
 
-def index_view(request):
+def index_view(request): 
     return render(request, 'index.html')
 
 @login_required
-def create_fault_view(request):
+def create_fault_view(request): #To display create fault page and pass to the fault form
     machine_id = request.GET.get('id')
     initial = {}
 
@@ -322,16 +322,16 @@ def create_fault_view(request):
         form.fields['assigned_technicians'].queryset = User.objects.filter(role='Technician')
     return render(request, 'report-fault.html', {'form': form})
 
-def faults_list_view(request):
+def faults_list_view(request): #Display faults page
     faults = FaultCase.objects.select_related('machine', 'created_by', 'resolved_by')
     return render(request, 'faults.html', {'faults': faults})
 
-def fault_detail(request, fault_id):
+def fault_detail(request, fault_id): #Display individual faults page based on id
     fault = get_object_or_404(FaultCase, id=fault_id)
     return render(request, 'fault-details.html', {'fault': fault})
 
 @login_required
-def resolve_fault(request, fault_id):
+def resolve_fault(request, fault_id): #Resolve/delete faults page
     fault = get_object_or_404(FaultCase, id=fault_id)
     if request.method == 'POST':
         fault.resolved = True
@@ -341,7 +341,7 @@ def resolve_fault(request, fault_id):
     return redirect('fault_detail', fault_id=fault.id)
 
 @login_required
-def edit_fault(request, fault_id):
+def edit_fault(request, fault_id): #Display edit fault page and deal with form for editing faults
     fault = get_object_or_404(FaultCase, id=fault_id)
 
     if request.method == 'POST':
@@ -358,12 +358,12 @@ def edit_fault(request, fault_id):
     return render(request, 'edit-fault.html', {'form': form, 'fault': fault})
 
 @login_required
-def warnings_view(request):
+def warnings_view(request): #Display warnings page
     warnings = MachineWarning.objects.filter(resolved=False).select_related('machine', 'added_by')
     return render(request, 'warnings.html', {'warnings': warnings})
 
 @login_required
-def create_warning_view(request):
+def create_warning_view(request): #To display create warning page and pass to the warning form
     if request.method == 'POST':
         form = MachineWarningForm(request.POST)
         if form.is_valid():
@@ -376,7 +376,7 @@ def create_warning_view(request):
     return render(request, 'create-warning.html', {'form': form})
 
 @login_required
-def resolve_warning_view(request, warning_id):
+def resolve_warning_view(request, warning_id): #Resolve/delete warning page
     warning = get_object_or_404(MachineWarning, id=warning_id)
     warning.resolved = True
     warning.resolved_by = request.user
@@ -385,12 +385,12 @@ def resolve_warning_view(request, warning_id):
     return redirect('warnings') 
 
 @login_required
-def warning_detail_view(request, warning_id):
+def warning_detail_view(request, warning_id): #Display individual warning page based on id
     warning = get_object_or_404(MachineWarning, id=warning_id)
     return render(request, 'warning-details.html', {'warning': warning})
 
 @login_required
-def dashboard_view(request):
+def dashboard_view(request): #Display dashboard(index) page
     user = request.user
     view_all = request.GET.get('view') == 'all'
 
@@ -436,5 +436,5 @@ def dashboard_view(request):
 
     return render(request, 'index.html', context)
 
-def test_record_api_view(request):
+def test_record_api_view(request): # Display test record API page
     return render(request, 'test-record-api.html')

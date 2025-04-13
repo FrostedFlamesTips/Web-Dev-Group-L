@@ -15,13 +15,13 @@ import json
 
 
 @api_view(['GET'])
-def machine_list(request):
+def machine_list(request): #GET method to retrieve machine data
     machines = Machine.objects.all()
     serializer = MachineSerializer(machines, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
-def report_warning(request):
+def report_warning(request): #POST method to report a warning
     serializer = WarningSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -29,11 +29,11 @@ def report_warning(request):
     return Response(serializer.errors, status=400)
 
 
-class CollectionViewSet(ModelViewSet):
+class CollectionViewSet(ModelViewSet): # ViewSet for Collection model
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
 
-class MachineListCreateAPIView(generics.ListCreateAPIView):
+class MachineListCreateAPIView(generics.ListCreateAPIView): # List and create machines
     queryset = Machine.objects.all()
     serializer_class = MachineSerializer
 
@@ -42,12 +42,12 @@ class MachineListCreateAPIView(generics.ListCreateAPIView):
             return [permissions.IsAuthenticated(), IsManager()]
         return [permissions.AllowAny()]
 
-class MachineDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+class MachineDetailAPIView(generics.RetrieveUpdateDestroyAPIView): # 
     queryset = Machine.objects.all()
     serializer_class = MachineSerializer
 
 @csrf_exempt
-def external_record_event(request):
+def external_record_event(request): #External POST API endpoint to update machine warning or fault through external system with JSON.
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
@@ -73,7 +73,7 @@ def external_record_event(request):
     return JsonResponse({'error': 'POST required'}, status=405)
 
 
-def machine_status_api(request, machine_id):
+def machine_status_api(request, machine_id): # API endpoint to get machine status
     machine = get_object_or_404(Machine, id=machine_id)
     return JsonResponse({
         'machine_id': machine.id,
@@ -83,7 +83,7 @@ def machine_status_api(request, machine_id):
     })
 
 
-def open_fault_cases_api(request):
+def open_fault_cases_api(request): # API endpoint to get open fault cases
     cases = FaultCase.objects.filter(resolved=False).select_related('machine')
     data = [
         {
@@ -98,7 +98,7 @@ def open_fault_cases_api(request):
     return JsonResponse({'open_cases': data})
 
 
-def fault_case_detail_api(request, fault_id):
+def fault_case_detail_api(request, fault_id): # API endpoint to get fault case details
     fault = get_object_or_404(FaultCase, id=fault_id)
     return JsonResponse({
         'id': fault.id,
@@ -111,7 +111,7 @@ def fault_case_detail_api(request, fault_id):
 
 
 @csrf_exempt
-def add_fault_note_api(request, fault_id):
+def add_fault_note_api(request, fault_id): # API endpoint to add a note to a fault case
     if request.method == 'POST':
         try:
             data = json.loads(request.body)

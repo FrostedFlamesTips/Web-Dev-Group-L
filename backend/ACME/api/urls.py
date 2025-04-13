@@ -2,6 +2,7 @@ from django.urls import path
 from . import views_api
 from .views_api import MachineListCreateAPIView, MachineDetailAPIView
 
+#Urls for the API endpoints
 urlpatterns = [
     path('machines/', views_api.machine_list, name='api-machine-list'),
     path('report_warning/', views_api.report_warning, name='api-report-warning'),

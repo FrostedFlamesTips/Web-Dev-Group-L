@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 import uuid
 
-class User(AbstractUser):
+class User(AbstractUser): #Database model for custom users
     ROLE_CHOICES = [
         ('Technician', 'Technician'),
         ('Repair', 'Repair'),
@@ -17,7 +17,7 @@ class Collection(models.Model):
         return self.name
 
 
-class Machine(models.Model):
+class Machine(models.Model): #Database model for machines
     STATUS_CHOICES = [
         ('OK', 'OK'),
         ('Warning', 'Warning'),
@@ -55,7 +55,7 @@ class Machine(models.Model):
         return f"{self.name} ({self.id})"
 
 
-class MachineWarning(models.Model):
+class MachineWarning(models.Model): #Database model for machine warnings. Renamed from warnings as it caused issues with a built-in python function
     machine = models.ForeignKey(Machine, on_delete=models.CASCADE, related_name='warnings')
     warning_text = models.TextField()
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='warnings_added')
@@ -64,7 +64,7 @@ class MachineWarning(models.Model):
     resolved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='warnings_resolved')
     resolved_at = models.DateTimeField(null=True, blank=True)
 
-class FaultCase(models.Model):
+class FaultCase(models.Model): #Database model for fault cases
     case_number = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='faults_created')
@@ -80,13 +80,13 @@ class FaultCase(models.Model):
     limit_choices_to={'role': 'Technician'}
 )
 
-class FaultNote(models.Model):
+class FaultNote(models.Model): #Database model for fault notes
     fault_case = models.ForeignKey(FaultCase, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     note = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-class FaultImage(models.Model):
+class FaultImage(models.Model): # Database model for fault images
     fault_case = models.ForeignKey(FaultCase, on_delete=models.CASCADE)
     image_file = models.FileField(upload_to='fault_images/')
     uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
