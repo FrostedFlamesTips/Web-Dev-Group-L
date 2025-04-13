@@ -1,0 +1,1346 @@
+[
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "ACME",
+    "model": "machine"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "ACME",
+    "model": "faultcase"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "ACME",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "ACME",
+    "model": "machinewarning"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "ACME",
+    "model": "faultnote"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "ACME",
+    "model": "faultimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "ACME",
+    "model": "collection"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "8j85vpylr5nh7psr0sictq2pbg4wnu58",
+  "fields": {
+    "session_data": ".eJxVjMsOgjAUBf-la9PIpUBx6Z5vaO6rFjVtQmFl_HclYaHbMzPnZQJuawpb1SXMYi4GzOl3I-SH5h3IHfOtWC55XWayu2IPWu1URJ_Xw_07SFjTtx6ixjiw43H0wh7OvhOlFiNgE0dy2ioLE3jH0vkeSLXxbewZGXsCMO8PIso5jg:1u2uaA:ArcYOyIELRlH68GBhY4GpURDAB8xSCa6eS1Yjfv_TAE",
+    "expire_date": "2025-04-24T16:16:50.723Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "d6h4kjs1zjaisozv1d2hwl9zmt6l6yw8",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAURO_iGlnYMV4o6XMG62_CAWRLcVIh7k4ipYAp572Zt8qwLiWvXeY8sboqo06_HQI9pe6AH1DvTVOryzyh3hV90K7HxvK6He7fQYFetvUFJDgbyTqO6AcAPAdMICYFtyUmdIBkKLBQ9INxMYhlDAMlZ2Ly6vMF5kI3sg:1u3tXs:TcKOAnLvvL3VgB5ePANVao5hp6LP7oFF8s__wImFybw",
+    "expire_date": "2025-04-27T09:22:32.485Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "rjevbdivkmqntajggi7vvwwtgtlo5aa7",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAURO_iGlnYMV4o6XMG62_CAWRLcVIh7k4ipYAp572Zt8qwLiWvXeY8sboqo06_HQI9pe6AH1DvTVOryzyh3hV90K7HxvK6He7fQYFetvUFJDgbyTqO6AcAPAdMICYFtyUmdIBkKLBQ9INxMYhlDAMlZ2Ly6vMF5kI3sg:1u2Zi3:mvXLiKmSoJnIeblndLCAocdxTmlTixQhyxQYg2-2shc",
+    "expire_date": "2025-04-23T17:59:35.937Z"
+  }
+},
+{
+  "model": "ACME.collection",
+  "pk": 1,
+  "fields": {
+    "name": "First Floor Machines"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add machine",
+    "content_type": [
+      "ACME",
+      "machine"
+    ],
+    "codename": "add_machine"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change machine",
+    "content_type": [
+      "ACME",
+      "machine"
+    ],
+    "codename": "change_machine"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete machine",
+    "content_type": [
+      "ACME",
+      "machine"
+    ],
+    "codename": "delete_machine"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view machine",
+    "content_type": [
+      "ACME",
+      "machine"
+    ],
+    "codename": "view_machine"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add fault case",
+    "content_type": [
+      "ACME",
+      "faultcase"
+    ],
+    "codename": "add_faultcase"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change fault case",
+    "content_type": [
+      "ACME",
+      "faultcase"
+    ],
+    "codename": "change_faultcase"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete fault case",
+    "content_type": [
+      "ACME",
+      "faultcase"
+    ],
+    "codename": "delete_faultcase"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view fault case",
+    "content_type": [
+      "ACME",
+      "faultcase"
+    ],
+    "codename": "view_faultcase"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user",
+    "content_type": [
+      "ACME",
+      "user"
+    ],
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user",
+    "content_type": [
+      "ACME",
+      "user"
+    ],
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user",
+    "content_type": [
+      "ACME",
+      "user"
+    ],
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user",
+    "content_type": [
+      "ACME",
+      "user"
+    ],
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add warning",
+    "content_type": [
+      "ACME",
+      "machinewarning"
+    ],
+    "codename": "add_warning"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change warning",
+    "content_type": [
+      "ACME",
+      "machinewarning"
+    ],
+    "codename": "change_warning"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete warning",
+    "content_type": [
+      "ACME",
+      "machinewarning"
+    ],
+    "codename": "delete_warning"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view warning",
+    "content_type": [
+      "ACME",
+      "machinewarning"
+    ],
+    "codename": "view_warning"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add fault note",
+    "content_type": [
+      "ACME",
+      "faultnote"
+    ],
+    "codename": "add_faultnote"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change fault note",
+    "content_type": [
+      "ACME",
+      "faultnote"
+    ],
+    "codename": "change_faultnote"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete fault note",
+    "content_type": [
+      "ACME",
+      "faultnote"
+    ],
+    "codename": "delete_faultnote"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view fault note",
+    "content_type": [
+      "ACME",
+      "faultnote"
+    ],
+    "codename": "view_faultnote"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add fault image",
+    "content_type": [
+      "ACME",
+      "faultimage"
+    ],
+    "codename": "add_faultimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change fault image",
+    "content_type": [
+      "ACME",
+      "faultimage"
+    ],
+    "codename": "change_faultimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete fault image",
+    "content_type": [
+      "ACME",
+      "faultimage"
+    ],
+    "codename": "delete_faultimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view fault image",
+    "content_type": [
+      "ACME",
+      "faultimage"
+    ],
+    "codename": "view_faultimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add collection",
+    "content_type": [
+      "ACME",
+      "collection"
+    ],
+    "codename": "add_collection"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change collection",
+    "content_type": [
+      "ACME",
+      "collection"
+    ],
+    "codename": "change_collection"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete collection",
+    "content_type": [
+      "ACME",
+      "collection"
+    ],
+    "codename": "delete_collection"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view collection",
+    "content_type": [
+      "ACME",
+      "collection"
+    ],
+    "codename": "view_collection"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add machine warning",
+    "content_type": [
+      "ACME",
+      "machinewarning"
+    ],
+    "codename": "add_machinewarning"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change machine warning",
+    "content_type": [
+      "ACME",
+      "machinewarning"
+    ],
+    "codename": "change_machinewarning"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete machine warning",
+    "content_type": [
+      "ACME",
+      "machinewarning"
+    ],
+    "codename": "delete_machinewarning"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view machine warning",
+    "content_type": [
+      "ACME",
+      "machinewarning"
+    ],
+    "codename": "view_machinewarning"
+  }
+},
+{
+  "model": "ACME.user",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$VfBPFvX0ivOuF3jOB7gaVd$d634XhujitpcXiVHUM8lGgq2NsnlNw4fjVRMbQta5gA=",
+    "last_login": "2025-04-13T09:22:32.174Z",
+    "is_superuser": false,
+    "username": "manager",
+    "first_name": "",
+    "last_name": "",
+    "email": "manager@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-07T14:21:57.698Z",
+    "role": "Manager",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "ACME.user",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$DIPfvYYuJYf6YkXEMTaDA6$ckdnJFKNMuVbF2Wzmyt6CQqLhr/e2DAIGYKtdYwdkBo=",
+    "last_login": "2025-04-12T13:43:17.399Z",
+    "is_superuser": false,
+    "username": "tech1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-07T19:24:09.680Z",
+    "role": "Technician",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "ACME.user",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$Du2AFLyQeyZz6xHwlIOodg$gB2UI1CMC90ycUdogMmWLaHic/85jeu2qLPQfR/unQU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "tech2",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-07T19:24:10.681Z",
+    "role": "Technician",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "ACME.user",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$6umx6TeggXC6933BniWTDg$epHAxnGt1HOS2iNeSXUGjqpetFhroVV8b/+Bb3N3LLo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "repair1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-07T19:24:11.730Z",
+    "role": "Repair",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "ACME.user",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$b5pqxvSvNj5lpApBOAle8r$ziqbM49gIVZSOQXOLhkbz9YIG55d0FQ4+qurnteQfUw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "repair2",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-07T19:24:12.814Z",
+    "role": "Repair",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "ACME.machine",
+  "pk": 1,
+  "fields": {
+    "name": "Test Machine 1",
+    "description": "This is a test Machine. Edited",
+    "status": "Fault",
+    "priority": 0,
+    "created_at": "2025-04-07T14:41:12.316Z",
+    "updated_at": "2025-04-13T09:20:46.102Z",
+    "collections": [],
+    "technicians": [],
+    "repair_personnel": []
+  }
+},
+{
+  "model": "ACME.machine",
+  "pk": 2,
+  "fields": {
+    "name": "Test Machine 2",
+    "description": "Test machine",
+    "status": "Fault",
+    "priority": 2,
+    "created_at": "2025-04-07T19:25:27.039Z",
+    "updated_at": "2025-04-07T19:25:27.039Z",
+    "collections": [],
+    "technicians": [
+      [
+        "tech1"
+      ]
+    ],
+    "repair_personnel": [
+      [
+        "repair1"
+      ]
+    ]
+  }
+},
+{
+  "model": "ACME.machine",
+  "pk": 3,
+  "fields": {
+    "name": "Test 3",
+    "description": "test 3",
+    "status": "Warning",
+    "priority": 0,
+    "created_at": "2025-04-07T19:25:46.188Z",
+    "updated_at": "2025-04-07T19:25:46.188Z",
+    "collections": [
+      1
+    ],
+    "technicians": [
+      [
+        "tech2"
+      ]
+    ],
+    "repair_personnel": [
+      [
+        "repair2"
+      ]
+    ]
+  }
+},
+{
+  "model": "ACME.machine",
+  "pk": 4,
+  "fields": {
+    "name": "Test Machine 4",
+    "description": "test 4",
+    "status": "OK",
+    "priority": 0,
+    "created_at": "2025-04-07T20:38:21.340Z",
+    "updated_at": "2025-04-07T20:38:21.340Z",
+    "collections": [],
+    "technicians": [
+      [
+        "tech1"
+      ]
+    ],
+    "repair_personnel": [
+      [
+        "repair1"
+      ]
+    ]
+  }
+},
+{
+  "model": "ACME.machine",
+  "pk": 5,
+  "fields": {
+    "name": "Test 5",
+    "description": "test",
+    "status": "Fault",
+    "priority": 1,
+    "created_at": "2025-04-08T18:19:15.375Z",
+    "updated_at": "2025-04-08T18:19:15.375Z",
+    "collections": [
+      1
+    ],
+    "technicians": [
+      [
+        "tech1"
+      ]
+    ],
+    "repair_personnel": [
+      [
+        "repair1"
+      ]
+    ]
+  }
+},
+{
+  "model": "ACME.machine",
+  "pk": 6,
+  "fields": {
+    "name": "Test Machine 6",
+    "description": "2",
+    "status": "OK",
+    "priority": 0,
+    "created_at": "2025-04-13T09:11:28.660Z",
+    "updated_at": "2025-04-13T09:11:28.660Z",
+    "collections": [
+      1
+    ],
+    "technicians": [
+      [
+        "tech1"
+      ]
+    ],
+    "repair_personnel": [
+      [
+        "repair1"
+      ]
+    ]
+  }
+},
+{
+  "model": "ACME.machinewarning",
+  "pk": 1,
+  "fields": {
+    "machine": 1,
+    "warning_text": "The battery will die soon",
+    "added_by": [
+      "manager"
+    ],
+    "added_at": "2025-04-07T14:41:37.660Z",
+    "resolved": true,
+    "resolved_by": [
+      "manager"
+    ],
+    "resolved_at": "2025-04-07T14:46:23.272Z"
+  }
+},
+{
+  "model": "ACME.machinewarning",
+  "pk": 2,
+  "fields": {
+    "machine": 1,
+    "warning_text": "Warning test",
+    "added_by": [
+      "manager"
+    ],
+    "added_at": "2025-04-07T14:46:19.129Z",
+    "resolved": true,
+    "resolved_by": [
+      "manager"
+    ],
+    "resolved_at": "2025-04-08T18:00:22.140Z"
+  }
+},
+{
+  "model": "ACME.machinewarning",
+  "pk": 3,
+  "fields": {
+    "machine": 2,
+    "warning_text": "Test",
+    "added_by": [
+      "manager"
+    ],
+    "added_at": "2025-04-07T19:36:39.597Z",
+    "resolved": true,
+    "resolved_by": [
+      "manager"
+    ],
+    "resolved_at": "2025-04-08T16:18:17.171Z"
+  }
+},
+{
+  "model": "ACME.machinewarning",
+  "pk": 4,
+  "fields": {
+    "machine": 2,
+    "warning_text": "Battery critically low",
+    "added_by": [
+      "manager"
+    ],
+    "added_at": "2025-04-08T17:59:00.544Z",
+    "resolved": true,
+    "resolved_by": [
+      "manager"
+    ],
+    "resolved_at": "2025-04-08T17:59:09.893Z"
+  }
+},
+{
+  "model": "ACME.machinewarning",
+  "pk": 5,
+  "fields": {
+    "machine": 3,
+    "warning_text": "Test warning",
+    "added_by": [
+      "manager"
+    ],
+    "added_at": "2025-04-08T18:00:31.316Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null
+  }
+},
+{
+  "model": "ACME.machinewarning",
+  "pk": 6,
+  "fields": {
+    "machine": 1,
+    "warning_text": "Test",
+    "added_by": null,
+    "added_at": "2025-04-09T17:58:56.826Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null
+  }
+},
+{
+  "model": "ACME.machinewarning",
+  "pk": 7,
+  "fields": {
+    "machine": 1,
+    "warning_text": "Test",
+    "added_by": null,
+    "added_at": "2025-04-09T18:09:26.386Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null
+  }
+},
+{
+  "model": "ACME.machinewarning",
+  "pk": 8,
+  "fields": {
+    "machine": 1,
+    "warning_text": "Test API warning",
+    "added_by": null,
+    "added_at": "2025-04-09T18:20:27.955Z",
+    "resolved": true,
+    "resolved_by": [
+      "manager"
+    ],
+    "resolved_at": "2025-04-10T16:07:23.307Z"
+  }
+},
+{
+  "model": "ACME.machinewarning",
+  "pk": 9,
+  "fields": {
+    "machine": 1,
+    "warning_text": "Test API warning should be working",
+    "added_by": null,
+    "added_at": "2025-04-09T18:34:35.587Z",
+    "resolved": true,
+    "resolved_by": [
+      "manager"
+    ],
+    "resolved_at": "2025-04-10T16:03:23.290Z"
+  }
+},
+{
+  "model": "ACME.machinewarning",
+  "pk": 10,
+  "fields": {
+    "machine": 1,
+    "warning_text": "Hopefully final test from API",
+    "added_by": null,
+    "added_at": "2025-04-09T18:38:10.793Z",
+    "resolved": true,
+    "resolved_by": [
+      "manager"
+    ],
+    "resolved_at": "2025-04-10T16:03:09.363Z"
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 1,
+  "fields": {
+    "case_number": "53b077c8-2c5e-4d2d-ae4f-05ab74525655",
+    "machine": 1,
+    "created_by": [
+      "manager"
+    ],
+    "created_at": "2025-04-07T15:14:25.698Z",
+    "resolved": true,
+    "resolved_by": [
+      "manager"
+    ],
+    "resolved_at": "2025-04-08T16:38:26.141Z",
+    "summary": "Test edit",
+    "assigned_technicians": [
+      [
+        "tech1"
+      ],
+      [
+        "tech2"
+      ]
+    ]
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 2,
+  "fields": {
+    "case_number": "ba8873f1-84cc-475c-b83b-61eb481bf767",
+    "machine": 1,
+    "created_by": [
+      "manager"
+    ],
+    "created_at": "2025-04-07T15:20:34.366Z",
+    "resolved": true,
+    "resolved_by": [
+      "manager"
+    ],
+    "resolved_at": null,
+    "summary": "Test 2",
+    "assigned_technicians": [
+      [
+        "tech2"
+      ]
+    ]
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 3,
+  "fields": {
+    "case_number": "046b7c57-843a-4fec-be33-e835da300a58",
+    "machine": 1,
+    "created_by": [
+      "manager"
+    ],
+    "created_at": "2025-04-07T15:23:45.608Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "Further test",
+    "assigned_technicians": []
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 4,
+  "fields": {
+    "case_number": "47b2c9e7-c732-4cc1-9461-b2b431d2ca58",
+    "machine": 1,
+    "created_by": [
+      "manager"
+    ],
+    "created_at": "2025-04-07T15:24:00.178Z",
+    "resolved": false,
+    "resolved_by": [
+      "manager"
+    ],
+    "resolved_at": "2025-04-08T16:38:44.152Z",
+    "summary": "Test from new fault button on fault page Edit",
+    "assigned_technicians": [
+      [
+        "tech1"
+      ]
+    ]
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 5,
+  "fields": {
+    "case_number": "34cddceb-4b9d-429e-9cbf-d4eb14584635",
+    "machine": 2,
+    "created_by": [
+      "manager"
+    ],
+    "created_at": "2025-04-07T19:34:14.399Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "Test fault",
+    "assigned_technicians": []
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 6,
+  "fields": {
+    "case_number": "66c1893f-4d03-400e-8f4b-f768b78d9fc7",
+    "machine": 1,
+    "created_by": [
+      "manager"
+    ],
+    "created_at": "2025-04-07T19:36:05.688Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "",
+    "assigned_technicians": []
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 7,
+  "fields": {
+    "case_number": "abb9f540-cc4a-4621-b700-8ea5fec3dace",
+    "machine": 3,
+    "created_by": [
+      "manager"
+    ],
+    "created_at": "2025-04-08T17:27:42.600Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "New test fault",
+    "assigned_technicians": []
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 8,
+  "fields": {
+    "case_number": "130afebf-d784-4c22-98ba-bd3f0db30e07",
+    "machine": 1,
+    "created_by": [
+      "manager"
+    ],
+    "created_at": "2025-04-08T17:28:28.033Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "Test Test TEst",
+    "assigned_technicians": []
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 9,
+  "fields": {
+    "case_number": "c94e28dd-bbb2-418c-9eee-c3359f95e9cf",
+    "machine": 4,
+    "created_by": [
+      "manager"
+    ],
+    "created_at": "2025-04-08T17:40:58.680Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "Test tech addition working",
+    "assigned_technicians": [
+      [
+        "tech1"
+      ],
+      [
+        "tech2"
+      ]
+    ]
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 10,
+  "fields": {
+    "case_number": "d7d4ac98-21e6-44e2-aa16-98f043060bc9",
+    "machine": 4,
+    "created_by": null,
+    "created_at": "2025-04-09T18:20:56.532Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "Test API warning",
+    "assigned_technicians": []
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 11,
+  "fields": {
+    "case_number": "a10749fd-a7e3-4986-9486-fb65e4b0b267",
+    "machine": 4,
+    "created_by": null,
+    "created_at": "2025-04-09T18:20:57.825Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "Test API warning",
+    "assigned_technicians": []
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 12,
+  "fields": {
+    "case_number": "57eb0ef8-10e4-479b-a3d0-7af51d02ec89",
+    "machine": 4,
+    "created_by": null,
+    "created_at": "2025-04-09T18:20:58.330Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "Test API warning",
+    "assigned_technicians": []
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 13,
+  "fields": {
+    "case_number": "ce5250cb-26ec-4217-be52-d1b3e8d10d6c",
+    "machine": 4,
+    "created_by": null,
+    "created_at": "2025-04-09T18:20:58.541Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "Test API warning",
+    "assigned_technicians": []
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 14,
+  "fields": {
+    "case_number": "e38e6d03-6c8e-460f-965e-c5e92c75a1e0",
+    "machine": 4,
+    "created_by": null,
+    "created_at": "2025-04-09T18:21:06.744Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "Test fault",
+    "assigned_technicians": []
+  }
+},
+{
+  "model": "ACME.faultcase",
+  "pk": 15,
+  "fields": {
+    "case_number": "7ec0c02f-3759-4d81-b550-776adb339a75",
+    "machine": 2,
+    "created_by": [
+      "tech1"
+    ],
+    "created_at": "2025-04-10T16:45:36.534Z",
+    "resolved": false,
+    "resolved_by": null,
+    "resolved_at": null,
+    "summary": "Test",
+    "assigned_technicians": [
+      [
+        "tech1"
+      ]
+    ]
+  }
+}
+]
