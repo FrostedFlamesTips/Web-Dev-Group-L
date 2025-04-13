@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg" href="images/favicon.svg">
+  <title>Testimonials | ACME</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/testimonials.css" />
+
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.svg" alt="ACME Logo" />
+          <h1>ACME</h1>
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <button class="login-btn">Login</button>
+
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <aside class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+      <div class="logo">
+        <a href="index.html">ACME</a>
+      </div>
+      <button class="close-menu" id="closeMenu">&times;</button>
+    </div>
+    <div class="menu-sections">
+        <div class="menu-section">
+          <a href="index.html">Home</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="testimonials.html">Testimonials</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+  </aside>
+
+
+  <section id="testimonials" style="padding: 4rem 20px; background-color: var(--background-color);">
+    <h2 style="text-align: center; margin-bottom: 2rem;">What Our Clients Say</h2>
+    
+
+    <div class="testimonial-slider">
+      <!--slider for testimonials-->
+      <div class="slider-track">
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"ACME's real-time monitoring revolutionized our maintenance planning."</p>
+          <p class="testimonial-author">- Alex R., Plant Manager</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"The predictive maintenance feature saves us countless hours of downtime."</p>
+          <p class="testimonial-author">- Jamie L., Operations Lead</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Automated alerts keep our team one step ahead of potential issues."</p>
+          <p class="testimonial-author">- Morgan S., Maintenance Supervisor</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Our overall efficiency increased dramatically after adopting ACME."</p>
+          <p class="testimonial-author">- Chris P., Production Manager</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"The detailed analytics give us the insights needed to optimize our operations."</p>
+          <p class="testimonial-author">- Sarah T., Quality Control</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"ACME has made our maintenance system proactive and efficient."</p>
+          <p class="testimonial-author">- David M., Technical Director</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"The intuitive interface and powerful features are unmatched."</p>
+          <p class="testimonial-author">- Karen D., Operations Manager</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"We have seen a significant reduction in unplanned downtime."</p>
+          <p class="testimonial-author">- Robert W., Maintenance Lead</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"The data-driven insights are helping us make smarter decisions daily."</p>
+          <p class="testimonial-author">- Emily S., Process Improvement Specialist</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"An indispensable tool for any modern facility management team."</p>
+          <p class="testimonial-author">- James H., Factory Supervisor</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"We appreciate the timely alerts and comprehensive reports."</p>
+          <p class="testimonial-author">- Linda K., Equipment Manager</p>
+        </div>
+ 
+        <div class="testimonial-card">
+          <p class="testimonial-text">"ACME's system is reliable and easy to integrate with our processes."</p>
+          <p class="testimonial-author">- Mark B., System Administrator</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"The proactive maintenance scheduling has saved us significant expenses."</p>
+          <p class="testimonial-author">- Olivia F., Maintenance Engineer</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Highly recommended for its robust analytics and seamless monitoring."</p>
+          <p class="testimonial-author">- Ethan C., Operations Director</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"ACME delivers exactly what our modern manufacturing facility needs."</p>
+          <p class="testimonial-author">- Sophia G., Plant Operations Manager</p>
+        </div>
+      </div>
+      <!-- Navigation Buttons -->
+      <button class="slider-button prev" id="prevBtn">Prev</button>
+      <button class="slider-button next" id="nextBtn">Next</button>
+    </div>
+  </section>
+
+  <!-- Call-to-Action Section -->
+  <section id="contact" style="padding: 4rem 20px; text-align: center; background-image: url('images/improve.jpg'); background-size: cover; background-position: center; color: var(--white-color);">
+    <div class="cta-content">
+      <h2>Ready to Transform Your Operations?</h2>
+      <p>Contact us today for a personalized walkthrough of our platform and find out how ACME can help you with factory maintenance strategy.</p>
+      <a href="mailto:contact@ACME.com" class="btn btn-primary">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="images/logo.svg" alt="ACME Logo" />
+        <span>ACME</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="testimonials.html">Testimonial</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2025 ACME. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+
+    const menuToggle = document.getElementById('menuToggle');
+    const sideMenu = document.getElementById('sideMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenu = document.getElementById('closeMenu');
+    if(menuToggle && sideMenu && menuOverlay && closeMenu) {
+      menuToggle.addEventListener('click', () => {
+        sideMenu.classList.add('active');
+        menuOverlay.classList.add('active');
+      });
+      closeMenu.addEventListener('click', () => {
+        sideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+      });
+      menuOverlay.addEventListener('click', () => {
+        sideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+      });
+    }
+
+    // --- Testimonial Slider Logic ---
+    const sliderTrack = document.querySelector('.slider-track');
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    const totalCards = testimonialCards.length;
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
+
+    function updateSlider() {
+      sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalCards;
+      updateSlider();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+      updateSlider();
+    }
+
+    // Auto-rotate every 5 seconds
+    let sliderInterval = setInterval(nextSlide, 5000);
+
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      clearInterval(sliderInterval);
+      sliderInterval = setInterval(nextSlide, 5000);
+    });
+
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      clearInterval(sliderInterval);
+      sliderInterval = setInterval(nextSlide, 5000);
+    });
+  </script>
+</body>
+</html>

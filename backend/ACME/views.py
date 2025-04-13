@@ -92,6 +92,20 @@ def index_view(request):
 
     return render(request, 'index.html', context)
 
+def home_view(request):
+    return render(request, 'home.html')
+
+def pricing_view(request):
+    return render(request, 'pricing.html')
+
+def testimonials_view(request):
+    return render(request, 'testimonials.html')
+
+def privacy_view(request):
+    return render(request, 'privacy.html')
+
+def contact_view(request):
+    return render(request, 'contact.html')
 
 def collection_details(request):
     return render(request, 'collection-details.html')
@@ -104,9 +118,6 @@ def collections(request):
 
 def edit_fault(request):
     return render(request, 'edit-fault.html')
-
-def edit_machine(request):
-    return render(request, 'edit-machine.html')
 
 def fault_details(request):
     return render(request, 'fault-details.html')
@@ -233,27 +244,43 @@ def add_machine_view(request):
 def edit_machine_view(request, machine_id):
     machine = get_object_or_404(Machine, id=machine_id)
 
-    # Only managers can edit
     if request.user.role != 'Manager':
         return HttpResponseForbidden("Only managers can edit machines.")
 
     if request.method == 'POST':
-        form = MachineForm(request.POST, instance=machine)
-        if form.is_valid():
-            form.save()
-            return redirect('machinery_list')
-    else:
-        form = MachineForm(instance=machine)
+        # Manual update from POST data
+        machine.name = request.POST.get('name')
+        machine.model = request.POST.get('model')
+        machine.manufacturer = request.POST.get('manufacturer')
+        machine.serial_number = request.POST.get('serial_number')
+        machine.location = request.POST.get('location')
+        machine.purchase_date = request.POST.get('purchase_date')
+        machine.warranty_until = request.POST.get('warranty_until')
+        machine.last_maintained = request.POST.get('last_maintained')
+        machine.priority = request.POST.get('priority')
+        machine.description = request.POST.get('description')
 
-    
+        assigned_to_id = request.POST.get('assigned_to')
+        if assigned_to_id:
+            machine.assigned_to = User.objects.get(id=assigned_to_id)
+        else:
+            machine.assigned_to = None
+
+        machine.save()
+
+        # Handle ManyToMany fields manually
+        collection_ids = request.POST.getlist('collection[]')
+        machine.collections.set(Collection.objects.filter(id__in=collection_ids))
+
+        return redirect('machinery_detail', machine_id=machine.id)
+
     technicians = User.objects.filter(role='Technician')
     collections = Collection.objects.all()
 
     return render(request, 'edit-machine.html', {
         'machine': machine,
-        'form': form,
         'technicians': technicians,
-        'collections': collections
+        'collections': collections,
     })
 
 def machinery_detail(request, machine_id):

@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg" href="{% static 'images/favicon.svg' %}" />
+  <title>ACME - Factory Machinery Tracking</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="{% url 'public-index' %}">
+          <img src="{% static 'images/logo.svg' %}" alt="ACME Logo" />
+          <h1>ACME</h1>
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="{% url 'public-index' %}">Home</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'testimonials' %}">Testimonials</a>
+        <a href="{% url 'privacy' %}">Privacy Policy</a>
+        <a href="{% url 'contact' %}">Contact Us</a>
+      </div>
+      <a href="{% url 'login' %}" class="login-btn">Login</a>
+      <button class="menu-toggle" id="menuToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <aside class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+      <div class="logo">
+        <a href="index.html">ACME</a>
+        <a href="{% url 'public-index' %}">ACME</a>
+      </div>
+      <button class="close-menu" id="closeMenu">×</button>
+    </div>
+    <div class="menu-sections">
+      <div class="menu-section">
+        <h3>Navigation</h3>
+      <a href="{% url 'public-index' %}"><i class="fa-solid fa-gear menu-icon"></i>Home</a>
+      <a href="{% url 'pricing' %}"><i class="fa-solid fa-gear menu-icon"></i>Pricing</a>
+      <a href="{% url 'testimonials' %}"><i class="fa-solid fa-gear menu-icon"></i>Testimonials</a>
+      <a href="{% url 'privacy' %}"><i class="fa-solid fa-gear menu-icon"></i>Privacy Policy</a>
+      <a href="{% url 'contact' %}"><i class="fa-solid fa-gear menu-icon"></i>Contact</a>
+      </div>
+    </div>
+  </aside>
+
+  <section id="intro" class="hero-section" style="position: relative; overflow: hidden;">
+    <div class="hero-content" style="position: relative; z-index: 2; text-align: center; padding: 150px 20px;">
+      <h2 style="color: aliceblue;">Seamless Machinery Tracking</h2>
+      <p style="font-weight: bold;color: azure;font-size: large;">Monitor and repair your factory machinery in real-time with advanced status tracking and insightful analytics.</p>
+      <a href="#contact" class="btn btn-primary">Get Started</a>
+    </div>
+    <div class="hero-bg" id="heroBg" style="position: absolute; top:0; left:0; right:0; bottom:0; background-size: cover; background-position: center; z-index: 1;"></div>
+  </section>
+
+  <section id="features" style="padding: 4rem 20px; text-align: center;">
+    <h2>Our Features</h2>
+    <div class="card-grid">
+      <div class="card"><div class="card-content"><h3>Real-Time Monitoring</h3><p>Instant updates on machinery status and performance to optimize operations.</p></div></div>
+      <div class="card"><div class="card-content"><h3>Data Analytics</h3><p>Deep insights into repair trends and machine performance history.</p></div></div>
+      <div class="card"><div class="card-content"><h3>Automated Alerts</h3><p>Stay informed with automated notifications for maintenance events and faults.</p></div></div>
+    </div>
+  </section>
+
+  <section id="testimonials" style="background-color: var(--background-color); padding: 4rem 20px;">
+    <h2 style="text-align: center; margin-bottom: 2rem;">What Our Clients Say</h2>
+    <div class="card-grid">
+      <div class="card"><div class="card-content"><p>"ACME revolutionized our maintenance routines. The real-time alerts and analytics are game changers!"</p><h3>- John Doe, Plant Manager</h3></div></div>
+      <div class="card"><div class="card-content"><p>"A truly intuitive system that has significantly minimized downtime and improved efficiency."</p><h3>- Jane Smith, Operations Lead</h3></div></div>
+      <div class="card"><div class="card-content"><p>"Reliable and innovative. Our repair tracking has never been smoother."</p><h3>- Mike Johnson, Maintenance Supervisor</h3></div></div>
+    </div>
+  </section>
+
+  <section id="pricing" style="padding: 4rem 20px; text-align: center; background-color: var(--white-color);">
+    <h2>Pricing Plans</h2>
+    <div class="card-grid">
+      <div class="card"><div class="card-content"><h3>Basic</h3><p>Perfect for small setups</p><p style="font-size: 2rem; color: var(--primary-color); margin: 1rem 0;">$0/month</p><a href="#contact" class="btn btn-primary">Get Started</a></div></div>
+      <div class="card"><div class="card-content"><h3>Standard</h3><p>For medium-scale operations</p><p style="font-size: 2rem; color: var(--primary-color); margin: 1rem 0;">$49/month</p><a href="#contact" class="btn btn-primary">Get Started</a></div></div>
+      <div class="card"><div class="card-content"><h3>Premium</h3><p>Enterprise-grade monitoring</p><p style="font-size: 2rem; color: var(--primary-color); margin: 1rem 0;">$99/month</p><a href="#contact" class="btn btn-primary">Get Started</a></div></div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding: 4rem 20px; text-align: center; background-image: url('{% static 'images/improve.jpg' %}'); background-size: cover; background-position: center; color: var(--white-color);">
+    <h2>Ready to Optimize Your Maintenance?</h2>
+    <p style="margin: 1rem 0;">Contact us today to learn how ACME can streamline your operations.</p>
+    <a href="mailto:contact@ACME.com" class="btn btn-primary">Contact Us</a>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="images/logo.svg" alt="ACME Logo" />
+        <span>ACME</span>
+        <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
+        <span>ACME</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="testimonials.html">Testimonial</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2025 ACME. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sideMenu = document.getElementById('sideMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenu = document.getElementById('closeMenu');
+
+    menuToggle.addEventListener('click', () => {
+      sideMenu.classList.add('active');
+      menuOverlay.classList.add('active');
+    });
+
+    closeMenu.addEventListener('click', () => {
+      sideMenu.classList.remove('active');
+      menuOverlay.classList.remove('active');
+    });
+
+    menuOverlay.addEventListener('click', () => {
+      sideMenu.classList.remove('active');
+      menuOverlay.classList.remove('active');
+    });
+
+    const heroBg = document.getElementById('heroBg');
+    const backgrounds = [
+      "{% static 'images/futuristic.png' %}",
+      "{% static 'images/repair3.png' %}",
+      "{% static 'images/robot.jpg' %}"
+    ];
+    let currentBg = 0;
+
+    function changeHeroBg() {
+      currentBg = (currentBg + 1) % backgrounds.length;
+      heroBg.style.backgroundImage = `url('${backgrounds[currentBg]}')`;
+    }
+
+    heroBg.style.backgroundImage = `url('${backgrounds[0]}')`;
+    setInterval(changeHeroBg, 5000);
+  </script>
+</body>
+</html>

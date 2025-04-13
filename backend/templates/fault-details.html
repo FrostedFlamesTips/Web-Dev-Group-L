@@ -25,7 +25,7 @@
         <div class="side-menu">
           <div class="side-menu-header">
             <img
-              src="./static/images/favicon.svg"
+              src="{% static 'images/favicon.svg' %}"
               alt="Logo"
               class="menu-logo"
             />
@@ -51,23 +51,11 @@
                 <i class="fa-solid fa-folder menu-icon"></i>
                 Collections
               </a>
-              <a href="reports.html">
-                <i class="fa-solid fa-chart-bar menu-icon"></i>
-                Reports
-              </a>
             </div>
 
             <div class="menu-section">
               <h3>Management</h3>
-              <a href="users.html">
-                <i class="fa-solid fa-users menu-icon"></i>
-                Users
-              </a>
-              <a href="settings.html">
-                <i class="fa-solid fa-cog menu-icon"></i>
-                Settings
-              </a>
-              <a href="api-test.html">
+              <a href="{% url 'test_record_api' %}">
                 <i class="fa-solid fa-code menu-icon"></i>
                 API Testing
               </a>
@@ -75,14 +63,12 @@
 
             <div class="menu-section">
               <h3>Account</h3>
-              <a href="profile.html">
-                <i class="fa-solid fa-user menu-icon"></i>
-                Your Profile
-              </a>
-              <a href="login.html" class="logout-link">
-                <i class="fa-solid fa-right-from-bracket menu-icon"></i>
-                Logout
-              </a>
+              <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-link">
+                  <i class="fa-solid fa-right-from-bracket menu-icon"></i> Logout
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -96,7 +82,7 @@
         <!-- Logo and Title -->
         <div class="logo">
           <a href="{% url 'index' %}">
-            <img src="./static/images/favicon.svg" alt="ACME Logo" />
+            <img src="{% static 'images/favicon.svg' %}" alt="ACME Logo" />
             <h1>ACME Manufacturing</h1>
           </a>
         </div>
@@ -110,17 +96,18 @@
           <a class="hideable-nav-item" href="{% url 'collections' %}"
             >Collections</a
           >
-
           <!-- Profile Dropdown for logged-in users -->
           <div class="profile-dropdown">
             <div class="profile-trigger">
               <div class="profile-icon">EA</div>
             </div>
             <div class="dropdown-content">
-              <a href="profile.html">My Profile</a>
-              <a href="settings.html">Settings</a>
-              <div class="dropdown-divider"></div>
-              <a href="login.html" class="logout-link">Logout</a>
+              <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">
+                  <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+              </form>
             </div>
           </div>
         </div>

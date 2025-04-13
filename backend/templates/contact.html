@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | ACME</title>
+  <link rel="icon" type="image/svg" href="{% static 'images/favicon.svg' %}" />
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/contact.css' %}" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="{% url 'public-index' %}">
+          <img src="{% static 'images/logo.svg' %}" alt="ACME Logo" />
+          <h1>ACME</h1>
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="{% url 'public-index' %}">Home</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'testimonials' %}">Testimonials</a>
+        <a href="{% url 'privacy' %}">Privacy Policy</a>
+        <a href="{% url 'contact' %}">Contact Us</a>
+      </div>
+      <a href="{% url 'login' %}" class="login-btn">Login</a>
+      <button class="menu-toggle" id="menuToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <aside class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+      <div class="logo">
+        <a href="{% url 'public-index' %}">ACME</a>
+      </div>
+      <button class="close-menu" id="closeMenu">×</button>
+    </div>
+    <div class="menu-sections">
+      <div class="menu-section">
+        <h3>Navigation</h3>
+        <a href="{% url 'public-index' %}"><i class="fa-solid fa-gear menu-icon"></i>Home</a>
+        <a href="{% url 'pricing' %}"><i class="fa-solid fa-gear menu-icon"></i>Pricing</a>
+        <a href="{% url 'testimonials' %}"><i class="fa-solid fa-gear menu-icon"></i>Testimonials</a>
+        <a href="{% url 'privacy' %}"><i class="fa-solid fa-gear menu-icon"></i>Privacy Policy</a>
+        <a href="{% url 'contact' %}"><i class="fa-solid fa-gear menu-icon"></i>Contact</a>
+      </div>
+    </div>
+  </aside>
+
+  <section id="contact-hero">
+    <div class="hero-content">
+      <h2>Contact Us</h2>
+      <p>We're here to assist you—get in touch with our team for any inquiries, support or feedback.</p>
+    </div>
+  </section>
+
+  <section id="contact-info">
+    <h2>Get in Touch</h2>
+    <div class="info-item">
+      <strong>Office Address</strong>
+      <span>1234 Industrial Ave, Dublin, <br/> Factory City, Ireland</span>
+    </div>
+    <div class="info-item">
+      <strong>Phone</strong>
+      <span><a href="tel:+1234567890" style="color: var(--primary-color); text-decoration: none;">+1 (234) 567-890</a></span>
+    </div>
+    <div class="info-item">
+      <strong>Email</strong>
+      <span><a href="mailto:info@ACME.com" style="color: var(--primary-color); text-decoration: none;">info@ACME.com</a></span>
+    </div>
+    <div class="info-item">
+      <strong>Office Hours</strong>
+      <span>Monday - Friday: 9:00 AM to 6:00 PM</span>
+    </div>
+  </section>
+
+  <section id="contact-form">
+    <div class="form-container">
+      <h2 style="text-align: center; margin-bottom: 1.5rem;">Send Us a Message</h2>
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required placeholder="Enter your name" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="Enter your email" />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" required placeholder="Subject of your message" />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" required placeholder="Write your message here..."></textarea>
+        </div>
+        <div style="text-align: center;">
+          <button type="submit" class="btn-submit">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact-cta" style="padding: 4rem 20px; text-align: center; background-image: url('{% static 'images/repair3.png' %}'); background-size: cover; background-position: center; color: var(--white-color);">
+    <div class="cta-content">
+      <h2>Let's Connect</h2>
+      <p>If you have any questions or need support, we're just one click away. Reach out to us and let's discuss how we can help your operations thrive.</p>
+      <a href="mailto:info@ACME.com" class="btn btn-primary">Email Us</a>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="{% url 'public-index' %}">
+          <img src="{% static 'images/logo.svg' %}" alt="ACME Logo" />
+          <span>ACME</span>
+        </a>
+      </div>
+      <div class="footer-links">
+        <a href="{% url 'public-index' %}">Home</a>
+        <a href="{% url 'pricing' %}">Pricing</a>
+        <a href="{% url 'testimonials' %}">Testimonials</a>
+        <a href="{% url 'privacy' %}">Privacy Policy</a>
+        <a href="{% url 'contact' %}">Contact</a>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2025 ACME. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sideMenu = document.getElementById('sideMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenu = document.getElementById('closeMenu');
+    if (menuToggle && sideMenu && menuOverlay && closeMenu) {
+      menuToggle.addEventListener('click', () => {
+        sideMenu.classList.add('active');
+        menuOverlay.classList.add('active');
+      });
+      closeMenu.addEventListener('click', () => {
+        sideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+      });
+      menuOverlay.addEventListener('click', () => {
+        sideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+      });
+    }
+  </script>
+</body>
+</html>
